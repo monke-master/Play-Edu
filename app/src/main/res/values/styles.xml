@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Дефолтная кнопка -->
+    <style name="DefaultButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/btn_text_size</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="shapeAppearanceOverlay">@style/DefaultBtnAppearance</item>
+        <item name="fontFamily">@font/roboto_black</item>
+    </style>
+
+    <!-- Форма дефолтной кнопки -->
+    <style name="DefaultBtnAppearance">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/btn_rounding_radius</item>
+    </style>
+
+    <!-- Поле ввода -->
+    <style name="MyEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/edit_txt_shape</item>
+        <item name="android:padding">20dip</item>
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">@dimen/edit_txt_size</item>
+    </style>
+
+    <style name="Header" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">@font/roboto_black</item>
+        <item name="android:textSize">@dimen/header_txt_size</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+    <style name="Header1" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/header1_txt_size</item>
+        <item name="fontFamily">@font/roboto_black</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+</resources>

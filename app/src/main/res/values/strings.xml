@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">PlayEDU</string>
+    <string name="forgot_pass">Забыли пароль?</string>
+    <string name="remind_pass">Напомнить пароль</string>
+    <string name="FIO_hint">ФИО</string>
+    <string name="group_hint">Группа</string>
+    <string name="enter_title">Вход</string>
+    <string name="sign_in">Войти</string>
+    <string name="reg_title">Регистрация</string>
+    <string name="pass_hint">Пароль</string>
+    <string name="remind">Напомнить</string>
+    <string name="sign_up">Зарегистрироваться</string>
+    <string name="phone_number_hint">Номер телефона</string>
+    <string name="repeat_pass_hint">Повторите пароль</string>
+    <string name="magician_male_title">Маг</string>
+    <string name="magician_female_title">Волшебница</string>
+    <string name="magician_male_description">Lorem ipsum dolor sit amet consectetur. Praesent lectus pulvinar lorem ut proin enim odio. Eu id arcu dictum pretium quisque tristique.</string>
+    <string name="choose_magician_title">Выбери своего героя</string>
+    <string name="user_greetings_pass">Привет, Михаил!</string>
+    <string name="user_gold_coin_pass">1200</string>
+    <string name="choose">Выбрать</string>
+
+</resources>
