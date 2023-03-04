@@ -21,11 +21,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
+        android:weightSum="2"
         app:layout_constraintTop_toBottomOf="@+id/toolbar3"
         tools:layout_editor_absoluteX="122dp">
 
 
         <TextView
+            android:id="@+id/header"
             style="@style/Header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,25 +42,26 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_marginTop="20dp"
                 android:layout_width="182dp"
                 android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/magician_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/magician_card" />
 
                 <TextView
+                    android:id="@+id/magician_hdr"
                     style="@style/Header1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="@string/magician_male_title"
-                    />
+                    android:text="@string/magician_male_title" />
 
                 <TextView
                     android:layout_width="182dp"
@@ -71,36 +74,38 @@
                     android:textSize="12sp" />
 
                 <Button
-                    android:textSize="14sp"
-                    android:id="@+id/enterBtn2"
+                    android:id="@+id/male_choose_btn"
                     style="@style/DefaultButton"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_gravity="start"
                     android:backgroundTint="@color/purple_100"
-                    android:text="@string/choose" />
+                    android:text="@string/choose"
+                    android:textSize="14sp" />
 
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="20dp"
                 android:layout_width="182dp"
                 android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/female_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/female_magician_card" />
 
                 <TextView
+                    android:id="@+id/female_hdr"
                     style="@style/Header1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="@string/magician_female_title"
-                    />
+                    android:text="@string/magician_female_title" />
 
                 <TextView
                     android:layout_width="182dp"
@@ -113,14 +118,14 @@
                     android:textSize="12sp" />
 
                 <Button
-                    android:textSize="14sp"
-                    android:id="@+id/enterBtn2"
+                    android:id="@+id/fml_choose_btn"
                     style="@style/DefaultButton"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_gravity="start"
                     android:backgroundTint="@color/purple_100"
-                    android:text="@string/choose" />
+                    android:text="@string/choose"
+                    android:textSize="14sp" />
 
             </LinearLayout>
         </LinearLayout>

@@ -19,15 +19,18 @@
         tools:layout_editor_absoluteX="26dp" />
 
     <LinearLayout
-        android:layout_marginTop="50dp"
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="50dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="-33dp">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/header"
             style="@style/Header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,8 +42,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginTop="30dp"
+            android:layout_marginEnd="16dp"
             android:hint="@string/FIO_hint"
             android:inputType="textPersonName" />
 
@@ -67,7 +70,7 @@
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/enterBtn2"
+            android:id="@+id/enterBtn"
             style="@style/DefaultButton"
             android:layout_width="@dimen/min_btn_width"
             android:layout_height="64dp"
@@ -76,20 +79,17 @@
             android:backgroundTint="@color/purple_100"
             android:text="@string/sign_in" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/cat"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:layout_editor_absoluteX="8dp" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
     </LinearLayout>
+
+    <ImageView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/cat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

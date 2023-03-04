@@ -1,11 +1,9 @@
 package ru.mirea.playedu;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import ru.mirea.playedu.databinding.ActivityLaunchBinding;
@@ -30,7 +28,7 @@ public class LaunchActivity extends AppCompatActivity {
         binding.regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(LaunchActivity.this, Registration.class);
+                Intent i = new Intent(LaunchActivity.this, RegistrationActivity.class);
                 startActivity(i);
             }
         });

@@ -23,5 +23,6 @@ public class EnterActivity extends AppCompatActivity {
             Intent intent = new Intent(EnterActivity.this, LaunchActivity.class);
             startActivity(intent);
         });
+
     }
 }
