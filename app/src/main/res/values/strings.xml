@@ -19,5 +19,10 @@
     <string name="user_greetings_pass">Привет, Михаил!</string>
     <string name="user_gold_coin_pass">1200</string>
     <string name="choose">Выбрать</string>
+    <string name="statistic_title">Статистика</string>
+    <string name="statistic_round_description">Заданий от PlayEdu выполнено за неделю</string>
+    <string name="show_more_title">Показать больше</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="leaderboard_title">Доска лидеров</string>
 
 </resources>
