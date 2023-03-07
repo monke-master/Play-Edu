@@ -53,7 +53,7 @@
                     android:id="@+id/magician_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/magician_card" />
+                    app:srcCompat="@drawable/card_magician" />
 
                 <TextView
                     android:id="@+id/magician_hdr"
@@ -97,7 +97,7 @@
                     android:id="@+id/female_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/female_magician_card" />
+                    app:srcCompat="@drawable/card_female_magician" />
 
                 <TextView
                     android:id="@+id/female_hdr"

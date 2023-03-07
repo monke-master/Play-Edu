@@ -24,5 +24,10 @@ public class EnterActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        binding.enterBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(EnterActivity.this, MainActivity.class);
+            startActivity(intent);
+        });
+
     }
 }

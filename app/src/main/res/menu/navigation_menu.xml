@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/quests_btn"
+        android:icon="@drawable/ic_quests"
+        android:title="@string/quests"
+        android:visible="true" />
+    <item
+        android:id="@+id/adventure_btn"
+        android:icon="@drawable/ic_adventure"
+        android:title="@string/adventure"
+        android:visible="true" />
+    <item
+        android:id="@+id/community_btn"
+        android:icon="@drawable/ic_community"
+        android:title="@string/community"
+        android:visible="true" />
+    <item
+        android:id="@+id/profile_btn"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/profile"
+        android:visible="true" />
+</menu>
