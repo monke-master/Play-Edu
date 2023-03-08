@@ -22,7 +22,11 @@
     <string name="statistic_title">Статистика</string>
     <string name="statistic_round_description">Заданий от PlayEdu выполнено за неделю</string>
     <string name="show_more_title">Показать больше</string>
+    <string name="powers_title">Силы</string>
+    <string name="achievements_title">Достижения</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="leaderboard_title">Доска лидеров</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
