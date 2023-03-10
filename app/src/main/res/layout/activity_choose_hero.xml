@@ -27,6 +27,7 @@
 
 
         <TextView
+            android:layout_gravity="center_horizontal"
             android:id="@+id/header"
             style="@style/Header"
             android:layout_width="wrap_content"
@@ -57,10 +58,11 @@
 
                 <TextView
                     android:id="@+id/magician_hdr"
-                    style="@style/Header1"
+                    style="@style/Header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:textSize="@dimen/header2_txt_size"
                     android:text="@string/magician_male_title" />
 
                 <TextView
@@ -100,8 +102,9 @@
                     app:srcCompat="@drawable/card_female_magician" />
 
                 <TextView
+                    style="@style/Header"
                     android:id="@+id/female_hdr"
-                    style="@style/Header1"
+                    android:textSize="@dimen/header2_txt_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"

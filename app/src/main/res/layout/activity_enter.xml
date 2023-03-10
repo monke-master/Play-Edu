@@ -32,13 +32,14 @@
         <TextView
             android:id="@+id/header"
             style="@style/Header"
+            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/enter_title" />
 
         <EditText
             android:id="@+id/edit_txt_name"
-            style="@style/MyEditTextStyle"
+            style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -49,7 +50,7 @@
 
         <EditText
             android:id="@+id/edit_txt_group"
-            style="@style/MyEditTextStyle"
+            style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -60,7 +61,7 @@
 
         <EditText
             android:id="@+id/edit_txt_pswrd"
-            style="@style/MyEditTextStyle"
+            style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

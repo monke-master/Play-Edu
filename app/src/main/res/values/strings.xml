@@ -23,7 +23,7 @@
     <string name="adventure">Приключение</string>
     <string name="community">Сообщество</string>
     <string name="profile">Профиль</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pe_tasks">Задания от PlayEdu</string>
+    <string name="your_tasks">Твои задания</string>
 
 </resources>
