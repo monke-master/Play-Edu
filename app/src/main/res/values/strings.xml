@@ -25,5 +25,6 @@
     <string name="profile">Профиль</string>
     <string name="pe_tasks">Задания от PlayEdu</string>
     <string name="your_tasks">Твои задания</string>
-
+    <string name="pick_color">Выбери нужный цвет задачи</string>
+    <string name="pick_list">Выбери нужный список</string>
 </resources>

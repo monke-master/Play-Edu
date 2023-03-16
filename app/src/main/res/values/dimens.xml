@@ -15,4 +15,9 @@
     <dimen name="deadline_txt_size">10sp</dimen>
 
     <dimen name="task_rounding_radius">17dp</dimen>
+
+    <dimen name="dialog_rounding_radius">31dp</dimen>
+
+    <dimen name="color_btn_size">25dp</dimen>
+
 </resources>
