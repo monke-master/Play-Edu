@@ -99,7 +99,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:text="@string/pe_tasks"
-            android:textSize="@dimen/header2_txt_size" />
+            android:textSize="@dimen/header1_txt_size" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
@@ -122,9 +122,10 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="15dp"
                 android:text="@string/your_tasks"
-                android:textSize="@dimen/header2_txt_size" />
+                android:textSize="@dimen/header1_txt_size" />
 
             <Spinner
+
                 android:id="@+id/filter_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
