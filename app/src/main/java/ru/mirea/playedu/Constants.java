@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat;
 // Статический класс с константами
 public class Constants {
 
-    static int[] getCategoryColors(Context context) {
+    public static int[] getCategoryColors(Context context) {
          int[] colors = {
                 ContextCompat.getColor(context, R.color.silver_coin),
                 ContextCompat.getColor(context, R.color.white),

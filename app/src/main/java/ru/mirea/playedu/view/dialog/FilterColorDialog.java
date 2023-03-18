@@ -1,9 +1,7 @@
-package ru.mirea.playedu;
+package ru.mirea.playedu.view.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -16,6 +14,12 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import ru.mirea.playedu.view.adapter.ColorAdapter;
+import ru.mirea.playedu.Constants;
+import ru.mirea.playedu.DimensionManager;
+import ru.mirea.playedu.HorizontalMarginItemDecoration;
+import ru.mirea.playedu.R;
 
 // Диалог выбора цвета для фильтра
 public class FilterColorDialog extends DialogFragment {
@@ -31,7 +35,8 @@ public class FilterColorDialog extends DialogFragment {
                 false);
 
         // Фон диалога
-        getDialog().getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.shape_dialog));
+        getDialog().getWindow().setBackgroundDrawable(
+                ContextCompat.getDrawable(requireContext(), R.drawable.shape_dialog));
         return view;
     }
 
