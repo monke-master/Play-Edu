@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="filterItems">
+        <item>По списку</item>
+        <item>По цвету</item>
+    </string-array>
+</resources>

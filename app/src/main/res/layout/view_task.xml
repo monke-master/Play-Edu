@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/shape_task_back"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="98"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title_txt"
+                style="@style/DefaultText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="14dp"
+                android:layout_weight="1"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/deadline_txt"
+                style="@style/DefaultText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="14dp"
+                android:layout_weight="1"
+                android:text="TextView"
+                android:textSize="@dimen/deadline_txt_size" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/price_txt"
+            style="@style/PriceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+
+            android:layout_weight="1"
+            android:text="69"
+            android:textColor="@color/silver_coin" />
+
+        <ImageView
+            android:id="@+id/silver_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="1"
+            android:src="@drawable/pic_silver_coin" />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--Файл для хранения размеров -->
 <resources>
-    <dimen name="btn_rounding_radius">10dp</dimen>
+    <dimen name="btn_rounding_radius">15dp</dimen>
     <dimen name="min_btn_width">200dp</dimen>
+    <dimen name="round_btn_radius">40dp</dimen>
 
     <dimen name="btn_text_size">18sp</dimen>
-    <dimen name="edit_txt_size">16sp</dimen>
 
     <dimen name="header_txt_size">24sp</dimen>
-    <dimen name="header1_txt_size">18sp</dimen>
+    <dimen name="header1_txt_size">20sp</dimen>
+    <dimen name="default_txt_size">16sp</dimen>
+    <dimen name="header2_txt_size">18sp</dimen>
+    <dimen name="spinner_text_size">14sp</dimen>
+    <dimen name="price_txt_size">14sp</dimen>
+    <dimen name="deadline_txt_size">10sp</dimen>
+
+    <dimen name="task_rounding_radius">17dp</dimen>
+
+    <dimen name="dialog_rounding_radius">31dp</dimen>
+
+    <dimen name="color_btn_size">25dp</dimen>
+    <dimen name="default_margin">20dp</dimen>
+
 </resources>

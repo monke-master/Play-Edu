@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textAlignment="viewEnd"
+    tools:context=".QuestsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/greet_hdr"
+                style="@style/Header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:text="@string/user_greetings_pass" />
+
+            <ImageView
+                android:id="@+id/golden_ic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/pic_golden_coin" />
+
+            <TextView
+                android:id="@+id/golden_count_txt"
+                style="@style/PriceText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:text="69"
+                android:textColor="@color/golden_coin" />
+
+            <ImageView
+                android:id="@+id/silver_ic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/pic_silver_coin" />
+
+            <TextView
+                android:id="@+id/silver_count_txt"
+                style="@style/PriceText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:text="1488"
+                android:textColor="@color/silver_coin" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/date_txt"
+            style="@style/Header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Сегодня 14 февраля 2023 года"
+            android:textSize="@dimen/header2_txt_size" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/date_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="7"
+            tools:listitem="@layout/view_date">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/pe_tasks_hdr"
+            style="@style/Header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/pe_tasks"
+            android:textSize="@dimen/header1_txt_size" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewEnd"
+            tools:itemCount="2"
+            tools:listitem="@layout/view_task" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/user_tasks_hdr"
+                style="@style/Header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="15dp"
+                android:text="@string/your_tasks"
+                android:textSize="@dimen/header1_txt_size" />
+
+            <com.skydoves.powerspinner.PowerSpinnerView
+                android:id="@+id/filterSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/roboto_black"
+                android:gravity="end|center_vertical"
+                android:hint="@string/filter"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="@dimen/spinner_text_size"
+                app:spinner_arrow_gravity="end"
+                app:spinner_item_array="@array/filterItems"
+                app:spinner_item_height="46dp"
+                app:spinner_popup_animation="dropdown"
+                app:spinner_popup_background="@color/purple_background"
+                app:spinner_popup_elevation="14dp" />
+
+            <ImageButton
+                android:id="@+id/add_task_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/shape_round_btn"
+                android:src="@drawable/ic_add"
+                app:backgroundTint="@color/purple_100" />
+
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:itemCount="7"
+            tools:listitem="@layout/view_user_task" />
+
+
+    </LinearLayout>
+</FrameLayout>

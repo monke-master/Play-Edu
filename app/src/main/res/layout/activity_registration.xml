@@ -27,6 +27,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <TextView
+            android:layout_gravity="center_horizontal"
             android:id="@+id/header"
             style="@style/Header"
             android:layout_width="wrap_content"
@@ -39,7 +40,7 @@
 
         <EditText
             android:id="@+id/edit_txt_name"
-            style="@style/MyEditTextStyle"
+            style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -50,7 +51,7 @@
 
         <EditText
             android:id="@+id/edit_txt_group"
-            style="@style/MyEditTextStyle"
+            style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -60,7 +61,7 @@
 
         <EditText
             android:id="@+id/edit_txt_phone"
-            style="@style/MyEditTextStyle"
+            style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -71,7 +72,7 @@
 
         <EditText
             android:id="@+id/edit_text_pswrd"
-            style="@style/MyEditTextStyle"
+            style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -81,7 +82,7 @@
 
         <EditText
             android:id="@+id/edit_txt_pswrd_rep"
-            style="@style/MyEditTextStyle"
+            style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

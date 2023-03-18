@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
-            android:src="@drawable/female_magician" />
+            android:src="@drawable/pic_female_magician" />
 
         <Button
             android:id="@+id/enterBtn"
