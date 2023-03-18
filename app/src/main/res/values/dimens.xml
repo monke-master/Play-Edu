@@ -11,6 +11,7 @@
     <dimen name="header1_txt_size">20sp</dimen>
     <dimen name="default_txt_size">16sp</dimen>
     <dimen name="header2_txt_size">18sp</dimen>
+    <dimen name="spinner_text_size">14sp</dimen>
     <dimen name="price_txt_size">14sp</dimen>
     <dimen name="deadline_txt_size">10sp</dimen>
 

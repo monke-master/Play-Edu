@@ -27,4 +27,5 @@
     <string name="your_tasks">Твои задания</string>
     <string name="pick_color">Выбери нужный цвет задачи</string>
     <string name="pick_list">Выбери нужный список</string>
+    <string name="filter">Фильтр</string>
 </resources>
