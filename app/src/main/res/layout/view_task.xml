@@ -58,7 +58,7 @@
 
             android:layout_weight="1"
             android:text="69"
-            android:textColor="@color/silver" />
+            android:textColor="@color/silver_coin" />
 
         <ImageView
             android:id="@+id/silver_ic"
