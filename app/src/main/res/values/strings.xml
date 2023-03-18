@@ -36,4 +36,8 @@
     <string name="add">Добавить</string>
     <string name="price_error_too_much">Не более 100 монет</string>
     <string name="price_hint">20</string>
+    <string name="delete_task_header">Ты уверен, что хочешь удалить задание?</string>
+    <string name="complete_task_header">Отметить задание выполненным?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 </resources>

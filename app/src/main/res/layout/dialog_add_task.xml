@@ -122,6 +122,17 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
+        <Button
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:backgroundTint="@color/purple_600"
+            android:layout_gravity="center_horizontal"
+            style="@style/DefaultButton"
+            android:id="@+id/add_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add" />
+
     </LinearLayout>
 
 

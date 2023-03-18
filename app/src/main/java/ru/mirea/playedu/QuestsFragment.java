@@ -1,5 +1,6 @@
 package ru.mirea.playedu;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -29,22 +30,27 @@ public class QuestsFragment extends Fragment {
         PowerSpinnerView filterSpinner = binding.filterSpinner;
         filterSpinner.setOnSpinnerItemSelectedListener(
                 (OnSpinnerItemSelectedListener<CharSequence>) (oldIndex, oldItem, newIndex, newItem) -> {
-            switch (newIndex) {
-                case 0:
-                    FilterListDialog listDialog = new FilterListDialog();
-                    listDialog.show(getActivity().getSupportFragmentManager(), "Filter lists dialog");
-                    break;
-                case 1:
-                    FilterColorDialog colorDialog = new FilterColorDialog();
-                    colorDialog.show(getActivity().getSupportFragmentManager(), "Filter color dialog");
-                    break;
-            }
-        });
+                    switch (newIndex) {
+                        case 0:
+                            FilterListDialog listDialog = new FilterListDialog();
+                            listDialog.show(getActivity().getSupportFragmentManager(), "Filter lists dialog");
+                            break;
+                        case 1:
+                            FilterColorDialog colorDialog = new FilterColorDialog();
+                            colorDialog.show(getActivity().getSupportFragmentManager(), "Filter color dialog");
+                            break;
+                    }
+                });
 
         binding.addTaskBtn.setOnClickListener(view -> {
             AddTaskDialog dialog = new AddTaskDialog();
             dialog.show(getActivity().getSupportFragmentManager(), "Add task dialog");
         });
+
+
+        //new DeleteTaskDialog().show(getActivity().getSupportFragmentManager(), "Delete task dialog");
+        new CompleteTaskDialog().show(getActivity().getSupportFragmentManager(), "Complete task dialog");
+
 
         return binding.getRoot();
     }
