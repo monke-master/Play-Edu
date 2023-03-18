@@ -41,6 +41,11 @@ public class QuestsFragment extends Fragment {
             }
         });
 
+        binding.addTaskBtn.setOnClickListener(view -> {
+            AddTaskDialog dialog = new AddTaskDialog();
+            dialog.show(getActivity().getSupportFragmentManager(), "Add task dialog");
+        });
+
         return binding.getRoot();
     }
 }

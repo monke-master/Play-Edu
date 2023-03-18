@@ -20,5 +20,6 @@
     <dimen name="dialog_rounding_radius">31dp</dimen>
 
     <dimen name="color_btn_size">25dp</dimen>
+    <dimen name="default_margin">20dp</dimen>
 
 </resources>

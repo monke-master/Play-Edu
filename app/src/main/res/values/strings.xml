@@ -25,7 +25,15 @@
     <string name="profile">Профиль</string>
     <string name="pe_tasks">Задания от PlayEdu</string>
     <string name="your_tasks">Твои задания</string>
-    <string name="pick_color">Выбери нужный цвет задачи</string>
+    <string name="pick_required_color">Выбери нужный цвет задачи</string>
     <string name="pick_list">Выбери нужный список</string>
     <string name="filter">Фильтр</string>
+    <string name="add_task">Добавление нового задания</string>
+    <string name="title">Название</string>
+    <string name="list">Список</string>
+    <string name="add_task_hint">Введи награду за выполнение и дедлайн</string>
+    <string name="pick_task_color">Выбери цвет задания</string>
+    <string name="add">Добавить</string>
+    <string name="price_error_too_much">Не более 100 монет</string>
+    <string name="price_hint">20</string>
 </resources>

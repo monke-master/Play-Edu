@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:text="@string/pick_color" />
+            android:text="@string/pick_required_color" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/colors_list"
