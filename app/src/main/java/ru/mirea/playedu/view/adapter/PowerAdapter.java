@@ -14,7 +14,12 @@ import ru.mirea.playedu.R;
 
 public class PowerAdapter extends RecyclerView.Adapter<PowerAdapter.ViewHolder> {
 
+    public interface OnItemClickListener {
+        void onItemClick(String name);
+    }
+
     private String[] powers;
+    private OnItemClickListener onItemClickListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -28,19 +33,21 @@ public class PowerAdapter extends RecyclerView.Adapter<PowerAdapter.ViewHolder> 
             powerImg = itemView.findViewById(R.id.power_img);
         }
 
+        public void bind(String powerName, OnItemClickListener listener) {
+            nameTxt.setText(powerName);
 
-        public TextView getNameTxt() {
-            return nameTxt;
+            itemView.setOnClickListener(view -> {
+                listener.onItemClick(powerName);
+            });
         }
 
-        public ImageView getPowerImg() {
-            return powerImg;
-        }
+
 
     }
 
-    public PowerAdapter(String[] powers) {
+    public PowerAdapter(String[] powers, OnItemClickListener onItemClickListener) {
         this.powers = powers;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -53,7 +60,7 @@ public class PowerAdapter extends RecyclerView.Adapter<PowerAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.getNameTxt().setText(powers[position]);
+        holder.bind(powers[position], onItemClickListener);
     }
 
     @Override

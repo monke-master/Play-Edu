@@ -3,6 +3,7 @@ package ru.mirea.playedu.view.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,33 +14,36 @@ import ru.mirea.playedu.R;
 
 public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.ViewHolder> {
 
+    public interface OnItemClickListener {
+        void onItemClick(String name);
+    }
+
     private String[] achievements;
+    private OnItemClickListener clickListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView nameTxt;
-        private ImageView powerImg;
+        private ImageView image;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             nameTxt = itemView.findViewById(R.id.name_txt);
-            powerImg = itemView.findViewById(R.id.power_img);
+            image = itemView.findViewById(R.id.power_img);
         }
 
+        public void bind(String name, OnItemClickListener listener) {
 
-        public TextView getNameTxt() {
-            return nameTxt;
-        }
-
-        public ImageView getPowerImg() {
-            return powerImg;
+            nameTxt.setText(name);
+            itemView.setOnClickListener(view -> listener.onItemClick(name));
         }
 
     }
 
-    public AchievementAdapter(String[] achievements) {
+    public AchievementAdapter(String[] achievements, OnItemClickListener clickListener) {
         this.achievements = achievements;
+        this.clickListener = clickListener;
     }
 
     @NonNull
@@ -52,7 +56,7 @@ public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.getNameTxt().setText(achievements[position]);
+        holder.bind(achievements[position], clickListener);
     }
 
 

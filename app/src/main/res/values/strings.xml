@@ -47,5 +47,6 @@
     <string name="powers_title">Силы</string>
     <string name="achievements_title">Достижения</string>
     <string name="leaderboard_title">Доска лидеров</string>
-
+    <string name="price">Цена:</string>
+    <string name="buy">Купить</string>
 </resources>

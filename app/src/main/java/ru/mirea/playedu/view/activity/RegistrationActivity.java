@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import ru.mirea.playedu.databinding.ActivityRegistrationBinding;
 
+// Активность с формой регистрации
 public class RegistrationActivity extends AppCompatActivity {
 
     @Override

@@ -12,7 +12,10 @@ import android.view.ViewGroup;
 
 import ru.mirea.playedu.R;
 import ru.mirea.playedu.databinding.FragmentProfileBinding;
+import ru.mirea.playedu.view.adapter.AchievementAdapter;
 import ru.mirea.playedu.view.adapter.PowerAdapter;
+import ru.mirea.playedu.view.dialog.AchievementDialog;
+import ru.mirea.playedu.view.dialog.PowerDialog;
 
 public class ProfileFragment extends Fragment {
 
@@ -60,7 +63,13 @@ public class ProfileFragment extends Fragment {
                 "Сила Куджа Кобейна",
         };
         powersList.setNestedScrollingEnabled(false);
-        powersList.setAdapter(new PowerAdapter(powers));
+        powersList.setAdapter(new PowerAdapter(powers, new PowerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(String name) {
+                PowerDialog dialog = new PowerDialog(name);
+                dialog.show(getActivity().getSupportFragmentManager(), "Power dialog");
+            }
+        }));
 
         // Табличный RecyclerView для списка достижений
         RecyclerView achievementsList = binding.achvmntsList;
@@ -72,7 +81,11 @@ public class ProfileFragment extends Fragment {
                 "Знамя пропастинского ударника"
         };
         achievementsList.setNestedScrollingEnabled(false);
-        achievementsList.setAdapter(new PowerAdapter(achievements));
+        // Отслеживание нажатия на элемент списка
+        achievementsList.setAdapter(new AchievementAdapter(achievements, name -> {
+            AchievementDialog dialog = new AchievementDialog(name);
+            dialog.show(getActivity().getSupportFragmentManager(), "Achievement dialog");
+        }));
 
         return binding.getRoot();
     }
