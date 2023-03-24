@@ -15,11 +15,8 @@ public class ChooseHeroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityChooseHeroBinding binding = ActivityChooseHeroBinding.inflate(getLayoutInflater());
 
-        binding.toolbar.setNavigationOnClickListener(view -> {
-            Intent intent = new Intent(ChooseHeroActivity.this, RegistrationActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        });
+        // Возвращение на предыдущую активность
+        binding.toolbar.setNavigationOnClickListener(v -> finish());
 
         setContentView(binding.getRoot());
     }

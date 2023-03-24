@@ -45,7 +45,7 @@
             android:layout_marginTop="10dp">
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/golden_ic"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center"

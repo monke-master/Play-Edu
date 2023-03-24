@@ -19,11 +19,8 @@ public class RegistrationActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        binding.toolbar.setNavigationOnClickListener(v -> {
-            Intent intent = new Intent(RegistrationActivity.this, LaunchActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        });
+        // Возвращение на предыдущую активность
+        binding.toolbar.setNavigationOnClickListener(v -> finish());
 
         setContentView(binding.getRoot());
     }

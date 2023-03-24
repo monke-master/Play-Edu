@@ -16,12 +16,8 @@ public class EnterActivity extends AppCompatActivity {
         ActivityEnterBinding binding = ActivityEnterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-        Toolbar toolbar = binding.toolbar;
-        toolbar.setNavigationOnClickListener(v -> {
-            Intent intent = new Intent(EnterActivity.this, LaunchActivity.class);
-            startActivity(intent);
-        });
+        // Возвращение на предыдущую активность
+        binding.toolbar.setNavigationOnClickListener(v -> finish());
 
         binding.enterBtn.setOnClickListener(v -> {
             Intent intent = new Intent(EnterActivity.this, MainActivity.class);
