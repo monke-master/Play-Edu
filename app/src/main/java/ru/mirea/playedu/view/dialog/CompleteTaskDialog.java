@@ -1,20 +1,20 @@
-package ru.mirea.playedu;
+package ru.mirea.playedu.view.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-public class DeleteTaskDialog extends DialogFragment {
+import ru.mirea.playedu.R;
+
+public class CompleteTaskDialog extends DialogFragment {
 
     private View view;
 
@@ -22,12 +22,13 @@ public class DeleteTaskDialog extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = requireActivity().getLayoutInflater().inflate(
-                R.layout.dialog_delete_task,
+                R.layout.dialog_complete_task,
                 null,
                 false);
 
         // Фон диалога
-        getDialog().getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.shape_dialog));
+        getDialog().getWindow().setBackgroundDrawable(
+                ContextCompat.getDrawable(requireContext(), R.drawable.shape_dialog));
         return view;
     }
 
@@ -36,7 +37,7 @@ public class DeleteTaskDialog extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_delete_task, null, false);
+        view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_complete_task, null, false);
         builder.setView(view);
         return builder.create();
     }

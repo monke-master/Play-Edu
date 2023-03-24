@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
+    tools:context=".view.fragment.ProfileFragment">
 
 
     <ScrollView
@@ -35,7 +35,7 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/gold_coin" />
+                        app:srcCompat="@drawable/pic_golden_coin" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/silver_coin" />
+                        app:srcCompat="@drawable/pic_silver_coin" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -89,7 +89,7 @@
                         android:layout_height="100dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="20dp"
-                        android:src="@drawable/magician_icon" />
+                        android:src="@drawable/pic_magician" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -151,7 +151,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -175,7 +175,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -199,7 +199,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -222,7 +222,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/power_template"/>
+                        android:src="@drawable/shape_power"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -251,7 +251,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -275,7 +275,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -299,7 +299,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -322,7 +322,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template"/>
+                            android:src="@drawable/shape_power"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -351,7 +351,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -375,7 +375,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -399,7 +399,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -422,7 +422,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template"/>
+                            android:src="@drawable/shape_power"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -452,7 +452,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -476,7 +476,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -500,7 +500,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -552,7 +552,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -574,7 +574,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -596,7 +596,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -618,7 +618,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -649,7 +649,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -673,7 +673,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -697,7 +697,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -720,7 +720,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template"/>
+                            android:src="@drawable/shape_power"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -749,7 +749,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -773,7 +773,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -797,7 +797,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -820,7 +820,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template"/>
+                            android:src="@drawable/shape_power"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -849,7 +849,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -873,7 +873,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -897,7 +897,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -921,7 +921,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -951,7 +951,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -975,7 +975,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -999,7 +999,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/power_template" />
+                            android:src="@drawable/shape_power" />
 
                         <TextView
                             android:layout_width="match_parent"

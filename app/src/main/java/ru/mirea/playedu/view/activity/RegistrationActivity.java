@@ -1,4 +1,4 @@
-package ru.mirea.playedu;
+package ru.mirea.playedu.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +21,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         binding.toolbar.setNavigationOnClickListener(v -> {
             Intent intent = new Intent(RegistrationActivity.this, LaunchActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         });
 

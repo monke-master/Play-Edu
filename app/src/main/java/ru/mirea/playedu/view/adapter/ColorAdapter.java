@@ -1,4 +1,4 @@
-package ru.mirea.playedu;
+package ru.mirea.playedu.view.adapter;
 
 import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import ru.mirea.playedu.R;
 
 public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> {
 

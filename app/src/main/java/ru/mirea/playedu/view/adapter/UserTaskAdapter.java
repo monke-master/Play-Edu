@@ -1,4 +1,4 @@
-package ru.mirea.playedu;
+package ru.mirea.playedu.view.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import ru.mirea.playedu.R;
 
 // Адаптер для отображения юзерских задач
 public class UserTaskAdapter extends RecyclerView.Adapter<UserTaskAdapter.ViewHolder> {

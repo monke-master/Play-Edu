@@ -1,4 +1,4 @@
-package ru.mirea.playedu;
+package ru.mirea.playedu.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,7 +36,7 @@ public class LaunchActivity extends AppCompatActivity {
         binding.forgotPassBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(LaunchActivity.this, ForgotPassword.class);
+                Intent i = new Intent(LaunchActivity.this, ForgotPasswordActivity.class);
                 startActivity(i);
             }
         });

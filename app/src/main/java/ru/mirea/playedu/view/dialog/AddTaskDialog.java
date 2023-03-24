@@ -1,4 +1,4 @@
-package ru.mirea.playedu;
+package ru.mirea.playedu.view.dialog;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -15,12 +15,19 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import ru.mirea.playedu.view.adapter.ColorAdapter;
+import ru.mirea.playedu.Constants;
+import ru.mirea.playedu.DimensionManager;
+import ru.mirea.playedu.HorizontalMarginItemDecoration;
+import ru.mirea.playedu.R;
 
 // Диалог добавления задачи
 public class AddTaskDialog extends DialogFragment {
@@ -36,7 +43,8 @@ public class AddTaskDialog extends DialogFragment {
                 false);
 
         // Фон диалога
-        getDialog().getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.shape_dialog));
+        getDialog().getWindow().setBackgroundDrawable(
+                ContextCompat.getDrawable(requireContext(), R.drawable.shape_dialog));
         return view;
     }
 

@@ -1,22 +1,21 @@
-package ru.mirea.playedu;
+package ru.mirea.playedu.view.fragment;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import com.skydoves.powerspinner.OnSpinnerItemSelectedListener;
 import com.skydoves.powerspinner.PowerSpinnerView;
 
 import ru.mirea.playedu.databinding.FragmentQuestsBinding;
+import ru.mirea.playedu.view.dialog.AddTaskDialog;
+import ru.mirea.playedu.view.dialog.CompleteTaskDialog;
+import ru.mirea.playedu.view.dialog.FilterColorDialog;
+import ru.mirea.playedu.view.dialog.FilterListDialog;
 
 public class QuestsFragment extends Fragment {
 
@@ -49,7 +48,7 @@ public class QuestsFragment extends Fragment {
 
 
         //new DeleteTaskDialog().show(getActivity().getSupportFragmentManager(), "Delete task dialog");
-        new CompleteTaskDialog().show(getActivity().getSupportFragmentManager(), "Complete task dialog");
+        //new CompleteTaskDialog().show(getActivity().getSupportFragmentManager(), "Complete task dialog");
 
 
         return binding.getRoot();

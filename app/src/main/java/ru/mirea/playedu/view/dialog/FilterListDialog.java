@@ -1,9 +1,8 @@
-package ru.mirea.playedu;
+package ru.mirea.playedu.view.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,10 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
+
+import ru.mirea.playedu.R;
 
 
 // Диалог для выбора списка задач
@@ -29,7 +31,8 @@ public class FilterListDialog extends DialogFragment {
                 false);
 
         // Фон диалога
-        getDialog().getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.shape_dialog));
+        getDialog().getWindow().setBackgroundDrawable(
+                ContextCompat.getDrawable(requireContext(), R.drawable.shape_dialog));
         return view;
     }
 
@@ -38,7 +41,8 @@ public class FilterListDialog extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_filter_list, null, false);
+        view = requireActivity().getLayoutInflater().
+                inflate(R.layout.dialog_filter_list, null, false);
         ListView listsView = view.findViewById(R.id.lists_view);
 
         String[] mockStrings = {"Homework", "University", "Avrora"};
