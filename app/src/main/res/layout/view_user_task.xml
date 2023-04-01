@@ -37,7 +37,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/title_txt"
+                android:id="@+id/label_txt"
                 style="@style/DefaultText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/price_txt"
+            android:id="@+id/reward_txt"
             style="@style/PriceText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
