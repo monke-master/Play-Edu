@@ -10,8 +10,10 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import ru.mirea.playedu.UserQuestsModel;
 import ru.mirea.playedu.view.adapter.ColorAdapter;
 import ru.mirea.playedu.Constants;
 import ru.mirea.playedu.DimensionManager;
@@ -42,6 +45,7 @@ public class AddTaskDialog extends DialogFragment {
                 null,
                 false);
 
+
         // Фон диалога
         getDialog().getWindow().setBackgroundDrawable(
                 ContextCompat.getDrawable(requireContext(), R.drawable.shape_dialog));
@@ -57,6 +61,9 @@ public class AddTaskDialog extends DialogFragment {
         EditText priceEditTxt = view.findViewById(R.id.price_edit_txt);
         RecyclerView recyclerView = view.findViewById(R.id.colors_list);
         EditText dateEditTxt = view.findViewById(R.id.date_edit_txt);
+        EditText titleEditTxt = view.findViewById(R.id.title_edit_txt);
+        EditText listEditTxt = view.findViewById(R.id.list_edit_txt);
+        Button addBtn = (Button) view.findViewById(R.id.add_btn);
 
         // Ввод награды
         priceEditTxt.addTextChangedListener(new TextWatcher() {
@@ -127,6 +134,18 @@ public class AddTaskDialog extends DialogFragment {
                         0,
                         colors.length));
 
+        // Сборка данных задания
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String title = titleEditTxt.getText().toString();
+                String category = listEditTxt.getText().toString();
+                String price = priceEditTxt.getText().toString();
+                String date = "Дедлайн: " + calendar.get(Calendar.DAY_OF_MONTH);
+                Bundle result = new Bundle();
+                getParentFragmentManager().setFragmentResult("requestKey", result);
+            }
+        });
         builder.setView(view);
         return builder.create();
     }

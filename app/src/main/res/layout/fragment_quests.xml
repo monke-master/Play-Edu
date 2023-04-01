@@ -156,6 +156,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/user_tasks_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:itemCount="7"
