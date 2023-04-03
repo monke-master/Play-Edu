@@ -25,6 +25,17 @@ public class UserTask {
         this.color = color;
     }
 
+    public UserTask() {
+        taskId = 0;
+        label = "";
+        category = new Category(0, "");
+        status = true;
+        coinsReward = 0;
+        deadlineDate = new Date();
+        creationDate = new Date();
+        color = 0;
+    }
+
     public int getTaskId() {
         return taskId;
     }
