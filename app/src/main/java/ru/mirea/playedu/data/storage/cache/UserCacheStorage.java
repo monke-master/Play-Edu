@@ -12,6 +12,8 @@ public class UserCacheStorage {
 
     private UserCacheStorage() {}
 
+    // Возвращает экземпляр класса
+    // Если экземпляра нет, создает новый
     public static UserCacheStorage getInstance() {
         if (instance == null)
             instance = new UserCacheStorage();

@@ -19,6 +19,10 @@ public class PlayEduTaskRepository {
         return cacheStorage.getTasks();
     }
 
+    public PlayEduTask getTaskById(int id) {
+        return cacheStorage.getTaskById(id);
+    }
+
     public RepositoryResponse addTask(PlayEduTask task) {
         cacheStorage.addTask(task);
         return new RepositoryResponse(200, "Success");
