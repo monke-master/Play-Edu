@@ -16,7 +16,7 @@ public class CategoryCacheStorage {
         categories = new ArrayList<>();
     }
 
-    private static CategoryCacheStorage getInstance() {
+    public static CategoryCacheStorage getInstance() {
         if (instance == null)
             instance = new CategoryCacheStorage();
 

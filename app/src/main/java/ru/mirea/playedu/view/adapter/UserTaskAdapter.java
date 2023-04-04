@@ -1,6 +1,7 @@
 package ru.mirea.playedu.view.adapter;
 
 import android.content.res.ColorStateList;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class UserTaskAdapter extends RecyclerView.Adapter<UserTaskAdapter.ViewHo
 
             colorShape = itemView.findViewById(R.id.category_layout);
             labelTxt = itemView.findViewById(R.id.label_txt);
-            rewardTxt = itemView.findViewById(R.id.price_txt);
+            rewardTxt = itemView.findViewById(R.id.reward_txt);
             deadlineTxt = itemView.findViewById(R.id.deadline_txt);
             completeBox = itemView.findViewById(R.id.complete_box);
         }
@@ -43,7 +44,8 @@ public class UserTaskAdapter extends RecyclerView.Adapter<UserTaskAdapter.ViewHo
         public void bind(UserTask task) {
             colorShape.setBackgroundTintList(ColorStateList.valueOf(task.getColor()));
             labelTxt.setText(task.getLabel());
-            rewardTxt.setText(task.getCoinsReward());
+            Log.e("Adapter", Integer.toString(task.getCoinsReward()));
+            rewardTxt.setText(Integer.toString(task.getCoinsReward()));
             // TODO сделать отображение дедлайна
         }
 

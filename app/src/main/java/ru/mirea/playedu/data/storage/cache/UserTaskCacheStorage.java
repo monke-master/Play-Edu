@@ -17,7 +17,7 @@ public class UserTaskCacheStorage {
         tasks = new ArrayList<>();
     }
 
-    private static UserTaskCacheStorage getInstance() {
+    public static UserTaskCacheStorage getInstance() {
         if (instance == null)
             instance = new UserTaskCacheStorage();
 
