@@ -11,8 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Objects;
 
+import ru.mirea.playedu.Constants;
 import ru.mirea.playedu.R;
 import ru.mirea.playedu.model.UserTask;
 
@@ -21,6 +25,9 @@ public class UserTaskAdapter extends RecyclerView.Adapter<UserTaskAdapter.ViewHo
 
     // Список юзерских задач,
     private ArrayList<UserTask> tasks;
+    // Константы представления
+    public static final int VIEW_TYPE_NORMAL = 0;
+    public static final int VIEW_TYPE_HEADER = 1;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -29,11 +36,14 @@ public class UserTaskAdapter extends RecyclerView.Adapter<UserTaskAdapter.ViewHo
         private TextView deadlineTxt;
         private TextView rewardTxt;
         private CheckBox completeBox;
+        private TextView header;
 
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, int viewType) {
             super(itemView);
-
+            if (viewType == VIEW_TYPE_HEADER) {
+                header = itemView.findViewById(R.id.header);
+            }
             colorShape = itemView.findViewById(R.id.category_layout);
             labelTxt = itemView.findViewById(R.id.label_txt);
             rewardTxt = itemView.findViewById(R.id.reward_txt);
@@ -41,12 +51,14 @@ public class UserTaskAdapter extends RecyclerView.Adapter<UserTaskAdapter.ViewHo
             completeBox = itemView.findViewById(R.id.complete_box);
         }
 
-        public void bind(UserTask task) {
+        public void bind(UserTask task, int viewType) {
+            if (viewType == VIEW_TYPE_HEADER) {
+                header.setText(task.getCategory().getTitle());
+            }
             colorShape.setBackgroundTintList(ColorStateList.valueOf(task.getColor()));
             labelTxt.setText(task.getLabel());
-            Log.e("Adapter", Integer.toString(task.getCoinsReward()));
             rewardTxt.setText(Integer.toString(task.getCoinsReward()));
-            // TODO сделать отображение дедлайна
+            deadlineTxt.setText(Constants.getDeadlineString(task.getDeadlineDate()));
         }
 
 
@@ -59,13 +71,26 @@ public class UserTaskAdapter extends RecyclerView.Adapter<UserTaskAdapter.ViewHo
     @NonNull
     @Override
     public UserTaskAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_user_task, parent, false);
-        return new UserTaskAdapter.ViewHolder(view);
+        View view;
+        if (viewType == VIEW_TYPE_NORMAL) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_user_task, parent, false);
+        }
+        else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_user_task_header, parent, false);
+        }
+
+        return new UserTaskAdapter.ViewHolder(view, viewType);
     }
 
     @Override
     public void onBindViewHolder(@NonNull UserTaskAdapter.ViewHolder holder, int position) {
-        holder.bind(tasks.get(position));
+        if (holder.getItemViewType() == VIEW_TYPE_NORMAL) {
+            holder.bind(tasks.get(position), VIEW_TYPE_NORMAL);
+        }
+        else {
+            holder.bind(tasks.get(position), VIEW_TYPE_HEADER);
+        }
+
     }
 
 
@@ -73,6 +98,20 @@ public class UserTaskAdapter extends RecyclerView.Adapter<UserTaskAdapter.ViewHo
     @Override
     public int getItemCount() {
         return tasks.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+
+        if (position == 0) {
+            return VIEW_TYPE_HEADER;
+        }
+        else if (!Objects.equals(tasks.get(position).getCategory().getTitle(), tasks.get(position - 1).getCategory().getTitle())) {
+            return VIEW_TYPE_HEADER;
+        }
+        else {
+            return VIEW_TYPE_NORMAL;
+        }
     }
 
 

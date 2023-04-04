@@ -6,10 +6,13 @@ import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Debug;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -148,6 +151,8 @@ public class AddTaskDialog extends DialogFragment {
                         0,
                         colors.length));
 
+
+        // Сбор данных по форме задания
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -156,7 +161,8 @@ public class AddTaskDialog extends DialogFragment {
                 Date deadlineDate = calendar.getTime();
                 Date creationDate = Calendar.getInstance().getTime();
                 Category category = viewModel.createCategory(listEditTxt.getText().toString());
-                UserTask userTask = new UserTask(title, category, true, price, deadlineDate, creationDate, 0);
+                int color = ((ColorAdapter)recyclerView.getAdapter()).getCurrentColor();
+                UserTask userTask = new UserTask(title, category, true, price, deadlineDate, creationDate, color);
                 viewModel.addTask(userTask);
                 getParentFragmentManager().setFragmentResult("requestKey", Bundle.EMPTY);
                 alert.cancel();
