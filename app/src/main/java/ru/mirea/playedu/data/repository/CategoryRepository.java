@@ -1,5 +1,7 @@
 package ru.mirea.playedu.data.repository;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 import ru.mirea.playedu.model.Category;
@@ -16,6 +18,14 @@ public class CategoryRepository {
 
     public ArrayList<Category> getCategories() {
         return cacheStorage.getCategories();
+    }
+
+    public ArrayList<String> getCategoriesTitles() {
+        ArrayList<String> categoriesTitles = new ArrayList<String>();
+        for (Category category : getCategories()) {
+            if (!categoriesTitles.contains(category.getTitle())) categoriesTitles.add(category.getTitle());
+        }
+        return categoriesTitles;
     }
 
     public RepositoryResponse updateCategory(int categoryId, Category newCategory) {

@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -12,19 +14,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import ru.mirea.playedu.callbacks.OnSelectColorFilterCallback;
 import ru.mirea.playedu.view.adapter.ColorAdapter;
 import ru.mirea.playedu.Constants;
 import ru.mirea.playedu.DimensionManager;
 import ru.mirea.playedu.HorizontalMarginItemDecoration;
 import ru.mirea.playedu.R;
+import ru.mirea.playedu.view.fragment.QuestsFragment;
+import ru.mirea.playedu.view_model.QuestsViewModel;
 
 // Диалог выбора цвета для фильтра
-public class FilterColorDialog extends DialogFragment {
+public class FilterColorDialog extends DialogFragment implements OnSelectColorFilterCallback{
 
     private View view;
+    private QuestsViewModel questsViewModel;
+
 
     @Nullable
     @Override
@@ -37,6 +45,8 @@ public class FilterColorDialog extends DialogFragment {
         // Фон диалога
         getDialog().getWindow().setBackgroundDrawable(
                 ContextCompat.getDrawable(requireContext(), R.drawable.shape_dialog));
+
+        questsViewModel = new ViewModelProvider(requireActivity()).get(QuestsViewModel.class);
         return view;
     }
 
@@ -51,7 +61,7 @@ public class FilterColorDialog extends DialogFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(),
                 LinearLayoutManager.HORIZONTAL, false));
         int[] colors = Constants.getCategoryColors(requireContext());
-        recyclerView.setAdapter(new ColorAdapter(colors));
+        recyclerView.setAdapter(new ColorAdapter(colors, this));
         // Рассчет отступов между цветами
         DisplayMetrics metrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -71,5 +81,10 @@ public class FilterColorDialog extends DialogFragment {
         return builder.create();
     }
 
+
+    @Override
+    public void execute(int color) {
+        questsViewModel.setTasksListForColor(color);
+    }
 }
 

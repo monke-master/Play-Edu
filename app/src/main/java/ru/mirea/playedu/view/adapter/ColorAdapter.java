@@ -10,11 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ru.mirea.playedu.R;
+import ru.mirea.playedu.callbacks.OnSelectColorFilterCallback;
 
 public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> {
 
     private int[] colors;
-    private int currentColor;
+    private final OnSelectColorFilterCallback callback;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -31,9 +32,9 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
         }
     }
 
-    public ColorAdapter(int[] colors) {
+    public ColorAdapter(int[] colors, OnSelectColorFilterCallback callback) {
         this.colors = colors;
-        currentColor = colors[0];
+        this.callback = callback;
     }
 
     @NonNull
@@ -46,10 +47,10 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.getColorShape().setBackgroundTintList(ColorStateList.valueOf(colors[position]));
-        holder.colorShape.setOnClickListener(new View.OnClickListener() {
+        holder.getColorShape().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currentColor = colors[holder.getBindingAdapterPosition()];
+                callback.execute(colors[holder.getBindingAdapterPosition()]);
             }
         });
     }
@@ -57,9 +58,5 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
     @Override
     public int getItemCount() {
         return colors.length;
-    }
-
-    public int getCurrentColor() {
-        return currentColor;
     }
 }

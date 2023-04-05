@@ -33,6 +33,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import ru.mirea.playedu.BR;
+import ru.mirea.playedu.callbacks.OnSelectColorFilterCallback;
 import ru.mirea.playedu.databinding.DialogAddTaskBinding;
 import ru.mirea.playedu.model.Category;
 import ru.mirea.playedu.model.UserTask;
@@ -45,10 +46,18 @@ import ru.mirea.playedu.HorizontalMarginItemDecoration;
 import ru.mirea.playedu.R;
 
 // Диалог добавления задачи
-public class AddTaskDialog extends DialogFragment {
+public class AddTaskDialog extends DialogFragment implements OnSelectColorFilterCallback {
 
     private View view;
     private AddTaskViewModel viewModel;
+    private int taskColor;
+    private String title;
+    private int price;
+    private Date deadlineDate;
+    private Date creationDate;
+    private Category category;
+
+
 
     @Nullable
     @Override
@@ -134,7 +143,8 @@ public class AddTaskDialog extends DialogFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(),
                 LinearLayoutManager.HORIZONTAL, false));
         int[] colors = Constants.getCategoryColors(requireContext());
-        recyclerView.setAdapter(new ColorAdapter(colors));
+        taskColor = colors[0];
+        recyclerView.setAdapter(new ColorAdapter(colors, this));
         // Рассчет отступов между цветами
         DisplayMetrics metrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -156,13 +166,12 @@ public class AddTaskDialog extends DialogFragment {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String title = titleEditTxt.getText().toString();
-                int price = Integer.parseInt(priceEditTxt.getText().toString());
-                Date deadlineDate = calendar.getTime();
-                Date creationDate = Calendar.getInstance().getTime();
-                Category category = viewModel.createCategory(listEditTxt.getText().toString());
-                int color = ((ColorAdapter)recyclerView.getAdapter()).getCurrentColor();
-                UserTask userTask = new UserTask(title, category, true, price, deadlineDate, creationDate, color);
+                title = titleEditTxt.getText().toString();
+                price = Integer.parseInt(priceEditTxt.getText().toString());
+                deadlineDate = calendar.getTime();
+                creationDate = Calendar.getInstance().getTime();
+                category = viewModel.createCategory(listEditTxt.getText().toString());
+                UserTask userTask = new UserTask(title, category, true, price, deadlineDate, creationDate, taskColor);
                 viewModel.addTask(userTask);
                 getParentFragmentManager().setFragmentResult("requestKey", Bundle.EMPTY);
                 alert.cancel();
@@ -173,4 +182,8 @@ public class AddTaskDialog extends DialogFragment {
         return builder.create();
     }
 
+    @Override
+    public void execute(int color) {
+        taskColor = color;
+    }
 }
