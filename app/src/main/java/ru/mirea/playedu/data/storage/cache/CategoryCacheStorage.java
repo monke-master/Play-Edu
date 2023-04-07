@@ -16,8 +16,6 @@ public class CategoryCacheStorage {
         categories = new ArrayList<>();
     }
 
-    // Возвращает экземпляр класса
-    // Если экземпляра нет, создает новый
     private static CategoryCacheStorage getInstance() {
         if (instance == null)
             instance = new CategoryCacheStorage();

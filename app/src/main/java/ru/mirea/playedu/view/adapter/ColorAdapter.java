@@ -1,6 +1,7 @@
 package ru.mirea.playedu.view.adapter;
 
 import android.content.res.ColorStateList;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ru.mirea.playedu.R;
+import ru.mirea.playedu.callbacks.OnSelectColorFilterCallback;
 
 public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> {
 
     private int[] colors;
+    private final OnSelectColorFilterCallback callback;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -20,7 +23,6 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             colorShape = itemView.findViewById(R.id.add_task_btn);
         }
 
@@ -30,8 +32,9 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
         }
     }
 
-    public ColorAdapter(int[] colors) {
+    public ColorAdapter(int[] colors, OnSelectColorFilterCallback callback) {
         this.colors = colors;
+        this.callback = callback;
     }
 
     @NonNull
@@ -44,12 +47,16 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.getColorShape().setBackgroundTintList(ColorStateList.valueOf(colors[position]));
+        holder.getColorShape().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callback.execute(colors[holder.getBindingAdapterPosition()]);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return colors.length;
     }
-
-
 }

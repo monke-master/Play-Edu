@@ -3,24 +3,32 @@ package ru.mirea.playedu.view.dialog;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
+
+import java.util.ArrayList;
 
 import ru.mirea.playedu.R;
+import ru.mirea.playedu.view_model.QuestsViewModel;
 
 
 // Диалог для выбора списка задач
 public class FilterListDialog extends DialogFragment {
 
     private View view;
+    private QuestsViewModel questsViewModel;
 
     @Nullable
     @Override
@@ -45,12 +53,21 @@ public class FilterListDialog extends DialogFragment {
                 inflate(R.layout.dialog_filter_list, null, false);
         ListView listsView = view.findViewById(R.id.lists_view);
 
-        String[] mockStrings = {"Homework", "University", "Avrora"};
+        questsViewModel = new ViewModelProvider(requireActivity()).get(QuestsViewModel.class);
+        ArrayList<String> categories = questsViewModel.getCategories();
 
         ArrayAdapter<String> arrayAdapter =
-                new ArrayAdapter(requireContext(), R.layout.view_list_item, mockStrings);
+                new ArrayAdapter(requireContext(), R.layout.view_list_item, categories);
 
         listsView.setAdapter(arrayAdapter);
+
+        listsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView categoryView = (TextView)view;
+                questsViewModel.setTasksListForCategory(categoryView.getText().toString());
+            }
+        });
 
         builder.setView(view);
         return builder.create();

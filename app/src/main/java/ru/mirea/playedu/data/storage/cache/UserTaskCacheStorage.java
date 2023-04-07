@@ -18,8 +18,7 @@ public class UserTaskCacheStorage {
         tasks = new ArrayList<>();
     }
 
-    // Возвращает экземпляр класса
-    // Если экземпляра нет, создает новый
+
     public static UserTaskCacheStorage getInstance() {
         if (instance == null)
             instance = new UserTaskCacheStorage();

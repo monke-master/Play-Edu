@@ -13,9 +13,8 @@ public class UserTask {
     private Date creationDate;
     private int color;
 
-    public UserTask(int taskId, String label, Category category, boolean status, int coinsReward,
+    public UserTask(String label, Category category, boolean status, int coinsReward,
                     Date deadlineDate, Date creationDate, int color) {
-        this.taskId = taskId;
         this.label = label;
         this.category = category;
         this.status = status;
@@ -26,9 +25,8 @@ public class UserTask {
     }
 
     public UserTask() {
-        taskId = 0;
         label = "";
-        category = new Category(0, "");
+        category = new Category("");
         status = true;
         coinsReward = 0;
         deadlineDate = new Date();
