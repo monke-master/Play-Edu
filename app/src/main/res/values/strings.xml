@@ -49,4 +49,10 @@
     <string name="leaderboard_title">Доска лидеров</string>
     <string name="price">Цена:</string>
     <string name="buy">Купить</string>
+    <string name="start_adventure">Начать приключение?</string>
+    <string name="characteristics">Показатели:</string>
+    <string name="damage">Урон:</string>
+    <string name="health">Здоровье:</string>
+    <string name="pick_powers">Выбери силы:</string>
+    <string name="start">Начать</string>
 </resources>

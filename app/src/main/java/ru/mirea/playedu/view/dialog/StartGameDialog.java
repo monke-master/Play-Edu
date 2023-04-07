@@ -14,13 +14,12 @@ import androidx.fragment.app.DialogFragment;
 
 import ru.mirea.playedu.R;
 
-public class PowerDialog extends DialogFragment {
+public class StartGameDialog extends DialogFragment {
 
     private View view;
-    private String powerName;
 
-    public PowerDialog(String powerName) {
-        this.powerName = powerName;
+    public StartGameDialog() {
+
     }
 
     @Nullable
@@ -28,12 +27,12 @@ public class PowerDialog extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         view = requireActivity().getLayoutInflater().inflate(
-                R.layout.dialog_power,
+                R.layout.dialog_start_game,
                 null,
                 false);
 
         // Фон диалога
-        getDialog().getWindow().setBackgroundDrawableResource(R.color.transparent);
+        getDialog().getWindow().setBackgroundDrawableResource(R.drawable.shape_dialog);
         return view;
     }
 
@@ -43,9 +42,7 @@ public class PowerDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         view = requireActivity().getLayoutInflater().
-                inflate(R.layout.dialog_power, null, false);
-        TextView nameTxt = view.findViewById(R.id.name_txt);
-        nameTxt.setText(powerName);
+                inflate(R.layout.dialog_start_game, null, false);
         builder.setView(view);
         return builder.create();
     }

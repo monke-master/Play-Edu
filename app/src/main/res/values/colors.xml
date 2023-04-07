@@ -20,6 +20,10 @@
     <color name="purple_background">#624FC9</color>
     <color name="purple_600">#393470</color>
 
+    <color name="green">#74FB28</color>
+    <color name="red">#FF6363</color>
+
+    <color name="gray">#ABA7F1</color>
 
 
 </resources>

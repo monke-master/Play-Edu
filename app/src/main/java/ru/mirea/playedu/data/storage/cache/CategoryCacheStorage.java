@@ -18,7 +18,7 @@ public class CategoryCacheStorage {
 
     // Возвращает экземпляр класса
     // Если экземпляра нет, создает новый
-    private static CategoryCacheStorage getInstance() {
+    public static CategoryCacheStorage getInstance() {
         if (instance == null)
             instance = new CategoryCacheStorage();
 
