@@ -16,24 +16,35 @@ public class CategoryCacheStorage {
         categories = new ArrayList<>();
     }
 
-    public static CategoryCacheStorage getInstance() {
+    private static CategoryCacheStorage getInstance() {
         if (instance == null)
             instance = new CategoryCacheStorage();
 
         return instance;
     }
 
-    // Получение всех категорий
+    // Возвращает категорию с заданным id, если она есть в списке
+    // Иначе возвращает null
+    public Category getCategoryById(int id) {
+        for (Category category: categories) {
+            if (category.getCategoryId() == id) {
+                return category;
+            }
+        }
+        return null;
+    }
+
+    // Возвращает список всех категорий
     public ArrayList<Category> getCategories() {
         return categories;
     }
 
-    // Добавление категории
+    // Добавляет категорию в список
     public void addCategory(Category category) {
         categories.add(category);
     }
 
-    // Редактирование категории
+    // Заменяет категорию с заданным id на новую
     public boolean updateCategory(int categoryId, Category newCategory) {
         for (int i = 0; i < categories.size(); i++) {
             if (categories.get(i).getCategoryId() == categoryId) {
@@ -44,7 +55,7 @@ public class CategoryCacheStorage {
         return false;
     }
 
-    // Удаление категории
+    // Удаляет категорию с заданным id
     public boolean deleteCategory(Category category) {
         return categories.remove(category);
     }

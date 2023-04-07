@@ -17,24 +17,35 @@ public class AchievementCacheStorage {
         achievements = new ArrayList<>();
     }
 
+    // Возвращает экземпляр класса
+    // Если экземпляра нет, создает новый
     private static AchievementCacheStorage getInstance() {
         if (instance == null)
             instance = new AchievementCacheStorage();
         return instance;
     }
 
+    // Возвращает достижение с заданным id, если она есть в списке
+    // Иначе возвращает null
+    public Achievement getAchievementById(int id) {
+        for (Achievement achievement: achievements) {
+            if (achievement.getAchievementId() == id)
+                return achievement;
+        }
+        return null;
+    }
 
-    // Получение всех достижений
+    // Возвращает список достижений пользователя
     public ArrayList<Achievement> getAchievements() {
         return achievements;
     }
 
-    // Добавление достижения
-    public void addTask(Achievement achievement) {
+    // Добавляет достижение в список
+    public void addAchievement(Achievement achievement) {
         achievements.add(achievement);
     }
 
-    // Редактирование достижения
+    // Редактирует достижение по заданному id
     public boolean updateAchievement(int achievementId, Achievement newAchievement) {
         for (int i = 0; i < achievements.size(); i++) {
             if (achievements.get(i).getAchievementId() == achievementId) {
@@ -45,7 +56,7 @@ public class AchievementCacheStorage {
         return false;
     }
 
-    // Удаление достижения
+    // Удаляет достижение по заданному id
     public boolean deleteAchievement(Achievement achievement) {
         return achievements.remove(achievement);
     }

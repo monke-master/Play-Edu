@@ -1,0 +1,24 @@
+package ru.mirea.playedu.data.repository;
+
+import ru.mirea.playedu.data.storage.cache.UserStatsCacheStorage;
+import ru.mirea.playedu.model.RepositoryResponse;
+import ru.mirea.playedu.model.UserStats;
+
+// Репозиторий для хранения пользовательской статистики
+public class UserStatsRepository {
+
+    private UserStatsCacheStorage cacheStorage;
+
+    public UserStatsRepository(UserStatsCacheStorage cacheStorage) {
+        this.cacheStorage = cacheStorage;
+    }
+
+    public UserStats getUserStats() {
+        return cacheStorage.getUserStats();
+    }
+
+    public RepositoryResponse setUserStats(UserStats newStats) {
+        cacheStorage.setUserStats(newStats);
+        return new RepositoryResponse(200, "Success");
+    }
+}
