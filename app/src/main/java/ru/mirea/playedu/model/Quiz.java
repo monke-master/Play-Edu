@@ -19,4 +19,18 @@ public class Quiz extends PlayEduEvent {
         this.quizData = quizData;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Quiz quiz = (Quiz) o;
+
+        return quizData.equals(quiz.quizData);
+    }
+
+    @Override
+    public int hashCode() {
+        return quizData.hashCode();
+    }
 }

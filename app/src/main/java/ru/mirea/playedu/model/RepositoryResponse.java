@@ -11,7 +11,6 @@ public class RepositoryResponse {
         this.body = body;
     }
 
-
     public String getBody() {
         return body;
     }
@@ -26,5 +25,23 @@ public class RepositoryResponse {
 
     public void setCode(int code) {
         this.code = code;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        RepositoryResponse that = (RepositoryResponse) o;
+
+        if (code != that.code) return false;
+        return body.equals(that.body);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = code;
+        result = 31 * result + body.hashCode();
+        return result;
     }
 }

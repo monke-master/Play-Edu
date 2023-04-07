@@ -91,4 +91,34 @@ public class UserStats {
     public void setProfilesVisited(int profilesVisited) {
         this.profilesVisited = profilesVisited;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserStats userStats = (UserStats) o;
+
+        if (statsId != userStats.statsId) return false;
+        if (playEduTasksCompleted != userStats.playEduTasksCompleted) return false;
+        if (userTasksCompleted != userStats.userTasksCompleted) return false;
+        if (fightsCount != userStats.fightsCount) return false;
+        if (enemiesKilled != userStats.enemiesKilled) return false;
+        if (quizCompleted != userStats.quizCompleted) return false;
+        if (profilesVisited != userStats.profilesVisited) return false;
+        return registrationDate.equals(userStats.registrationDate);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = statsId;
+        result = 31 * result + registrationDate.hashCode();
+        result = 31 * result + playEduTasksCompleted;
+        result = 31 * result + userTasksCompleted;
+        result = 31 * result + fightsCount;
+        result = 31 * result + enemiesKilled;
+        result = 31 * result + quizCompleted;
+        result = 31 * result + profilesVisited;
+        return result;
+    }
 }

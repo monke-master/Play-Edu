@@ -69,6 +69,31 @@ public class Achievement {
         this.icon = icon;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Achievement that = (Achievement) o;
+
+        if (achievementId != that.achievementId) return false;
+        if (userAchievementId != that.userAchievementId) return false;
+        if (status != that.status) return false;
+        if (!title.equals(that.title)) return false;
+        if (!description.equals(that.description)) return false;
+        return icon.equals(that.icon);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = achievementId;
+        result = 31 * result + userAchievementId;
+        result = 31 * result + title.hashCode();
+        result = 31 * result + description.hashCode();
+        result = 31 * result + (status ? 1 : 0);
+        result = 31 * result + icon.hashCode();
+        return result;
+    }
 
 
 }

@@ -28,7 +28,11 @@ public class CategoryRepository {
         return cacheStorage.getCategories();
     }
 
-
+    // Добавляет категорию в список
+    public RepositoryResponse addCategory(Category category) {
+        cacheStorage.addCategory(category);
+        return new RepositoryResponse(200, "Success");
+    }
 
     // Заменяет категорию с заданным id на новую
     public ArrayList<String> getCategoriesTitles() {

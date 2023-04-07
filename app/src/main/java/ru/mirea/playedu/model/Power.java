@@ -89,4 +89,34 @@ public class Power {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Power power = (Power) o;
+
+        if (powerId != power.powerId) return false;
+        if (userPowerId != power.userPowerId) return false;
+        if (status != power.status) return false;
+        if (priceType != power.priceType) return false;
+        if (price != power.price) return false;
+        if (!title.equals(power.title)) return false;
+        if (!description.equals(power.description)) return false;
+        return icon.equals(power.icon);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = powerId;
+        result = 31 * result + userPowerId;
+        result = 31 * result + title.hashCode();
+        result = 31 * result + description.hashCode();
+        result = 31 * result + (status ? 1 : 0);
+        result = 31 * result + icon.hashCode();
+        result = 31 * result + priceType;
+        result = 31 * result + price;
+        return result;
+    }
 }

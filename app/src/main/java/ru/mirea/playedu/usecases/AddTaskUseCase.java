@@ -1,4 +1,4 @@
-package ru.mirea.playedu.use_cases;
+package ru.mirea.playedu.usecases;
 
 import ru.mirea.playedu.data.repository.UserTaskRepository;
 import ru.mirea.playedu.model.UserTask;

@@ -1,9 +1,5 @@
-package ru.mirea.playedu.view_model;
+package ru.mirea.playedu.viewmodel;
 
-import android.util.Log;
-
-import androidx.databinding.BaseObservable;
-import androidx.databinding.Bindable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -11,12 +7,10 @@ import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import ru.mirea.playedu.BR;
 import ru.mirea.playedu.data.repository.CategoryRepository;
 import ru.mirea.playedu.data.repository.UserTaskRepository;
 import ru.mirea.playedu.data.storage.cache.CategoryCacheStorage;
 import ru.mirea.playedu.data.storage.cache.UserTaskCacheStorage;
-import ru.mirea.playedu.model.Category;
 import ru.mirea.playedu.model.UserTask;
 
 public class QuestsViewModel extends ViewModel {

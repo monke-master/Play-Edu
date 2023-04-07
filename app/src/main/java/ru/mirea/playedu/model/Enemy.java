@@ -112,4 +112,38 @@ public class Enemy {
     public void setEnemyId(int enemyId) {
         this.enemyId = enemyId;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Enemy enemy = (Enemy) o;
+
+        if (enemyId != enemy.enemyId) return false;
+        if (health != enemy.health) return false;
+        if (damage != enemy.damage) return false;
+        if (attackPhaseSpeed != enemy.attackPhaseSpeed) return false;
+        if (defensePhaseSpeed != enemy.defensePhaseSpeed) return false;
+        if (defencePhaseSpread != enemy.defencePhaseSpread) return false;
+        if (price != enemy.price) return false;
+        if (phaseTime != enemy.phaseTime) return false;
+        if (!name.equals(enemy.name)) return false;
+        return image.equals(enemy.image);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = enemyId;
+        result = 31 * result + health;
+        result = 31 * result + damage;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + image.hashCode();
+        result = 31 * result + attackPhaseSpeed;
+        result = 31 * result + defensePhaseSpeed;
+        result = 31 * result + defencePhaseSpread;
+        result = 31 * result + price;
+        result = 31 * result + phaseTime;
+        return result;
+    }
 }

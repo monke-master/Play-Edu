@@ -37,4 +37,24 @@ public class Player {
     public void setMistakeCount(int mistakeCount) {
         this.mistakeCount = mistakeCount;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Player player = (Player) o;
+
+        if (health != player.health) return false;
+        if (damage != player.damage) return false;
+        return mistakeCount == player.mistakeCount;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = health;
+        result = 31 * result + damage;
+        result = 31 * result + mistakeCount;
+        return result;
+    }
 }

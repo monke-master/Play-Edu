@@ -97,4 +97,34 @@ public class UserTask {
     public void setColor(int color) {
         this.color = color;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserTask task = (UserTask) o;
+
+        if (taskId != task.taskId) return false;
+        if (status != task.status) return false;
+        if (coinsReward != task.coinsReward) return false;
+        if (color != task.color) return false;
+        if (!label.equals(task.label)) return false;
+        if (!category.equals(task.category)) return false;
+        if (!deadlineDate.equals(task.deadlineDate)) return false;
+        return creationDate.equals(task.creationDate);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = taskId;
+        result = 31 * result + label.hashCode();
+        result = 31 * result + category.hashCode();
+        result = 31 * result + (status ? 1 : 0);
+        result = 31 * result + coinsReward;
+        result = 31 * result + deadlineDate.hashCode();
+        result = 31 * result + creationDate.hashCode();
+        result = 31 * result + color;
+        return result;
+    }
 }

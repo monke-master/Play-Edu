@@ -16,7 +16,7 @@ public class User {
     private ArrayList<Achievement> profileAchievements;
 
 
-    public User(int userId, String login, String password, String phoneNumber,
+    public User(String login, String password, String phoneNumber,
                 String group, int goldenCoins, int silverCoins, URL userIcon,
                 ArrayList<Achievement> profileAchievements) {
         this.userId = userId;
@@ -100,6 +100,38 @@ public class User {
 
     public void setProfileAchievements(ArrayList<Achievement> profileAchievements) {
         this.profileAchievements = profileAchievements;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (userId != user.userId) return false;
+        if (goldenCoins != user.goldenCoins) return false;
+        if (silverCoins != user.silverCoins) return false;
+        if (!login.equals(user.login)) return false;
+        if (!password.equals(user.password)) return false;
+        if (!phoneNumber.equals(user.phoneNumber)) return false;
+        if (!group.equals(user.group)) return false;
+        if (!userIcon.equals(user.userIcon)) return false;
+        return profileAchievements.equals(user.profileAchievements);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = userId;
+        result = 31 * result + login.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + phoneNumber.hashCode();
+        result = 31 * result + group.hashCode();
+        result = 31 * result + goldenCoins;
+        result = 31 * result + silverCoins;
+        result = 31 * result + userIcon.hashCode();
+        result = 31 * result + profileAchievements.hashCode();
+        return result;
     }
 
 }

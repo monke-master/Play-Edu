@@ -4,9 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -24,8 +22,7 @@ import ru.mirea.playedu.Constants;
 import ru.mirea.playedu.DimensionManager;
 import ru.mirea.playedu.HorizontalMarginItemDecoration;
 import ru.mirea.playedu.R;
-import ru.mirea.playedu.view.fragment.QuestsFragment;
-import ru.mirea.playedu.view_model.QuestsViewModel;
+import ru.mirea.playedu.viewmodel.QuestsViewModel;
 
 // Диалог выбора цвета для фильтра
 public class FilterColorDialog extends DialogFragment implements OnSelectColorFilterCallback{

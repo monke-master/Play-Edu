@@ -3,7 +3,6 @@ package ru.mirea.playedu.view.dialog;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,7 @@ import androidx.lifecycle.ViewModelProvider;
 import java.util.ArrayList;
 
 import ru.mirea.playedu.R;
-import ru.mirea.playedu.view_model.QuestsViewModel;
+import ru.mirea.playedu.viewmodel.QuestsViewModel;
 
 
 // Диалог для выбора списка задач

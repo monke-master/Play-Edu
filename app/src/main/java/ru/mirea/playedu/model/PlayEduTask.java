@@ -78,4 +78,32 @@ public class PlayEduTask {
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PlayEduTask task = (PlayEduTask) o;
+
+        if (taskId != task.taskId) return false;
+        if (status != task.status) return false;
+        if (coinsReward != task.coinsReward) return false;
+        if (!label.equals(task.label)) return false;
+        if (!event.equals(task.event)) return false;
+        if (!deadlineDate.equals(task.deadlineDate)) return false;
+        return creationDate.equals(task.creationDate);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = taskId;
+        result = 31 * result + label.hashCode();
+        result = 31 * result + event.hashCode();
+        result = 31 * result + (status ? 1 : 0);
+        result = 31 * result + coinsReward;
+        result = 31 * result + deadlineDate.hashCode();
+        result = 31 * result + creationDate.hashCode();
+        return result;
+    }
 }

@@ -1,4 +1,4 @@
-package ru.mirea.playedu.view_model;
+package ru.mirea.playedu.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 
@@ -10,7 +10,7 @@ import ru.mirea.playedu.data.storage.cache.CategoryCacheStorage;
 import ru.mirea.playedu.data.storage.cache.UserTaskCacheStorage;
 import ru.mirea.playedu.model.Category;
 import ru.mirea.playedu.model.UserTask;
-import ru.mirea.playedu.use_cases.AddTaskUseCase;
+import ru.mirea.playedu.usecases.AddTaskUseCase;
 
 public class AddTaskViewModel extends ViewModel {
     // Объявление use case для добавления задания
