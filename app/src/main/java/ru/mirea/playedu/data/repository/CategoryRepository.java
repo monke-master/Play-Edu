@@ -1,11 +1,9 @@
 package ru.mirea.playedu.data.repository;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 import ru.mirea.playedu.model.Category;
-import ru.mirea.playedu.model.RepositoryResponse;
+import ru.mirea.playedu.model.Response;
 import ru.mirea.playedu.data.storage.cache.CategoryCacheStorage;
 
 // Репозиторий для хранения пользовательских задач
@@ -29,9 +27,9 @@ public class CategoryRepository {
     }
 
     // Добавляет категорию в список
-    public RepositoryResponse addCategory(Category category) {
+    public Response addCategory(Category category) {
         cacheStorage.addCategory(category);
-        return new RepositoryResponse(200, "Success");
+        return new Response(200, "Success");
     }
 
     // Заменяет категорию с заданным id на новую
@@ -43,19 +41,19 @@ public class CategoryRepository {
         return categoriesTitles;
     }
     
-    public RepositoryResponse updateCategory(int categoryId, Category newCategory) {
+    public Response updateCategory(int categoryId, Category newCategory) {
         if (cacheStorage.updateCategory(categoryId, newCategory))
-            return new RepositoryResponse(200, "Success");
+            return new Response(200, "Success");
         else
-            return new RepositoryResponse(404, "Not found");
+            return new Response(404, "Not found");
     }
 
     // Удаляет категорию с заданным id
-    public RepositoryResponse deleteCategory(Category category) {
+    public Response deleteCategory(Category category) {
         if (cacheStorage.deleteCategory(category))
-            return new RepositoryResponse(200, "Success");
+            return new Response(200, "Success");
         else
-            return new RepositoryResponse(404, "Not found");
+            return new Response(404, "Not found");
     }
 
 

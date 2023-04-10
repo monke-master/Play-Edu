@@ -1,6 +1,6 @@
 package ru.mirea.playedu.data.repository;
 
-import ru.mirea.playedu.model.RepositoryResponse;
+import ru.mirea.playedu.model.Response;
 import ru.mirea.playedu.model.User;
 import ru.mirea.playedu.data.storage.cache.UserCacheStorage;
 
@@ -18,8 +18,17 @@ public class UserRepository {
         return cacheStorage.getUser();
     }
 
-    public RepositoryResponse updateUser(User user) {
+    // Создает пользователя
+    // В случае успешного создания возвращает id новой учетной записи
+    public Response createUser(User user) {
         cacheStorage.setUser(user);
-        return new RepositoryResponse(200, "Success");
+        Response repositoryResponse = new Response(200, "Success");
+        repositoryResponse.setResponseObject(1);
+        return repositoryResponse;
+    }
+
+    public Response updateUser(User user) {
+        cacheStorage.setUser(user);
+        return new Response(200, "Success");
     }
 }

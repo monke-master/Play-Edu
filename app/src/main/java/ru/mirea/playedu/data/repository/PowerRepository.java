@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import ru.mirea.playedu.data.storage.cache.PowerCacheStorage;
 import ru.mirea.playedu.model.Power;
-import ru.mirea.playedu.model.RepositoryResponse;
+import ru.mirea.playedu.model.Response;
 
 // Репозиторий для сил пользователя
 public class PowerRepository {
@@ -27,24 +27,24 @@ public class PowerRepository {
     }
 
     // Добавляет силу
-    public RepositoryResponse addPower(Power power) {
+    public Response addPower(Power power) {
         cacheStorage.addPower(power);
-        return new RepositoryResponse(200, "Success");
+        return new Response(200, "Success");
     }
 
     // Заменяет силу с заданным id на новую
-    public RepositoryResponse updatePower(int id, Power newPower) {
+    public Response updatePower(int id, Power newPower) {
         if (cacheStorage.updatePower(id, newPower))
-            return new RepositoryResponse(200, "Success");
+            return new Response(200, "Success");
         else
-            return new RepositoryResponse(404, "Not found");
+            return new Response(404, "Not found");
     }
 
     // Удаление силы с заданным id
-    public RepositoryResponse deletePower(Power power) {
+    public Response deletePower(Power power) {
         if (cacheStorage.deletePower(power))
-            return new RepositoryResponse(200, "Success");
+            return new Response(200, "Success");
         else
-            return new RepositoryResponse(404, "Not found");
+            return new Response(404, "Not found");
     }
 }

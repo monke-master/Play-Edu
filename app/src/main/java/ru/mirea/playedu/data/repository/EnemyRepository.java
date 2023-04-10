@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import ru.mirea.playedu.data.storage.cache.EnemyCacheStorage;
 import ru.mirea.playedu.model.Enemy;
-import ru.mirea.playedu.model.RepositoryResponse;
+import ru.mirea.playedu.model.Response;
 
 // Репозиторий для хранения данных о врагах
 public class EnemyRepository {
@@ -27,24 +27,24 @@ public class EnemyRepository {
     }
 
     // Добавляет врага в список
-    public RepositoryResponse addEnemy(Enemy enemy) {
+    public Response addEnemy(Enemy enemy) {
         cacheStorage.addEnemy(enemy);
-        return new RepositoryResponse(200, "Success");
+        return new Response(200, "Success");
     }
 
     // Заменяет врага с заданным id на нового
-    public RepositoryResponse updateEnemy(int enemyId, Enemy newEnemy) {
+    public Response updateEnemy(int enemyId, Enemy newEnemy) {
         if (cacheStorage.updateEnemy(enemyId, newEnemy))
-            return new RepositoryResponse(200, "Success");
+            return new Response(200, "Success");
         else
-            return new RepositoryResponse(404, "Not found");
+            return new Response(404, "Not found");
     }
 
     // Удаляет врага с заданным id
-    public RepositoryResponse deleteEnemy(Enemy enemy) {
+    public Response deleteEnemy(Enemy enemy) {
         if (cacheStorage.deleteEnemy(enemy))
-            return new RepositoryResponse(200, "Success");
+            return new Response(200, "Success");
         else
-            return new RepositoryResponse(404, "Not found");
+            return new Response(404, "Not found");
     }
 }

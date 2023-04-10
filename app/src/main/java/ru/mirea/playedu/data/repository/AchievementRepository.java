@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import ru.mirea.playedu.data.storage.cache.AchievementCacheStorage;
 import ru.mirea.playedu.model.Achievement;
-import ru.mirea.playedu.model.RepositoryResponse;
+import ru.mirea.playedu.model.Response;
 
 // Класс-репозиторий для достижений игрока
 public class AchievementRepository {
@@ -28,26 +28,26 @@ public class AchievementRepository {
     }
 
     // Добавляет достижение
-    public RepositoryResponse addAchievement(Achievement achievement) {
+    public Response addAchievement(Achievement achievement) {
         cacheStorage.addAchievement(achievement);
-        return new RepositoryResponse(200, "Success");
+        return new Response(200, "Success");
     }
 
     // Редактирует достижение по заданному id
-    public RepositoryResponse deleteAchievement(Achievement achievement) {
+    public Response deleteAchievement(Achievement achievement) {
         if (cacheStorage.deleteAchievement(achievement)) {
-            return new RepositoryResponse(200, "Success");
+            return new Response(200, "Success");
         } else {
-            return new RepositoryResponse(404, "Not found");
+            return new Response(404, "Not found");
         }
     }
 
     // Удаляет достижение по заданному id
-    public RepositoryResponse updateAchievement(int id, Achievement newAchievement) {
+    public Response updateAchievement(int id, Achievement newAchievement) {
         if (cacheStorage.updateAchievement(id, newAchievement)) {
-            return new RepositoryResponse(200, "Success");
+            return new Response(200, "Success");
         } else {
-            return new RepositoryResponse(404, "Not found");
+            return new Response(404, "Not found");
         }
     }
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 import ru.mirea.playedu.data.storage.cache.UserTaskCacheStorage;
-import ru.mirea.playedu.model.RepositoryResponse;
+import ru.mirea.playedu.model.Response;
 import ru.mirea.playedu.model.UserTask;
 
 // Репозиторий для хранения пользовательских задач
@@ -28,24 +28,24 @@ public class UserTaskRepository {
     }
 
     // Добавляет задачу
-    public RepositoryResponse addTask(UserTask task) {
+    public Response addTask(UserTask task) {
         cacheStorage.addTask(task);
-        return new RepositoryResponse(200, "Success");
+        return new Response(200, "Success");
     }
 
     // Удаляет задачу с заданным id
-    public RepositoryResponse deleteTask(UserTask task) {
+    public Response deleteTask(UserTask task) {
         if (cacheStorage.deleteTask(task))
-            return new RepositoryResponse(200, "Success");
+            return new Response(200, "Success");
         else
-            return new RepositoryResponse(404, "Not found");
+            return new Response(404, "Not found");
     }
 
     // Заменяет задачу с заданным id на новую
-    public RepositoryResponse updateTask(int taskId, UserTask newTask) {
+    public Response updateTask(int taskId, UserTask newTask) {
         if (cacheStorage.updateTask(taskId, newTask))
-            return new RepositoryResponse(200, "Success");
+            return new Response(200, "Success");
         else
-            return new RepositoryResponse(404, "Not found");
+            return new Response(404, "Not found");
     }
 }
