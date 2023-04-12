@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import ru.mirea.playedu.R;
+import ru.mirea.playedu.databinding.DialogPowerBinding;
 
 public class PowerDialog extends DialogFragment {
 
