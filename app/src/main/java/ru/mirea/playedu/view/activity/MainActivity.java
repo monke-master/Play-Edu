@@ -8,6 +8,7 @@ import android.os.Bundle;
 import ru.mirea.playedu.view.dialog.EnemyPreviewDialog;
 import ru.mirea.playedu.view.dialog.StartGameDialog;
 import ru.mirea.playedu.view.fragment.CommunityFragment;
+import ru.mirea.playedu.view.fragment.GameFragment;
 import ru.mirea.playedu.view.fragment.ProfileFragment;
 import ru.mirea.playedu.view.fragment.QuestsFragment;
 import ru.mirea.playedu.R;
@@ -21,14 +22,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
 
-        EnemyPreviewDialog enemyPreviewDialog = new EnemyPreviewDialog();
-        enemyPreviewDialog.show(getSupportFragmentManager(), "aboibus");
-
         // Отслеживание переключения вкладок
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.quests_btn:
                     replaceFragment(new QuestsFragment());
+                    break;
+                case R.id.adventure_btn:
+                    replaceFragment(new GameFragment());
                     break;
                 case R.id.profile_btn:
                     replaceFragment(new ProfileFragment());
