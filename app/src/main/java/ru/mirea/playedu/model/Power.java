@@ -8,19 +8,19 @@ public class Power {
     private int userPowerId;
     private String title;
     private String description;
-    private boolean status;
+    private boolean bought;
     private URL icon;
     private int priceType;
     private int price;
 
 
-    public Power(int powerId, int userPowerId, String title, String description, boolean status,
+    public Power(int powerId, int userPowerId, String title, String description, boolean bought,
                  URL icon, int priceType, int price) {
         this.powerId = powerId;
         this.userPowerId = userPowerId;
         this.title = title;
         this.description = description;
-        this.status = status;
+        this.bought = bought;
         this.icon = icon;
         this.priceType = priceType;
         this.price = price;
@@ -58,12 +58,12 @@ public class Power {
         this.description = description;
     }
 
-    public boolean isStatus() {
-        return status;
+    public boolean isBought() {
+        return bought;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setBought(boolean bought) {
+        this.bought = bought;
     }
 
     public URL getIcon() {
@@ -99,7 +99,7 @@ public class Power {
 
         if (powerId != power.powerId) return false;
         if (userPowerId != power.userPowerId) return false;
-        if (status != power.status) return false;
+        if (bought != power.bought) return false;
         if (priceType != power.priceType) return false;
         if (price != power.price) return false;
         if (!title.equals(power.title)) return false;
@@ -113,7 +113,7 @@ public class Power {
         result = 31 * result + userPowerId;
         result = 31 * result + title.hashCode();
         result = 31 * result + description.hashCode();
-        result = 31 * result + (status ? 1 : 0);
+        result = 31 * result + (bought ? 1 : 0);
         result = 31 * result + icon.hashCode();
         result = 31 * result + priceType;
         result = 31 * result + price;

@@ -8,16 +8,16 @@ public class Achievement {
     private int userAchievementId;
     private String title;
     private String description;
-    private boolean status;
+    private boolean unlocked;
     private URL icon;
 
     public Achievement(int achievementId, int userAchievementId, String title,
-                       String description, boolean status, URL icon) {
+                       String description, boolean unlocked, URL icon) {
         this.achievementId = achievementId;
         this.userAchievementId = userAchievementId;
         this.title = title;
         this.description = description;
-        this.status = status;
+        this.unlocked = unlocked;
         this.icon = icon;
     }
 
@@ -53,12 +53,12 @@ public class Achievement {
         this.description = description;
     }
 
-    public boolean isStatus() {
-        return status;
+    public boolean isUnlocked() {
+        return unlocked;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setUnlocked(boolean unlocked) {
+        this.unlocked = unlocked;
     }
 
     public URL getIcon() {
@@ -78,7 +78,7 @@ public class Achievement {
 
         if (achievementId != that.achievementId) return false;
         if (userAchievementId != that.userAchievementId) return false;
-        if (status != that.status) return false;
+        if (unlocked != that.unlocked) return false;
         if (!title.equals(that.title)) return false;
         if (!description.equals(that.description)) return false;
         return icon.equals(that.icon);
@@ -90,7 +90,7 @@ public class Achievement {
         result = 31 * result + userAchievementId;
         result = 31 * result + title.hashCode();
         result = 31 * result + description.hashCode();
-        result = 31 * result + (status ? 1 : 0);
+        result = 31 * result + (unlocked ? 1 : 0);
         result = 31 * result + icon.hashCode();
         return result;
     }

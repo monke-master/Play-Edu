@@ -3,23 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.fragment.ProfileFragment">
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="ru.mirea.playedu.viewmodel.ProfileViewModel" />
+    </data>
 
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/group_txt"
@@ -28,7 +30,7 @@
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/roboto_regular"
                     android:gravity="center"
-                    android:text="ЭЛБО-02-21"
+                    android:text="@{viewModel.user.group}"
                     android:textColor="@color/white"
                     android:textFontWeight="600"
                     android:textSize="14sp"
@@ -54,7 +56,7 @@
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/roboto_regular"
                     android:gravity="center"
-                    android:text="Андреев Виктор Дмитриевич"
+                    android:text="@{viewModel.user.login}"
                     android:textColor="@color/white"
                     android:textFontWeight="600"
                     android:textSize="16sp"
@@ -70,7 +72,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="1200"
+                    android:text="@{viewModel.user.silverCoins}"
                     android:textColor="@color/silver_coin"
                     android:textFontWeight="600"
                     android:textSize="14sp"
@@ -82,10 +84,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="4dp"
                     app:layout_constraintEnd_toStartOf="@+id/silver_count_txt"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/silver_count_txt"
+                    app:layout_constraintBottom_toBottomOf="@id/silver_count_txt"
                     app:srcCompat="@drawable/pic_silver_coin" />
 
                 <TextView
@@ -96,7 +98,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="1200"
+                    android:text="@{viewModel.user.goldenCoins}"
                     android:textColor="@color/golden_coin"
                     android:textFontWeight="600"
                     android:textSize="14sp"
@@ -108,62 +110,68 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="4dp"
                     app:layout_constraintEnd_toStartOf="@+id/golden_count_txt"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/golden_count_txt"
+                    app:layout_constraintBottom_toBottomOf="@id/golden_count_txt"
                     app:srcCompat="@drawable/pic_golden_coin" />
+
+                <TextView
+                    android:id="@+id/power_hdr"
+                    style="@style/Header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="21dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/powers_title"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/group_txt" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/powers_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="19dp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/power_hdr"
+                    app:spanCount="4"
+                    tools:itemCount="15"
+                    tools:listitem="@layout/view_power_item" />
+
+                <TextView
+                    android:id="@+id/achvmnts_hdr"
+                    style="@style/Header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/achievements_title"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/powers_list" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/achvmnts_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="21dp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/achvmnts_hdr"
+                    app:spanCount="4"
+                    tools:itemCount="15"
+                    tools:listitem="@layout/view_power_item" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
-            <TextView
-                android:layout_marginTop="20dp"
-                android:id="@+id/power_hdr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/powers_title"
-                style="@style/Header"
-                android:textSize="20sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/powers_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/power_list_margin"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="@dimen/power_list_margin"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="4"
-                tools:itemCount="15"
-                tools:listitem="@layout/view_power_item" />
-
-            <TextView
-                android:layout_marginTop="20dp"
-                android:id="@+id/achvmnts_hdr"
-                style="@style/Header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/achievements_title"
-                android:textSize="20sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/achvmnts_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/power_list_margin"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="@dimen/power_list_margin"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="4"
-                tools:itemCount="15"
-                tools:listitem="@layout/view_power_item" />
-
-        </LinearLayout>
-    </ScrollView>
-
-</FrameLayout>
+    </FrameLayout>
 </layout>
