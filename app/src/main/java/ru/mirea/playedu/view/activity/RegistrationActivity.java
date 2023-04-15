@@ -1,20 +1,18 @@
 package ru.mirea.playedu.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.widget.Toast;
 
 import ru.mirea.playedu.Constants;
 import ru.mirea.playedu.R;
 import ru.mirea.playedu.databinding.ActivityRegistrationBinding;
 import ru.mirea.playedu.viewmodel.RegistrationViewModel;
-import ru.mirea.playedu.viewmodel.RegistrationViewModelFabric;
+import ru.mirea.playedu.viewmodel.RegistrationViewModelFactory;
 
 // Активность с формой регистрации
 public class RegistrationActivity extends AppCompatActivity {
@@ -26,7 +24,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         // Получение view-model
         RegistrationViewModel viewModel = ViewModelProviders.of(this,
-                new RegistrationViewModelFabric()).get(RegistrationViewModel.class);
+                new RegistrationViewModelFactory()).get(RegistrationViewModel.class);
         binding.setViewModel(viewModel);
 
         // Отслеживание соответствия введенного пароля заданным стандартам после ввода

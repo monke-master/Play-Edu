@@ -19,7 +19,7 @@ public class AchievementCacheStorage {
 
     // Возвращает экземпляр класса
     // Если экземпляра нет, создает новый
-    private static AchievementCacheStorage getInstance() {
+    public static AchievementCacheStorage getInstance() {
         if (instance == null)
             instance = new AchievementCacheStorage();
         return instance;

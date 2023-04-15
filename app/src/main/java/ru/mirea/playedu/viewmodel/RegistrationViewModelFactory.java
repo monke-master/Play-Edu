@@ -11,13 +11,13 @@ import ru.mirea.playedu.data.storage.cache.UserStatsCacheStorage;
 import ru.mirea.playedu.usecases.SignUpUseCase;
 
 // Фабрика для класса RegistrationViewModel
-public class RegistrationViewModelFabric implements ViewModelProvider.Factory {
+public class RegistrationViewModelFactory implements ViewModelProvider.Factory {
 
     private SignUpUseCase signUpUseCase;
 
     private static RegistrationViewModel instance = null;
 
-    public RegistrationViewModelFabric() {
+    public RegistrationViewModelFactory() {
         UserRepository userRepository = new UserRepository(UserCacheStorage.getInstance());
         UserStatsRepository userStatsRepository = new UserStatsRepository(UserStatsCacheStorage.getInstance());
         signUpUseCase = new SignUpUseCase(userRepository, userStatsRepository);

@@ -10,7 +10,7 @@ import android.widget.Toast;
 import ru.mirea.playedu.Constants;
 import ru.mirea.playedu.databinding.ActivityChooseHeroBinding;
 import ru.mirea.playedu.viewmodel.RegistrationViewModel;
-import ru.mirea.playedu.viewmodel.RegistrationViewModelFabric;
+import ru.mirea.playedu.viewmodel.RegistrationViewModelFactory;
 
 // Активность с выбором персонажа
 public class ChooseHeroActivity extends AppCompatActivity {
@@ -23,7 +23,7 @@ public class ChooseHeroActivity extends AppCompatActivity {
         ActivityChooseHeroBinding binding = ActivityChooseHeroBinding.inflate(getLayoutInflater());
         // Получение view-model
         viewModel = ViewModelProviders.of(this,
-                new RegistrationViewModelFabric()).get(RegistrationViewModel.class);
+                new RegistrationViewModelFactory()).get(RegistrationViewModel.class);
 
         // Отслеживание выбора персонажа
         // После выбора вызывает регистрацию

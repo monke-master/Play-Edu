@@ -3,6 +3,8 @@ package ru.mirea.playedu.view.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +18,8 @@ import ru.mirea.playedu.view.adapter.AchievementAdapter;
 import ru.mirea.playedu.view.adapter.PowerAdapter;
 import ru.mirea.playedu.view.dialog.AchievementDialog;
 import ru.mirea.playedu.view.dialog.PowerDialog;
+import ru.mirea.playedu.viewmodel.ProfileViewModel;
+import ru.mirea.playedu.viewmodel.ProfileViewModelFabric;
 
 public class ProfileFragment extends Fragment {
 
@@ -24,6 +28,10 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         FragmentProfileBinding binding = FragmentProfileBinding.inflate(getLayoutInflater());
+
+        ProfileViewModel viewModel = ViewModelProviders.of(this,
+                new ProfileViewModelFabric()).get(ProfileViewModel.class);
+        binding.setViewModel(viewModel);
 
         // Табличный RecyclerView для списка сил
         RecyclerView powersList = binding.powersList;

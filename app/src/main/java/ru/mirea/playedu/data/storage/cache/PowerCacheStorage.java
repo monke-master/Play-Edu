@@ -18,7 +18,7 @@ public class PowerCacheStorage {
 
     // Возвращает экземпляр класса
     // Если экземпляра нет, создает новый
-    private static PowerCacheStorage getInstance() {
+    public static PowerCacheStorage getInstance() {
         if (instance == null)
             instance = new PowerCacheStorage();
 
