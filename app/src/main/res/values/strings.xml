@@ -62,6 +62,7 @@
     <string name="new_fight">Новый бой</string>
     <string name="award">Награда:</string>
     <string name="no_damage_to_player">Вам не был нанесен урон</string>
+    <string name="enemies_left">Монстров осталось: </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -58,6 +58,13 @@
             app:constraint_referenced_ids="award_count_txt, golden_ic, award_hdr"
             />
 
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/win_battle_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="award_count_txt, golden_ic"
+            />
+
         <TextView
             android:layout_marginTop="20dp"
             android:id="@+id/award_count_txt"

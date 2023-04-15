@@ -21,6 +21,7 @@ public class SpaceBody {
 
     void drow(Paint paint, Canvas canvas){ // рисуем картинку
         paint.setColor(colorId);
+        paint.setAlpha(100);
         canvas.drawCircle(x*GameView.unitW, y*GameView.unitH, size, paint);
     }
 }

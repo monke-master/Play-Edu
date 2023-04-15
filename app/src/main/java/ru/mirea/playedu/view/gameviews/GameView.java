@@ -5,12 +5,15 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
+import android.graphics.PorterDuff;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import androidx.lifecycle.ViewModelProvider;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import ru.mirea.playedu.viewmodel.GameViewModel;
 
@@ -23,9 +26,8 @@ public class GameView extends SurfaceView implements Runnable {
     private boolean firstTime = true;
     private boolean gameRunning = true;
     private boolean isAttackPhase;
-    private boolean isEnemyColide = false;
     private int circleSize;
-    private int circleSpeed;
+    private float circleSpeed;
     // Разброс размеров круга игрока
     private final int minSize = 100;
     private final int maxSize = 300;
@@ -37,7 +39,8 @@ public class GameView extends SurfaceView implements Runnable {
     private SurfaceHolder surfaceHolder;
 
 
-    public GameView(Context context, int speed, boolean phase) {
+    // Конструктор для фазы атаки
+    public GameView(Context context, float speed, boolean phase) {
         super(context);
         // Задаем фазу боя
         isAttackPhase = phase;
@@ -54,15 +57,18 @@ public class GameView extends SurfaceView implements Runnable {
         gameThread.start();
     }
 
-    public GameView(Context context, int size, int speed, boolean phase) {
+    // Конструктор для фазы защиты
+    public GameView(Context context, int size, float speed, boolean phase) {
         super(context);
         // Задаем фазу боя
         isAttackPhase = phase;
+        // Задаём время фазы
         // Задаём начальные параметры для кругов
         circleSize = size;
         circleSpeed = speed;
         //инициализируем обьекты для рисования
         surfaceHolder = getHolder();
+        surfaceHolder.setFormat(PixelFormat.TRANSPARENT);
         paint = new Paint();
         paint.setStyle(Paint.Style.FILL);
 
@@ -87,12 +93,16 @@ public class GameView extends SurfaceView implements Runnable {
         }
     }
 
-    private void checkCollision() {
-        isEnemyColide = playerCircle.isCollision(enemyCircle.size);
+    public boolean isEnemyColide() {
+        return playerCircle.isCollision(enemyCircle.size);
     }
 
-    public boolean isEnemyColide() {
-        return isEnemyColide;
+    public void updateObjectsSizes() {
+        if (enemyCircle != null) enemyCircle.updateSize();
+    }
+
+    public void endGame() {
+        gameRunning = false;
     }
 
     private void draw() {
@@ -102,23 +112,23 @@ public class GameView extends SurfaceView implements Runnable {
                 firstTime = false;
                 unitW = surfaceHolder.getSurfaceFrame().width()/maxX; // вычисляем число пикселей в юните
                 unitH = surfaceHolder.getSurfaceFrame().height()/maxY;
-
+                Log.e("Creation", "Create objects");
                 if (isAttackPhase) {
                     Random random = new Random();
-                    int playerSize = minSize + (maxSize - minSize) * random.nextInt();
-                    playerCircle = new PlayerCircle(getContext(), 0, playerSize, isAttackPhase); // добавляем круг игрока
-                    enemyCircle = new EnemyCircle(getContext(), circleSpeed, 10, isAttackPhase);
+                    int playerSize = ThreadLocalRandom.current().nextInt(minSize, maxSize + 1);
+                    playerCircle = new PlayerCircle(getContext(), playerSize, isAttackPhase); // добавляем круг игрока
+                    enemyCircle = new EnemyCircle(getContext(), circleSpeed, isAttackPhase);
                 }
                 else {
-                    playerCircle = new PlayerCircle(getContext(), circleSpeed, 20, isAttackPhase); // добавляем круг игрока
-                    enemyCircle = new EnemyCircle(getContext(), 0, circleSize, isAttackPhase);
+                    playerCircle = new PlayerCircle(getContext(), circleSpeed, isAttackPhase); // добавляем круг игрока
+                    enemyCircle = new EnemyCircle(getContext(),  circleSize, isAttackPhase);
                 }
             }
 
             canvas = surfaceHolder.lockCanvas(); // закрываем canvas
-
-            playerCircle.drow(paint, canvas); // рисуем корабль
+            canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
             enemyCircle.drow(paint, canvas);
+            playerCircle.drow(paint, canvas); // рисуем корабль
 
             surfaceHolder.unlockCanvasAndPost(canvas); // открываем canvas
         }

@@ -133,7 +133,6 @@
 
 
     <ProgressBar
-        android:progressBackgroundTint="@color/red"
         android:id="@+id/damage_progress_bar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="0dp"

@@ -64,5 +64,10 @@ public class EnemyCacheStorage {
         return enemies.remove(enemy);
     }
 
+    // Удалает всех врагов
+    public void deleteAllEnemies() {
+        enemies.clear();
+    }
+
 
 }

@@ -10,18 +10,16 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import ru.mirea.playedu.R;
 import ru.mirea.playedu.databinding.DialogFightEndBinding;
 import ru.mirea.playedu.databinding.DialogTextBinding;
+import ru.mirea.playedu.viewmodel.GameViewModel;
 
 public class FightEndDialog extends DialogFragment {
 
-    private boolean isWin;
-
-    public FightEndDialog(boolean isWin) {
-        this.isWin = isWin;
-    }
+    private GameViewModel gameViewModel;
 
     @Nullable
     @Override
@@ -47,13 +45,44 @@ public class FightEndDialog extends DialogFragment {
         DialogFightEndBinding binding = DialogFightEndBinding.inflate(getLayoutInflater());
         builder.setView(binding.getRoot());
 
-        // Получение view с помощью binding
-        // TODO заменить эту херню на View-Model!
-        if (!isWin) {
-            binding.awardGroup.setVisibility(View.GONE);
-            binding.resultHdr.setText(R.string.defeat);
-        }
 
+        // Инициализация ViewModel
+        gameViewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
+
+        switch (gameViewModel.getCurrentBattleResult()) {
+            case DEFEAT:
+                binding.awardGroup.setVisibility(View.GONE);
+                binding.resultHdr.setText(R.string.defeat);
+                binding.button3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        gameViewModel.restartGame();
+                        getDialog().dismiss();
+                    }
+                });
+                break;
+            case WIN_BATTLE:
+                binding.winBattleGroup.setVisibility(View.GONE);
+                binding.awardHdr.setText("Монстров осталось: " + Integer.toString(gameViewModel.getEnemiesLeft()));
+                binding.button3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        gameViewModel.setIsBattle(false);
+                        getDialog().dismiss();
+                    }
+                });
+                break;
+            case WIN_ADVENTURE:
+                binding.awardCountTxt.setText(Integer.toString(gameViewModel.getEnemy(gameViewModel.getCurrentEnemyId()).getPrice()));
+                binding.button3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        gameViewModel.setIsBattle(false);
+                        getDialog().dismiss();
+                    }
+                });
+                break;
+        }
         return builder.create();
     }
 }

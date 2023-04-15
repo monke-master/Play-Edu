@@ -11,8 +11,8 @@ public class CreatePlayerUseCase {
 
     public void execute() {
         Player player = new Player();
-        player.setHealth(3);
-        player.setDamage(1);
+        player.setHealth(5);
+        player.setDamage(3);
         player.setMistakeCount(0);
         playerRepository.setPlayer(player);
     }
