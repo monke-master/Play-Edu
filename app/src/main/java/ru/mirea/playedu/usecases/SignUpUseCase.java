@@ -23,7 +23,7 @@ public class SignUpUseCase {
     // Выполняет Use-Case
     public Response execute(User user) {
         // Создание учетной записи пользователя
-        Response userRepoResponse = userRepository.updateUser(user);
+        Response userRepoResponse = userRepository.createUser(user);
         // В случае неудачи возвращает ошибку
         if (userRepoResponse.getCode() != 200)
             return userRepoResponse;

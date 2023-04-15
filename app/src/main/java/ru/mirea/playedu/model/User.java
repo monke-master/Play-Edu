@@ -144,4 +144,18 @@ public class User {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", group='" + group + '\'' +
+                ", goldenCoins=" + goldenCoins +
+                ", silverCoins=" + silverCoins +
+                ", userIcon='" + userIcon + '\'' +
+                ", profileAchievements=" + profileAchievements +
+                '}';
+    }
 }

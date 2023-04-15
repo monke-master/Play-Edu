@@ -13,6 +13,10 @@ import java.util.Locale;
 // Статический класс с константами
 public class Constants {
 
+    // Константы иконок персонажа
+    public static String MALE_IC = "MALE_HERO";
+    public static String FEMALE_IC = "FEMALE_HERO";
+
     public static int[] getCategoryColors(Context context) {
          int[] colors = {
                 ContextCompat.getColor(context, R.color.silver_coin),
@@ -39,4 +43,6 @@ public class Constants {
         sdf.setDateFormatSymbols(dfs);
         return sdf.format(deadline);
     }
+
+
 }

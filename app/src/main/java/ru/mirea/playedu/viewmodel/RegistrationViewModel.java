@@ -16,21 +16,37 @@ public class RegistrationViewModel extends ViewModel {
     private MutableLiveData<User> userLiveData;
     private MutableLiveData<String> phone;
     private MutableLiveData<String> password;
+    private MutableLiveData<String> repeatPassword;
     private MutableLiveData<String> group;
     private MutableLiveData<String> userIcon;
     private MutableLiveData<String> login;
-    private MutableLiveData<String> toastMessage;
+    private String toastMessage;
     private SignUpUseCase signUpUseCase;
 
-    public RegistrationViewModel(UserRepository userRepository, UserStatsRepository userStatsRepository) {
+
+    public RegistrationViewModel(SignUpUseCase signUpUseCase) {
         userLiveData = new MutableLiveData<>();
         phone = new MutableLiveData<>();
         password = new MutableLiveData<>();
         group = new MutableLiveData<>();
         userIcon = new MutableLiveData<>();
         login = new MutableLiveData<>();
-        toastMessage = new MutableLiveData<>();
-        signUpUseCase = new SignUpUseCase(userRepository, userStatsRepository);
+        repeatPassword = new MutableLiveData<>();
+        this.signUpUseCase = signUpUseCase;
+    }
+
+    public int signUpWithPhone() {
+        User user = new User(login.getValue(), password.getValue(), phone.getValue(),
+                group.getValue(), userIcon.getValue());
+        Response useCaseResponse = signUpUseCase.execute(user);
+        int code = useCaseResponse.getCode();
+        if (code != 200)
+            toastMessage = useCaseResponse.getBody();
+        return code;
+    }
+
+    public void chooseHero(String icon) {
+        userIcon.setValue(icon);
     }
 
     public MutableLiveData<User> getUserLiveData() {
@@ -73,11 +89,29 @@ public class RegistrationViewModel extends ViewModel {
         this.userIcon = userIcon;
     }
 
-    public void signUpWithPhone() {
-        User user = new User(login.getValue(), password.getValue(), phone.getValue(),
-                group.getValue(), userIcon.getValue());
-        Response useCaseResponse = signUpUseCase.execute(user);
-        if (useCaseResponse.getCode() != 200)
-            toastMessage.setValue(useCaseResponse.getBody());
+    public MutableLiveData<String> getLogin() {
+        return login;
     }
+
+    public void setLogin(MutableLiveData<String> login) {
+        this.login = login;
+    }
+
+    public String getToastMessage() {
+        return toastMessage;
+    }
+
+    public void setToastMessage(String toastMessage) {
+        this.toastMessage = toastMessage;
+    }
+
+    public MutableLiveData<String> getRepeatPassword() {
+        return repeatPassword;
+    }
+
+    public void setRepeatPassword(MutableLiveData<String> repeatPassword) {
+        this.repeatPassword = repeatPassword;
+    }
+
+
 }

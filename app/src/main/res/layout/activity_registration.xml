@@ -3,105 +3,117 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.activity.RegistrationActivity">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <data>
+        <variable
+            name="viewModel"
+            type="ru.mirea.playedu.viewmodel.RegistrationViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/Theme.PlayEDU"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="?attr/actionModeCloseDrawable"
-        tools:layout_editor_absoluteX="26dp" />
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-        <TextView
-            android:layout_gravity="center_horizontal"
-            android:id="@+id/header"
-            style="@style/Header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_black"
-            android:text="@string/reg_title"
-            android:textColor="@color/white"
-            android:textFontWeight="700"
-            android:textSize="24sp" />
-
-        <EditText
-            android:id="@+id/edit_txt_name"
-            style="@style/EditText"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"
-            android:hint="@string/FIO_hint" />
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/Theme.PlayEDU"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="?attr/actionModeCloseDrawable"
+            tools:layout_editor_absoluteX="26dp" />
 
-        <EditText
-            android:id="@+id/edit_txt_group"
-            style="@style/EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"
-            android:hint="@string/group_hint" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <EditText
-            android:id="@+id/edit_txt_phone"
-            style="@style/EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"
-            android:hint="@string/phone_number_hint"
-            android:inputType="phone" />
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/header"
+                style="@style/Header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_black"
+                android:text="@string/reg_title"
+                android:textColor="@color/white"
+                android:textFontWeight="700"
+                android:textSize="24sp" />
 
-        <EditText
-            android:id="@+id/edit_text_pswrd"
-            style="@style/EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"
-            android:hint="@string/pass_hint" />
+            <EditText
+                android:text="@={viewModel.login}"
+                android:id="@+id/edit_txt_name"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:hint="@string/FIO_hint" />
 
-        <EditText
-            android:id="@+id/edit_txt_pswrd_rep"
-            style="@style/EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"
-            android:hint="@string/repeat_pass_hint" />
+            <EditText
+                android:text="@={viewModel.group}"
+                android:id="@+id/edit_txt_group"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:hint="@string/group_hint" />
 
-        <Button
-            android:id="@+id/sign_up_btn"
-            style="@style/DefaultButton"
-            android:layout_width="300dp"
-            android:layout_height="64dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:backgroundTint="@color/purple_100"
-            android:text="@string/sign_up" />
+            <EditText
+                android:text="@={viewModel.phone}"
+                android:id="@+id/edit_txt_phone"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:hint="@string/phone_number_hint"
+                android:inputType="phone" />
 
-    </LinearLayout>
+            <EditText
+                android:text="@={viewModel.password}"
+                android:id="@+id/edit_text_pswrd"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:hint="@string/pass_hint" />
+
+            <EditText
+                android:text="@={viewModel.repeatPassword}"
+                android:id="@+id/edit_txt_pswrd_rep"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:hint="@string/repeat_pass_hint" />
+
+            <Button
+                android:id="@+id/sign_up_btn"
+                style="@style/DefaultButton"
+                android:layout_width="300dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/purple_100"
+                android:text="@string/sign_up" />
+
+        </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

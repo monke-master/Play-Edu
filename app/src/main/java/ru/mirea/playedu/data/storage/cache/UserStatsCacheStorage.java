@@ -8,13 +8,13 @@ public class UserStatsCacheStorage {
 
     private UserStats userStats;
 
-    private UserStatsCacheStorage instance = null;
+    private static UserStatsCacheStorage instance = null;
 
     private UserStatsCacheStorage() {}
 
     // Возвращает экземпляр класса
     // Если экземпляра нет, создает новый
-    public UserStatsCacheStorage getInstance() {
+    public static UserStatsCacheStorage getInstance() {
         if (instance == null)
             instance = new UserStatsCacheStorage();
         return instance;

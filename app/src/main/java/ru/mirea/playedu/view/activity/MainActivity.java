@@ -4,7 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 
+import ru.mirea.playedu.data.storage.cache.UserCacheStorage;
+import ru.mirea.playedu.data.storage.cache.UserStatsCacheStorage;
+import ru.mirea.playedu.model.User;
+import ru.mirea.playedu.model.UserStats;
 import ru.mirea.playedu.view.dialog.EnemyPreviewDialog;
 import ru.mirea.playedu.view.dialog.StartGameDialog;
 import ru.mirea.playedu.view.fragment.CommunityFragment;
@@ -40,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
             return true;
 
         });
+
+        UserStatsCacheStorage userStatsCacheStorage = UserStatsCacheStorage.getInstance();
+        UserCacheStorage userCacheStorage = UserCacheStorage.getInstance();
+
+        User user = userCacheStorage.getUser();
+        UserStats userStats = userStatsCacheStorage.getUserStats();
+
+        Log.d("Cat", user.toString() + " " + userStats.toString());
 
         setContentView(binding.getRoot());
     }

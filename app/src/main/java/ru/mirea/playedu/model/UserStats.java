@@ -132,4 +132,18 @@ public class UserStats {
         result = 31 * result + profilesVisited;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "UserStats{" +
+                "statsId=" + statsId +
+                ", registrationDate=" + registrationDate +
+                ", playEduTasksCompleted=" + playEduTasksCompleted +
+                ", userTasksCompleted=" + userTasksCompleted +
+                ", fightsCount=" + fightsCount +
+                ", enemiesKilled=" + enemiesKilled +
+                ", quizCompleted=" + quizCompleted +
+                ", profilesVisited=" + profilesVisited +
+                '}';
+    }
 }
