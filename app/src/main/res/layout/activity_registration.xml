@@ -83,7 +83,7 @@
 
             <EditText
                 android:text="@={viewModel.password}"
-                android:id="@+id/edit_text_pswrd"
+                android:id="@+id/edit_txt_pswrd"
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -1,18 +1,15 @@
 package ru.mirea.playedu.viewmodel;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import ru.mirea.playedu.data.repository.UserRepository;
-import ru.mirea.playedu.data.repository.UserStatsRepository;
-import ru.mirea.playedu.data.storage.cache.UserCacheStorage;
 import ru.mirea.playedu.model.Response;
 import ru.mirea.playedu.model.User;
 import ru.mirea.playedu.usecases.SignUpUseCase;
 
+// View-Model ля процесса регистрации
 public class RegistrationViewModel extends ViewModel {
 
+    // Поля для создания пользователя
     private MutableLiveData<User> userLiveData;
     private MutableLiveData<String> phone;
     private MutableLiveData<String> password;
@@ -20,6 +17,7 @@ public class RegistrationViewModel extends ViewModel {
     private MutableLiveData<String> group;
     private MutableLiveData<String> userIcon;
     private MutableLiveData<String> login;
+    // Строка, содержащая текст ошибки в случае неудачной регистрации
     private String toastMessage;
     private SignUpUseCase signUpUseCase;
 
@@ -35,6 +33,7 @@ public class RegistrationViewModel extends ViewModel {
         this.signUpUseCase = signUpUseCase;
     }
 
+    // Регистрация по номеру телефона
     public int signUpWithPhone() {
         User user = new User(login.getValue(), password.getValue(), phone.getValue(),
                 group.getValue(), userIcon.getValue());
@@ -112,6 +111,16 @@ public class RegistrationViewModel extends ViewModel {
     public void setRepeatPassword(MutableLiveData<String> repeatPassword) {
         this.repeatPassword = repeatPassword;
     }
+
+//    public MutableLiveData<Boolean> getCanSignUp() {
+//        canSignUp.setValue(repeatPassword.getValue() != null
+//                && password.getValue() != null
+//                && repeatPassword.getValue().equals(password.getValue())
+//                && phone.getValue() != null
+//                && group.getValue() != null
+//                && login.getValue() != null);
+//        return canSignUp;
+//    }
 
 
 }

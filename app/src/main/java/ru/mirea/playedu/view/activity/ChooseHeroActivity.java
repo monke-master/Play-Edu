@@ -1,11 +1,6 @@
 package ru.mirea.playedu.view.activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
@@ -13,7 +8,6 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import ru.mirea.playedu.Constants;
-import ru.mirea.playedu.R;
 import ru.mirea.playedu.databinding.ActivityChooseHeroBinding;
 import ru.mirea.playedu.viewmodel.RegistrationViewModel;
 import ru.mirea.playedu.viewmodel.RegistrationViewModelFabric;

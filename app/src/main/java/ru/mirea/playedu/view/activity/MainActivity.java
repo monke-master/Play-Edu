@@ -26,9 +26,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
 
-        EnemyPreviewDialog enemyPreviewDialog = new EnemyPreviewDialog();
-        enemyPreviewDialog.show(getSupportFragmentManager(), "aboibus");
-
         // Отслеживание переключения вкладок
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {

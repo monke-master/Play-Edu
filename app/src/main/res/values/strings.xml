@@ -55,4 +55,7 @@
     <string name="health">Здоровье:</string>
     <string name="pick_powers">Выбери силы:</string>
     <string name="start">Начать</string>
+    <string name="min_pswrd_length">Пароль должен содержать не менее 8 символов!</string>
+    <string name="max_pswrd_length">Пароль должен содержать не более 32 символов!</string>
+    <string name="password_match_error">Пароли не совпадают!</string>
 </resources>

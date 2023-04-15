@@ -17,6 +17,9 @@ public class Constants {
     public static String MALE_IC = "MALE_HERO";
     public static String FEMALE_IC = "FEMALE_HERO";
 
+    public static int MIN_PASSWORD_LENGTH = 8;
+    public static int MAX_PASSWORD_LENGTH = 32;
+
     public static int[] getCategoryColors(Context context) {
          int[] colors = {
                 ContextCompat.getColor(context, R.color.silver_coin),
