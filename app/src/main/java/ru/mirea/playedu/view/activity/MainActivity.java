@@ -6,8 +6,12 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 
+import ru.mirea.playedu.Constants;
+import ru.mirea.playedu.data.repository.AchievementRepository;
+import ru.mirea.playedu.data.storage.cache.AchievementCacheStorage;
 import ru.mirea.playedu.data.storage.cache.UserCacheStorage;
 import ru.mirea.playedu.data.storage.cache.UserStatsCacheStorage;
+import ru.mirea.playedu.model.Achievement;
 import ru.mirea.playedu.model.User;
 import ru.mirea.playedu.model.UserStats;
 import ru.mirea.playedu.view.dialog.EnemyPreviewDialog;
@@ -43,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        // TODO убрать это нахуй
+        // Перевiрка регистрации
         UserStatsCacheStorage userStatsCacheStorage = UserStatsCacheStorage.getInstance();
         UserCacheStorage userCacheStorage = UserCacheStorage.getInstance();
 
@@ -50,6 +56,13 @@ public class MainActivity extends AppCompatActivity {
         UserStats userStats = userStatsCacheStorage.getUserStats();
 
         Log.d("Cat", user.toString() + " " + userStats.toString());
+
+        // Мокаем ачивки (осуждаю)
+        AchievementCacheStorage cacheStorage = AchievementCacheStorage.getInstance();
+        for (Achievement achievement: Constants.ACHIEVEMENTS_LIST) {
+            cacheStorage.addAchievement(achievement);
+        }
+
 
         setContentView(binding.getRoot());
     }

@@ -13,14 +13,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import ru.mirea.playedu.R;
+import ru.mirea.playedu.databinding.DialogAchievementBinding;
+import ru.mirea.playedu.model.Achievement;
 
+// Диалог с информацией о достижении
 public class AchievementDialog extends DialogFragment {
 
     private View view;
-    private String achievementName;
+    private Achievement achievement;
 
-    public AchievementDialog(String achievementName) {
-        this.achievementName = achievementName;
+    public AchievementDialog(Achievement achievement) {
+        this.achievement = achievement;
     }
 
     @Nullable
@@ -36,16 +39,17 @@ public class AchievementDialog extends DialogFragment {
         return view;
     }
 
+    // Создание диалога
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        view = requireActivity().getLayoutInflater().
-                inflate(R.layout.dialog_achievement, null, false);
-        TextView nameTxt = view.findViewById(R.id.name_txt);
-        nameTxt.setText(achievementName);
-        builder.setView(view);
+        // Получение binding диалога
+        DialogAchievementBinding binding = DialogAchievementBinding.inflate(getLayoutInflater());
+        binding.setAchievement(achievement);
+
+        builder.setView(binding.getRoot());
         return builder.create();
     }
 

@@ -9,10 +9,10 @@ public class Achievement {
     private String title;
     private String description;
     private boolean unlocked;
-    private URL icon;
+    private String icon;
 
     public Achievement(int achievementId, int userAchievementId, String title,
-                       String description, boolean unlocked, URL icon) {
+                       String description, boolean unlocked, String icon) {
         this.achievementId = achievementId;
         this.userAchievementId = userAchievementId;
         this.title = title;
@@ -61,11 +61,11 @@ public class Achievement {
         this.unlocked = unlocked;
     }
 
-    public URL getIcon() {
+    public String getIcon() {
         return icon;
     }
 
-    public void setIcon(URL icon) {
+    public void setIcon(String icon) {
         this.icon = icon;
     }
 

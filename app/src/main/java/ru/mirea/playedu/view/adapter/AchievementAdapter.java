@@ -10,38 +10,39 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 import ru.mirea.playedu.R;
+import ru.mirea.playedu.databinding.ViewAchievementItemBinding;
+import ru.mirea.playedu.model.Achievement;
 
 public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.ViewHolder> {
 
     public interface OnItemClickListener {
-        void onItemClick(String name);
+        void onItemClick(Achievement achievement);
     }
 
-    private String[] achievements;
+    private ArrayList<Achievement> achievements;
     private OnItemClickListener clickListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView nameTxt;
-        private ImageView image;
+        private final ViewAchievementItemBinding binding;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            nameTxt = itemView.findViewById(R.id.name_txt);
-            image = itemView.findViewById(R.id.power_img);
+        public ViewHolder(ViewAchievementItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
-        public void bind(String name, OnItemClickListener listener) {
+        public void bind(Achievement achievement, OnItemClickListener listener) {
 
-            nameTxt.setText(name);
-            itemView.setOnClickListener(view -> listener.onItemClick(name));
+            binding.setAchievement(achievement);
+            itemView.setOnClickListener(view -> listener.onItemClick(achievement));
         }
 
     }
 
-    public AchievementAdapter(String[] achievements, OnItemClickListener clickListener) {
+    public AchievementAdapter(ArrayList<Achievement> achievements, OnItemClickListener clickListener) {
         this.achievements = achievements;
         this.clickListener = clickListener;
     }
@@ -49,20 +50,19 @@ public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.
     @NonNull
     @Override
     public AchievementAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.view_power_item, parent, false);
-        return new AchievementAdapter.ViewHolder(view);
+        ViewAchievementItemBinding binding = ViewAchievementItemBinding.inflate(LayoutInflater.from(parent.getContext()));
+        return new AchievementAdapter.ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.bind(achievements[position], clickListener);
+        holder.bind(achievements.get(position), clickListener);
     }
 
 
     @Override
     public int getItemCount() {
-        return achievements.length;
+        return achievements.size();
     }
 
 

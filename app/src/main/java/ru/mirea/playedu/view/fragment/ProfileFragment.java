@@ -12,8 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import ru.mirea.playedu.R;
 import ru.mirea.playedu.databinding.FragmentProfileBinding;
+import ru.mirea.playedu.model.Achievement;
 import ru.mirea.playedu.view.adapter.AchievementAdapter;
 import ru.mirea.playedu.view.adapter.PowerAdapter;
 import ru.mirea.playedu.view.dialog.AchievementDialog;
@@ -79,19 +82,19 @@ public class ProfileFragment extends Fragment {
             }
         }));
 
+
+        // Список достижений
+        // Сначала идут уже полученные игроком достижения, затем оставшиеся
+        ArrayList<Achievement> achievements = viewModel.getUnlockedAchievements().getValue();
+        achievements.addAll(viewModel.getLockedAchievements().getValue());
         // Табличный RecyclerView для списка достижений
         RecyclerView achievementsList = binding.achvmntsList;
         achievementsList.setLayoutManager(new GridLayoutManager(requireContext(), 4));
-        String[] achievements = new String[]{
-                "Медаль ВТ",
-                "Орден Беркова",
-                "Орден Святого Красникова",
-                "Знамя пропастинского ударника"
-        };
         achievementsList.setNestedScrollingEnabled(false);
+
         // Отслеживание нажатия на элемент списка
-        achievementsList.setAdapter(new AchievementAdapter(achievements, name -> {
-            AchievementDialog dialog = new AchievementDialog(name);
+        achievementsList.setAdapter(new AchievementAdapter(achievements, achievement -> {
+            AchievementDialog dialog = new AchievementDialog(achievement);
             dialog.show(getActivity().getSupportFragmentManager(), "Achievement dialog");
         }));
 
