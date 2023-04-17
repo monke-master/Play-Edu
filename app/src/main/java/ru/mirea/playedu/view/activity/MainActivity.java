@@ -5,7 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 
+import ru.mirea.playedu.Constants;
+import ru.mirea.playedu.data.storage.cache.AchievementCacheStorage;
+import ru.mirea.playedu.data.storage.cache.PowerCacheStorage;
+import ru.mirea.playedu.data.storage.cache.UserCacheStorage;
+import ru.mirea.playedu.data.storage.cache.UserStatsCacheStorage;
+import ru.mirea.playedu.model.Achievement;
+import ru.mirea.playedu.model.Power;
+import ru.mirea.playedu.model.User;
+import ru.mirea.playedu.model.UserStats;
 import ru.mirea.playedu.view.fragment.CommunityFragment;
 import ru.mirea.playedu.view.fragment.GameFragment;
 import ru.mirea.playedu.view.fragment.ProfileFragment;
@@ -40,6 +50,28 @@ public class MainActivity extends AppCompatActivity {
             return true;
 
         });
+
+        // TODO убрать это нахуй
+        // Перевiрка регистрации
+        UserStatsCacheStorage userStatsCacheStorage = UserStatsCacheStorage.getInstance();
+        UserCacheStorage userCacheStorage = UserCacheStorage.getInstance();
+
+        User user = userCacheStorage.getUser();
+        UserStats userStats = userStatsCacheStorage.getUserStats();
+
+        Log.d("Cat", user.toString() + " " + userStats.toString());
+
+        // Мокаем ачивки (осуждаю)
+        AchievementCacheStorage cacheStorage = AchievementCacheStorage.getInstance();
+        for (Achievement achievement: Constants.ACHIEVEMENTS_LIST) {
+            cacheStorage.addAchievement(achievement);
+        }
+
+        // Мокаем силы (осуждаю)
+        PowerCacheStorage cacheStorage1 = PowerCacheStorage.getInstance();
+        for (Power power: Constants.POWERS_LIST) {
+            cacheStorage1.addPower(power);
+        }
 
         setContentView(binding.getRoot());
     }

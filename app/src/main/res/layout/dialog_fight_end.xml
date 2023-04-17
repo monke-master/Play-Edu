@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:text="69"
-            android:textColor="@color/golden_coin"
+            android:textColor="@color/golden"
             app:layout_constraintEnd_toEndOf="@+id/background"
             app:layout_constraintStart_toEndOf="@+id/golden_ic"
             app:layout_constraintTop_toBottomOf="@+id/award_hdr" />
