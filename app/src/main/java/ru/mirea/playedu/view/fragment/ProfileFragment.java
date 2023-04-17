@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import ru.mirea.playedu.R;
 import ru.mirea.playedu.databinding.FragmentProfileBinding;
 import ru.mirea.playedu.model.Achievement;
+import ru.mirea.playedu.model.Power;
 import ru.mirea.playedu.view.adapter.AchievementAdapter;
 import ru.mirea.playedu.view.adapter.PowerAdapter;
 import ru.mirea.playedu.view.dialog.AchievementDialog;
@@ -27,57 +28,43 @@ import ru.mirea.playedu.viewmodel.ProfileViewModelFabric;
 public class ProfileFragment extends Fragment {
 
 
+    private ProfileViewModel viewModel;
+    private FragmentProfileBinding binding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentProfileBinding binding = FragmentProfileBinding.inflate(getLayoutInflater());
+        binding = FragmentProfileBinding.inflate(getLayoutInflater());
 
-        ProfileViewModel viewModel = ViewModelProviders.of(this,
+        viewModel = ViewModelProviders.of(this,
                 new ProfileViewModelFabric()).get(ProfileViewModel.class);
         binding.setViewModel(viewModel);
 
+        bindRecyclerViews();
+
+        return binding.getRoot();
+    }
+
+    private void bindRecyclerViews() {
+        // Список сил
+        // Сначала идут уже купленные игроком силы, затем оставшиеся
+        ArrayList<Power> powers = viewModel.getBoughtPowers().getValue();
+        powers.addAll(viewModel.getSellingPowers().getValue());
         // Табличный RecyclerView для списка сил
         RecyclerView powersList = binding.powersList;
         powersList.setLayoutManager(new GridLayoutManager(requireContext(), 4));
-        String[] powers = new String[]{
-                "Сила Сибири",
-                "Сила Булеана",
-                "Сила Воды",
-                "Сила Белой профессуры",
-                "Сила Беркова",
-                "Сила Немировской",
-                "Сила Пропастина",
-                "Сила Куджа Кобейна",
-                "Сила Сибири",
-                "Сила Булеана",
-                "Сила Воды",
-                "Сила Белой профессуры",
-                "Сила Беркова",
-                "Сила Немировской",
-                "Сила Пропастина",
-                "Сила Куджа Кобейна",
-                "Сила Сибири",
-                "Сила Булеана",
-                "Сила Воды",
-                "Сила Белой профессуры",
-                "Сила Беркова",
-                "Сила Немировской",
-                "Сила Пропастина",
-                "Сила Куджа Кобейна",
-                "Сила Сибири",
-                "Сила Булеана",
-                "Сила Воды",
-                "Сила Белой профессуры",
-                "Сила Беркова",
-                "Сила Немировской",
-                "Сила Пропастина",
-                "Сила Куджа Кобейна",
-        };
         powersList.setNestedScrollingEnabled(false);
         powersList.setAdapter(new PowerAdapter(powers, new PowerAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(String name) {
-                PowerDialog dialog = new PowerDialog(name);
+            public void onItemClick(Power power) {
+                PowerDialog dialog = new PowerDialog(power, new PowerDialog.OnPowerBoughtListener() {
+                    // Отслеживание покупки силы
+                    @Override
+                    public void OnPowerBought(Power power) {
+                        viewModel.buyPower(power);
+                        bindRecyclerViews();
+                    }
+                });
                 dialog.show(getActivity().getSupportFragmentManager(), "Power dialog");
             }
         }));
@@ -97,7 +84,5 @@ public class ProfileFragment extends Fragment {
             AchievementDialog dialog = new AchievementDialog(achievement);
             dialog.show(getActivity().getSupportFragmentManager(), "Achievement dialog");
         }));
-
-        return binding.getRoot();
     }
 }

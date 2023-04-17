@@ -47,7 +47,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
                     android:text="69"
-                    android:textColor="@color/golden_coin" />
+                    android:textColor="@color/golden" />
 
                 <ImageView
                     android:id="@+id/silver_ic"
@@ -65,7 +65,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
                     android:text="1488"
-                    android:textColor="@color/silver_coin" />
+                    android:textColor="@color/silver" />
             </LinearLayout>
 
             <TextView

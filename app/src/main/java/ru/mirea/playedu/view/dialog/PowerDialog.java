@@ -6,28 +6,42 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProviders;
 
+import ru.mirea.playedu.Constants;
 import ru.mirea.playedu.R;
+import ru.mirea.playedu.databinding.DialogPowerBinding;
+import ru.mirea.playedu.model.Power;
+import ru.mirea.playedu.model.User;
+import ru.mirea.playedu.viewmodel.ProfileViewModel;
+import ru.mirea.playedu.viewmodel.ProfileViewModelFabric;
 
+// Диалог с информацией о силе
 public class PowerDialog extends DialogFragment {
 
-    private View view;
-    private String powerName;
+    public interface OnPowerBoughtListener {
 
-    public PowerDialog(String powerName) {
-        this.powerName = powerName;
+        void OnPowerBought(Power power);
+
+    }
+
+    private Power power;
+    private OnPowerBoughtListener boughtListener;
+
+    public PowerDialog(Power power, OnPowerBoughtListener powerBoughtListener) {
+        this.power = power;
+        this.boughtListener = powerBoughtListener;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        view = requireActivity().getLayoutInflater().inflate(
+        View view = requireActivity().getLayoutInflater().inflate(
                 R.layout.dialog_power,
                 null,
                 false);
@@ -42,11 +56,39 @@ public class PowerDialog extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        view = requireActivity().getLayoutInflater().
-                inflate(R.layout.dialog_power, null, false);
-        TextView nameTxt = view.findViewById(R.id.name_txt);
-        nameTxt.setText(powerName);
-        builder.setView(view);
+        DialogPowerBinding binding = DialogPowerBinding.inflate(getLayoutInflater());
+        binding.setPower(power);
+
+        ProfileViewModel viewModel = ViewModelProviders.of(this,
+                new ProfileViewModelFabric()).get(ProfileViewModel.class);
+        User user = viewModel.getUser().getValue();
+
+        // Меняет кнопку, если сила уже куплена
+        if (power.isBought()) {
+            binding.buyBtn.setEnabled(false);
+            binding.buyBtn.setBackgroundColor(getResources().getColor(R.color.gray));
+            binding.buyBtn.setText(R.string.bought);
+        }
+
+        // Меняет вид цены и монеты в зависимости от типа силы
+        if (power.getPriceType() == Constants.SILVER_COINS_TYPE) {
+            binding.priceTxt.setTextColor(getResources().getColor(R.color.silver));
+            binding.coinIc.setImageDrawable(getResources().getDrawable(R.drawable.pic_silver_coin));
+            if (user.getSilverCoins() < power.getPrice()) {
+                binding.buyBtn.setEnabled(false);
+                binding.buyBtn.setBackgroundColor(getResources().getColor(R.color.gray));
+            }
+        } else if (user.getGoldenCoins() < power.getPrice()) {
+            binding.buyBtn.setEnabled(false);
+            binding.buyBtn.setBackgroundColor(getResources().getColor(R.color.gray));
+        }
+
+        binding.buyBtn.setOnClickListener(view -> {
+            boughtListener.OnPowerBought(power);
+            dismiss();
+        });
+
+        builder.setView(binding.getRoot());
         return builder.create();
     }
 }

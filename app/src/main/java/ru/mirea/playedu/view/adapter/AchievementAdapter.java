@@ -16,31 +16,16 @@ import ru.mirea.playedu.R;
 import ru.mirea.playedu.databinding.ViewAchievementItemBinding;
 import ru.mirea.playedu.model.Achievement;
 
+// Адаптер для отображения списка достижений
 public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.ViewHolder> {
 
     public interface OnItemClickListener {
         void onItemClick(Achievement achievement);
     }
 
+    // Список достижений
     private ArrayList<Achievement> achievements;
     private OnItemClickListener clickListener;
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-
-        private final ViewAchievementItemBinding binding;
-
-        public ViewHolder(ViewAchievementItemBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
-
-        public void bind(Achievement achievement, OnItemClickListener listener) {
-
-            binding.setAchievement(achievement);
-            itemView.setOnClickListener(view -> listener.onItemClick(achievement));
-        }
-
-    }
 
     public AchievementAdapter(ArrayList<Achievement> achievements, OnItemClickListener clickListener) {
         this.achievements = achievements;
@@ -63,6 +48,23 @@ public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.
     @Override
     public int getItemCount() {
         return achievements.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        private final ViewAchievementItemBinding binding;
+
+        public ViewHolder(ViewAchievementItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        public void bind(Achievement achievement, OnItemClickListener listener) {
+
+            binding.setAchievement(achievement);
+            itemView.setOnClickListener(view -> listener.onItemClick(achievement));
+        }
+
     }
 
 

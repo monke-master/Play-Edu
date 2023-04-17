@@ -27,22 +27,29 @@ public class ProfileViewModelFabric implements ViewModelProvider.Factory {
     private GetUnlockedAchievementsUseCase getUnlockedAchievementsUseCase;
     private BuyPowerUseCase buyPowerUseCase;
 
+    private ProfileViewModel instance = null;
+
     public ProfileViewModelFabric() {
-        getUserUseCase = new GetUserUseCase(new UserRepository(UserCacheStorage.getInstance()));
-        getBoughtPowersUseCase = new GetBoughtPowersUseCase(new PowerRepository(PowerCacheStorage.getInstance()));
-        getSellingPowersUseCase = new GetSellingPowersUseCase(new PowerRepository(PowerCacheStorage.getInstance()));
-        getUnlockedAchievementsUseCase = new GetUnlockedAchievementsUseCase(
-                new AchievementRepository(AchievementCacheStorage.getInstance()));
-        getLockedAchievementsUseCase = new GetLockedAchievementsUseCase(
-                new AchievementRepository(AchievementCacheStorage.getInstance()));
-        buyPowerUseCase = new BuyPowerUseCase(
-                new PowerRepository(PowerCacheStorage.getInstance()));
+        // Инициализация репозиториев
+        UserRepository userRepository = new UserRepository(UserCacheStorage.getInstance());
+        PowerRepository powerRepository = new PowerRepository(PowerCacheStorage.getInstance());
+        AchievementRepository achievementRepository = new AchievementRepository(AchievementCacheStorage.getInstance());
+
+        // Инициализация юз-кейсов
+        getUserUseCase = new GetUserUseCase(userRepository);
+        getBoughtPowersUseCase = new GetBoughtPowersUseCase(powerRepository);
+        getSellingPowersUseCase = new GetSellingPowersUseCase(powerRepository);
+        getUnlockedAchievementsUseCase = new GetUnlockedAchievementsUseCase(achievementRepository);
+        getLockedAchievementsUseCase = new GetLockedAchievementsUseCase(achievementRepository);
+        buyPowerUseCase = new BuyPowerUseCase(powerRepository, userRepository);
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new ProfileViewModel(getUserUseCase, getBoughtPowersUseCase, getSellingPowersUseCase,
-                getLockedAchievementsUseCase, getUnlockedAchievementsUseCase, buyPowerUseCase);
+        if (instance == null)
+            instance = new ProfileViewModel(getUserUseCase, getBoughtPowersUseCase, getSellingPowersUseCase,
+                    getLockedAchievementsUseCase, getUnlockedAchievementsUseCase, buyPowerUseCase);
+        return (T) instance;
     }
 }

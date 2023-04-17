@@ -58,7 +58,7 @@
                 android:fontFamily="@font/roboto_regular"
                 android:textFontWeight="600"
                 android:text="1 000 000"
-                android:textColor="@color/golden_coin"
+                android:textColor="@color/golden"
                 android:textSize="14sp" />
         </LinearLayout>
 

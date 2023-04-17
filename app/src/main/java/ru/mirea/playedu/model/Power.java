@@ -9,13 +9,13 @@ public class Power {
     private String title;
     private String description;
     private boolean bought;
-    private URL icon;
+    private String icon;
     private int priceType;
     private int price;
 
 
     public Power(int powerId, int userPowerId, String title, String description, boolean bought,
-                 URL icon, int priceType, int price) {
+                 String icon, int priceType, int price) {
         this.powerId = powerId;
         this.userPowerId = userPowerId;
         this.title = title;
@@ -66,11 +66,11 @@ public class Power {
         this.bought = bought;
     }
 
-    public URL getIcon() {
+    public String getIcon() {
         return icon;
     }
 
-    public void setIcon(URL icon) {
+    public void setIcon(String icon) {
         this.icon = icon;
     }
 

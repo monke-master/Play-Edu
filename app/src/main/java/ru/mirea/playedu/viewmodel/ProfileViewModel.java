@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import ru.mirea.playedu.model.Achievement;
 import ru.mirea.playedu.model.Power;
+import ru.mirea.playedu.model.Response;
 import ru.mirea.playedu.model.User;
 import ru.mirea.playedu.usecases.BuyPowerUseCase;
 import ru.mirea.playedu.usecases.GetBoughtPowersUseCase;
@@ -48,6 +49,20 @@ public class ProfileViewModel extends ViewModel {
         unlockedAchievements = new MutableLiveData<>();
         // Получение данных из репозиториев
         getData();
+    }
+
+    // Покупка силы
+    // Возвращает код
+    public int buyPower(Power power) {
+        Response response = buyPowerUseCase.execute(power);
+        // В случае успеха изменяет списки сил и пользователя
+        if (response.getCode() == 200) {
+            sellingPowers.getValue().remove(power);
+            power.setBought(true);
+            boughtPowers.getValue().add(power);
+            user.setValue((User)response.getResponseObject());
+        }
+        return response.getCode();
     }
 
     // Получение данных из репозиториев

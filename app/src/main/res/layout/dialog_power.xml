@@ -2,43 +2,51 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <LinearLayout
+    <data>
+        <variable
+            name="power"
+            type="ru.mirea.playedu.model.Power" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/shape_dialog"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="@+id/achvmnt_img">
-
-        <TextView
-            android:id="@+id/name_txt"
-            style="@style/Header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="90dp"
-            android:text="TextView"
-            android:textSize="@dimen/header1_txt_size" />
-
-        <TextView
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center_horizontal"
-            android:id="@+id/descrpt_txt"
-            style="@style/DefaultText"
-            android:layout_marginBottom="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/buy_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="60dp">
+            android:layout_marginTop="60dp"
+            android:background="@drawable/shape_dialog"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/achvmnt_img">
+
+            <TextView
+                android:id="@+id/descrpt_txt"
+                style="@style/DefaultText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="@{power.description}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name_txt" />
+
+            <TextView
+                android:id="@+id/name_txt"
+                style="@style/Header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="70dp"
+                android:text="@{power.title}"
+                android:textSize="@dimen/header1_txt_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/price_hdr"
@@ -46,22 +54,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="26dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="40dp"
                 android:text="@string/price"
                 android:textSize="@dimen/price_txt_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/golden_ic2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="4dp"
-                android:src="@drawable/pic_golden_coin"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/price_txt"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/descrpt_txt" />
 
             <TextView
                 android:id="@+id/price_txt"
@@ -71,13 +70,14 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
-                android:text="69"
-                android:textColor="@color/golden_coin"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/price_hdr"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="@{Integer.toString(power.price)}"
+                android:textColor="@color/golden"
+                app:layout_constraintEnd_toStartOf="@id/coin_ic"
+                app:layout_constraintBaseline_toBaselineOf="@id/price_hdr"
+                app:layout_constraintStart_toEndOf="@+id/price_hdr" />
 
             <Button
+
                 android:id="@+id/buy_btn"
                 style="@style/DefaultButton"
                 android:layout_width="wrap_content"
@@ -88,22 +88,32 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:text="@string/buy"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/price_hdr"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/price_hdr" />
+
+            <ImageView
+                android:id="@+id/coin_ic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/pic_golden_coin"
+                app:layout_constraintBottom_toBottomOf="@+id/price_txt"
+                app:layout_constraintStart_toEndOf="@+id/price_txt"
+                app:layout_constraintTop_toTopOf="@+id/price_txt"
                 app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
 
-    <ImageView
-        android:id="@+id/achvmnt_img"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/shape_power" />
+        <ImageView
+            android:id="@+id/achvmnt_img"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/shape_power" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

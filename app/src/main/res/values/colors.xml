@@ -9,8 +9,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="golden_coin">#FED425</color>
-    <color name="silver_coin">#B1C8D9</color>
+    <color name="golden">#FED425</color>
+    <color name="silver">#B1C8D9</color>
 
     <!--Цвет кнопки-->
     <color name="purple_100">#986CF1</color>
