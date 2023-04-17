@@ -15,10 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 import ru.mirea.playedu.Constants;
 import ru.mirea.playedu.R;
 import ru.mirea.playedu.databinding.DialogPowerBinding;
-import ru.mirea.playedu.model.Power;
-import ru.mirea.playedu.model.User;
-import ru.mirea.playedu.viewmodel.ProfileViewModel;
-import ru.mirea.playedu.viewmodel.ProfileViewModelFabric;
+
 
 // Диалог с информацией о силе
 public class PowerDialog extends DialogFragment {

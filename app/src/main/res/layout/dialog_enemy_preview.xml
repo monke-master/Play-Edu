@@ -13,8 +13,9 @@
         android:layout_marginTop="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@id/enemy_img"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/shape_dialog"
-        tools:layout_editor_absoluteX="16dp" />
+        tools:layout_editor_absoluteX="0dp" />
 
     <ImageView
         android:id="@+id/enemy_img"
@@ -132,7 +133,6 @@
 
 
     <ProgressBar
-        android:progressBackgroundTint="@color/red"
         android:id="@+id/damage_progress_bar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="0dp"

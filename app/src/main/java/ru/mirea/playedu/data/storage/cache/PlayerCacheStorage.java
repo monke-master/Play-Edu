@@ -10,7 +10,7 @@ public class PlayerCacheStorage {
 
     private Player player;
 
-    private PlayerCacheStorage instance = null;
+    private static PlayerCacheStorage instance = null;
 
     private PlayerCacheStorage() {
 
@@ -18,7 +18,7 @@ public class PlayerCacheStorage {
 
     // Возвращает экземпляр класса
     // Если экземпляра нет, создает новый
-    public PlayerCacheStorage getInstance() {
+    public static PlayerCacheStorage getInstance() {
         if (instance == null)
             instance = new PlayerCacheStorage();
         return instance;

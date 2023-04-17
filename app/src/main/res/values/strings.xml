@@ -55,6 +55,18 @@
     <string name="health">Здоровье:</string>
     <string name="pick_powers">Выбери силы:</string>
     <string name="start">Начать</string>
+
+    <string name="damage_done">Нанесен урон:</string>
+    <string name="no_damage">Вы не смогли нанести урон</string>
+    <string name="victory">Победа!</string>
+    <string name="defeat">К сожалению, вы проиграли</string>
+    <string name="new_fight">Новый бой</string>
+    <string name="award">Награда:</string>
+    <string name="no_damage_to_player">Вам не был нанесен урон</string>
+    <string name="enemies_left">Монстров осталось: </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="min_pswrd_length">Пароль должен содержать не менее 8 символов!</string>
     <string name="max_pswrd_length">Пароль должен содержать не более 32 символов!</string>
     <string name="password_match_error">Пароли не совпадают!</string>

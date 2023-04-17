@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="40dp">
+
+        <ImageView
+            android:id="@+id/background"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/enemy_img"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/shape_dialog" />
+
+        <ImageView
+            android:id="@+id/enemy_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/pic_enemy" />
+
+        <TextView
+            style="@style/DefaultText"
+            android:id="@+id/result_hdr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/victory"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/enemy_img" />
+
+        <TextView
+            style="@style/DefaultText"
+            android:id="@+id/award_hdr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/award"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/result_hdr" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/award_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="award_count_txt, golden_ic, award_hdr"
+            />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/win_battle_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="award_count_txt, golden_ic"
+            />
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:id="@+id/award_count_txt"
+            style="@style/PriceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="69"
+            android:textColor="@color/golden_coin"
+            app:layout_constraintEnd_toEndOf="@+id/background"
+            app:layout_constraintStart_toEndOf="@+id/golden_ic"
+            app:layout_constraintTop_toBottomOf="@+id/award_hdr" />
+
+        <ImageView
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintEnd_toStartOf="@id/award_count_txt"
+            android:id="@+id/golden_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/pic_golden_coin"
+            app:layout_constraintBottom_toBottomOf="@id/award_count_txt"
+            app:layout_constraintStart_toStartOf="@+id/background"
+            app:layout_constraintTop_toTopOf="@id/award_count_txt" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/award_barrier"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="award_count_txt, golden_ic"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/button3"
+            style="@style/DefaultButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/purple_400"
+            android:paddingHorizontal="40dp"
+            android:paddingVertical="15dp"
+            android:text="@string/new_fight"
+            app:layout_constraintTop_toBottomOf="@id/award_barrier"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="295dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

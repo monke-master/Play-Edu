@@ -9,6 +9,7 @@ public class Enemy {
     private int damage;
     private String name;
     private URL image;
+    private int imageId;
     private int attackPhaseSpeed;
     private int defensePhaseSpeed;
     private int defencePhaseSpread;
@@ -111,6 +112,14 @@ public class Enemy {
 
     public void setEnemyId(int enemyId) {
         this.enemyId = enemyId;
+    }
+
+    public int getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
     }
 
     @Override

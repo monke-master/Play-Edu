@@ -57,5 +57,9 @@
         <item name="fontFamily">@font/roboto_black</item>
     </style>
 
+    <style name="DialogStyle" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="background">@drawable/shape_dialog</item>
+    </style>
+
 
 </resources>

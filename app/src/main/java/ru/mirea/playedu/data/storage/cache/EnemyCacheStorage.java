@@ -20,7 +20,7 @@ public class EnemyCacheStorage {
 
     // Возвращает экземпляр класса
     // Если экземпляра нет, создает новый
-    private static EnemyCacheStorage getInstance() {
+    public static EnemyCacheStorage getInstance() {
         if (instance == null)
             instance = new EnemyCacheStorage();
 
@@ -62,6 +62,11 @@ public class EnemyCacheStorage {
     // Удаляет врага с заданным id
     public boolean deleteEnemy(Enemy enemy) {
         return enemies.remove(enemy);
+    }
+
+    // Удалает всех врагов
+    public void deleteAllEnemies() {
+        enemies.clear();
     }
 
 

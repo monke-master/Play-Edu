@@ -22,6 +22,8 @@
 
     <color name="green">#74FB28</color>
     <color name="red">#FF6363</color>
+    <color name="player">#FFB84D</color>
+    <color name="enemy">#FF4F4F</color>
 
     <color name="gray">#ABA7F1</color>
 

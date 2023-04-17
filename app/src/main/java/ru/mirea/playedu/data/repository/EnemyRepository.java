@@ -47,4 +47,9 @@ public class EnemyRepository {
         else
             return new Response(404, "Not found");
     }
+
+    // Удаляет всех противников
+    public void deleteAllEnemies() {
+        cacheStorage.deleteAllEnemies();
+    }
 }
