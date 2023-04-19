@@ -3,14 +3,17 @@ package ru.mirea.playedu.view.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -23,7 +26,6 @@ import ru.mirea.playedu.view.adapter.PowerAdapter;
 import ru.mirea.playedu.view.dialog.AchievementDialog;
 import ru.mirea.playedu.view.dialog.PowerDialog;
 import ru.mirea.playedu.viewmodel.ProfileViewModel;
-import ru.mirea.playedu.viewmodel.ProfileViewModelFabric;
 
 public class ProfileFragment extends Fragment {
 
@@ -36,53 +38,59 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(getLayoutInflater());
 
-        viewModel = ViewModelProviders.of(this,
-                new ProfileViewModelFabric()).get(ProfileViewModel.class);
+//        viewModel = ViewModelProviders.of(this,
+//                new ProfileViewModelFabric()).get(ProfileViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(ProfileViewModel.class);
         binding.setViewModel(viewModel);
 
-        bindRecyclerViews();
-
-        return binding.getRoot();
-    }
-
-    private void bindRecyclerViews() {
-        // Список сил
-        // Сначала идут уже купленные игроком силы, затем оставшиеся
-        ArrayList<Power> powers = viewModel.getBoughtPowers().getValue();
-        powers.addAll(viewModel.getSellingPowers().getValue());
         // Табличный RecyclerView для списка сил
         RecyclerView powersList = binding.powersList;
         powersList.setLayoutManager(new GridLayoutManager(requireContext(), 4));
         powersList.setNestedScrollingEnabled(false);
-        powersList.setAdapter(new PowerAdapter(powers, new PowerAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Power power) {
-                PowerDialog dialog = new PowerDialog(power, new PowerDialog.OnPowerBoughtListener() {
-                    // Отслеживание покупки силы
-                    @Override
-                    public void OnPowerBought(Power power) {
-                        viewModel.buyPower(power);
-                        bindRecyclerViews();
-                    }
-                });
-                dialog.show(getActivity().getSupportFragmentManager(), "Power dialog");
-            }
-        }));
 
+        // Создание адаптера
+        // В аргументы передается список сил и callback для отслеживания нажатия на силу
+        PowerAdapter powerAdapter = new PowerAdapter(viewModel.getPowersList(), power -> {
+            PowerDialog dialog = new PowerDialog(power);
+            dialog.show(getActivity().getSupportFragmentManager(), "Power dialog");
+        });
+        powersList.setAdapter(powerAdapter);
 
-        // Список достижений
-        // Сначала идут уже полученные игроком достижения, затем оставшиеся
-        ArrayList<Achievement> achievements = viewModel.getUnlockedAchievements().getValue();
-        achievements.addAll(viewModel.getLockedAchievements().getValue());
         // Табличный RecyclerView для списка достижений
         RecyclerView achievementsList = binding.achvmntsList;
         achievementsList.setLayoutManager(new GridLayoutManager(requireContext(), 4));
         achievementsList.setNestedScrollingEnabled(false);
 
-        // Отслеживание нажатия на элемент списка
-        achievementsList.setAdapter(new AchievementAdapter(achievements, achievement -> {
+        // Создание адаптера
+        // В аргументы передается список сил и callback для отслеживания нажатия на ачивку
+        AchievementAdapter achievementAdapter = new AchievementAdapter(viewModel.getAchievementsList(), achievement -> {
             AchievementDialog dialog = new AchievementDialog(achievement);
             dialog.show(getActivity().getSupportFragmentManager(), "Achievement dialog");
-        }));
+        });
+        achievementsList.setAdapter(achievementAdapter);
+
+        viewModel.getBoughtPowers().observe(getViewLifecycleOwner(), powers ->
+            powerAdapter.setPowersList(viewModel.getPowersList())
+        );
+
+        viewModel.getUnlockedAchievements().observe(getViewLifecycleOwner(), achievements ->
+            achievementAdapter.setAchievementsList(viewModel.getAchievementsList())
+        );
+
+        viewModel.getErrorMessage().observe(getViewLifecycleOwner(), error -> {
+            Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
+        });
+
+        viewModel.getUser().observe(getViewLifecycleOwner(), user -> {
+            binding.silverCountTxt.setText(Integer.toString(user.getSilverCoins()));
+        });
+
+        viewModel.getUser().observe(getViewLifecycleOwner(), user -> {
+            binding.goldenCountTxt.setText(Integer.toString(user.getGoldenCoins()));
+        });
+
+
+        return binding.getRoot();
     }
+
 }

@@ -32,6 +32,11 @@ public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.
         this.clickListener = clickListener;
     }
 
+    public void setAchievementsList(ArrayList<Achievement> list) {
+        this.achievements = list;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public AchievementAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

@@ -27,6 +27,11 @@ public class PowerAdapter extends RecyclerView.Adapter<PowerAdapter.ViewHolder> 
         this.onItemClickListener = onItemClickListener;
     }
 
+    public void setPowersList(ArrayList<Power> powers) {
+        this.powers = powers;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public PowerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

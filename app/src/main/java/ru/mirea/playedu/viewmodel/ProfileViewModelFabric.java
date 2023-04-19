@@ -17,39 +17,39 @@ import ru.mirea.playedu.usecases.GetSellingPowersUseCase;
 import ru.mirea.playedu.usecases.GetUnlockedAchievementsUseCase;
 import ru.mirea.playedu.usecases.GetUserUseCase;
 
-// Фабрика для ProfileViewModel
-public class ProfileViewModelFabric implements ViewModelProvider.Factory {
-
-    private GetUserUseCase getUserUseCase;
-    private GetBoughtPowersUseCase getBoughtPowersUseCase;
-    private GetSellingPowersUseCase getSellingPowersUseCase;
-    private GetLockedAchievementsUseCase getLockedAchievementsUseCase;
-    private GetUnlockedAchievementsUseCase getUnlockedAchievementsUseCase;
-    private BuyPowerUseCase buyPowerUseCase;
-
-    private ProfileViewModel instance = null;
-
-    public ProfileViewModelFabric() {
-        // Инициализация репозиториев
-        UserRepository userRepository = new UserRepository(UserCacheStorage.getInstance());
-        PowerRepository powerRepository = new PowerRepository(PowerCacheStorage.getInstance());
-        AchievementRepository achievementRepository = new AchievementRepository(AchievementCacheStorage.getInstance());
-
-        // Инициализация юз-кейсов
-        getUserUseCase = new GetUserUseCase(userRepository);
-        getBoughtPowersUseCase = new GetBoughtPowersUseCase(powerRepository);
-        getSellingPowersUseCase = new GetSellingPowersUseCase(powerRepository);
-        getUnlockedAchievementsUseCase = new GetUnlockedAchievementsUseCase(achievementRepository);
-        getLockedAchievementsUseCase = new GetLockedAchievementsUseCase(achievementRepository);
-        buyPowerUseCase = new BuyPowerUseCase(powerRepository, userRepository);
-    }
-
-    @NonNull
-    @Override
-    public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (instance == null)
-            instance = new ProfileViewModel(getUserUseCase, getBoughtPowersUseCase, getSellingPowersUseCase,
-                    getLockedAchievementsUseCase, getUnlockedAchievementsUseCase, buyPowerUseCase);
-        return (T) instance;
-    }
-}
+//// Фабрика для ProfileViewModel
+//public class ProfileViewModelFabric implements ViewModelProvider.Factory {
+//
+//    private GetUserUseCase getUserUseCase;
+//    private GetBoughtPowersUseCase getBoughtPowersUseCase;
+//    private GetSellingPowersUseCase getSellingPowersUseCase;
+//    private GetLockedAchievementsUseCase getLockedAchievementsUseCase;
+//    private GetUnlockedAchievementsUseCase getUnlockedAchievementsUseCase;
+//    private BuyPowerUseCase buyPowerUseCase;
+//
+//    private ProfileViewModel instance = null;
+//
+//    public ProfileViewModelFabric() {
+//        // Инициализация репозиториев
+//        UserRepository userRepository = new UserRepository(UserCacheStorage.getInstance());
+//        PowerRepository powerRepository = new PowerRepository(PowerCacheStorage.getInstance());
+//        AchievementRepository achievementRepository = new AchievementRepository(AchievementCacheStorage.getInstance());
+//
+//        // Инициализация юз-кейсов
+//        getUserUseCase = new GetUserUseCase(userRepository);
+//        getBoughtPowersUseCase = new GetBoughtPowersUseCase(powerRepository);
+//        getSellingPowersUseCase = new GetSellingPowersUseCase(powerRepository);
+//        getUnlockedAchievementsUseCase = new GetUnlockedAchievementsUseCase(achievementRepository);
+//        getLockedAchievementsUseCase = new GetLockedAchievementsUseCase(achievementRepository);
+//        buyPowerUseCase = new BuyPowerUseCase(powerRepository, userRepository);
+//    }
+//
+//    @NonNull
+//    @Override
+//    public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+//        if (instance == null)
+//            instance = new ProfileViewModel(getUserUseCase, getBoughtPowersUseCase, getSellingPowersUseCase,
+//                    getLockedAchievementsUseCase, getUnlockedAchievementsUseCase, buyPowerUseCase);
+//        return (T) instance;
+//    }
+//}
