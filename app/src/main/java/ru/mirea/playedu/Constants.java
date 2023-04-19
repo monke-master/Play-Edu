@@ -1,12 +1,15 @@
 package ru.mirea.playedu;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 
 import androidx.core.content.ContextCompat;
 
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -76,6 +79,13 @@ public class Constants {
     public static int SILVER_COINS_TYPE = 0;
     public static int GOLDEN_COINS_TYPE = 1;
 
+    // Константы эффектов
+    public static int EFFECT_INFO = 0;
+    public static int EFFECT_USAGE = 1;
+
+    // Сила заглушка
+    public static Power selectablePower = new Power(-1, 0, "", "", false, R.drawable.ic_pick_power, SILVER_COINS_TYPE, EFFECT_INFO,0);
+
     // Список достижений (убрать нахер се неподтребство на сервер)
     public static Achievement[] ACHIEVEMENTS_LIST = new Achievement[]{
             new Achievement(1, 1, "Орден Пропастина", "За заслуги перед Пропастинечеством", true, "No"),
@@ -83,20 +93,31 @@ public class Constants {
             new Achievement(1, 1, "Поцелуй Большого Булеана", "Лучше не знать откуда это у вас...", true, "No"),
             new Achievement(1, 1, "Триггер Смирнова", "Собрать трехступенчатый PR-триггер", false, "No")
     };
-    // Список сил (убрать нахер се неподтребство на сервер)
-    public static Power[] POWERS_LIST = new Power[]{
-            new Power(1, 1, "Сила Немировской", "Ворует все деньги у противника", false, "NO", SILVER_COINS_TYPE, 100),
-            new Power(2, 1, "Сила Беркова", "Проецирует противника на одномерное пространство", false, "NO", SILVER_COINS_TYPE, 150),
-            new Power(2, 1, "Сила Красникова", "Отче наш, сущий на небесах!\n" +
-                    "Да святится имя Твое;\n" +
-                    "Да приидет Царствие Твое;\n" +
-                    "Да будет воля Твоя и на земле, как на небе; \n" +
-                    "Хлеб наш насущный дай нам на сей день; \n" +
-                    "И прости нам долги наши, как и мы прощаем должникам нашим;\n" +
-                    "И не введи нас в искушение, но избавь нас от лукавого. \n" +
-                    "Ибо Твое есть Царство и сила и слава вовеки.", false, "NO", GOLDEN_COINS_TYPE, 1500000)
 
-    };
+    // Получение списка сил
+    public static Power[] getPowersList(Context context) {
+        String[] powersTitles = context.getResources().getStringArray(R.array.powersTitles);
+        String[] powersDescriptions = context.getResources().getStringArray(R.array.powersDescription);
+        ArrayList<Power> POWERS_LIST = new ArrayList<>();
+        POWERS_LIST.add(new Power(0, 0, powersTitles[0], powersDescriptions[0], false, R.drawable.gold_pocket_power_ic, SILVER_COINS_TYPE, EFFECT_INFO,100));
+        POWERS_LIST.add(new Power(1, 0, powersTitles[1], powersDescriptions[1], false, R.drawable.ice_power_ic, SILVER_COINS_TYPE, EFFECT_INFO,100));
+        POWERS_LIST.add(new Power(2, 0, powersTitles[2], powersDescriptions[2], false, R.drawable.spell_book_power_ic, SILVER_COINS_TYPE, EFFECT_USAGE,100));
+        POWERS_LIST.add(new Power(3, 0, powersTitles[3], powersDescriptions[3], false, R.drawable.fire_power_ic, SILVER_COINS_TYPE, EFFECT_INFO,100));
+        POWERS_LIST.add(new Power(4, 0, powersTitles[4], powersDescriptions[4], false, R.drawable.earth_power_ic, SILVER_COINS_TYPE, EFFECT_INFO,100));
+        POWERS_LIST.add(new Power(5, 0, powersTitles[5], powersDescriptions[5], false, R.drawable.wind_power_ic, SILVER_COINS_TYPE, EFFECT_INFO,100));
+        POWERS_LIST.add(new Power(6, 0, powersTitles[6], powersDescriptions[6], false, R.drawable.time_power_ic, SILVER_COINS_TYPE, EFFECT_INFO,100));
+        POWERS_LIST.add(new Power(7, 0, powersTitles[7], powersDescriptions[7], false, R.drawable.health_power_ic, SILVER_COINS_TYPE, EFFECT_USAGE,100));
+        POWERS_LIST.add(new Power(8, 0, powersTitles[8], powersDescriptions[8], false, R.drawable.speed_power_ic, SILVER_COINS_TYPE, EFFECT_INFO,100));
+        POWERS_LIST.add(new Power(9, 0, powersTitles[9], powersDescriptions[9], false, R.drawable.blood_power_ic, SILVER_COINS_TYPE, EFFECT_USAGE,100));
+        POWERS_LIST.add(new Power(10, 0, powersTitles[10], powersDescriptions[10], false, R.drawable.wisdom_power_ic, SILVER_COINS_TYPE, EFFECT_INFO,100));
+        POWERS_LIST.add(new Power(11, 0, powersTitles[11], powersDescriptions[11], false, R.drawable.poison_power_ic, SILVER_COINS_TYPE, EFFECT_INFO,100));
+        POWERS_LIST.add(new Power(12, 0, powersTitles[12], powersDescriptions[12], false, R.drawable.griffin_power_ic, SILVER_COINS_TYPE, EFFECT_USAGE,100));
+        POWERS_LIST.add(new Power(13, 0, powersTitles[13], powersDescriptions[13], false, R.drawable.life_power_ic, SILVER_COINS_TYPE, EFFECT_INFO,100));
+        POWERS_LIST.add(new Power(14, 0, powersTitles[14], powersDescriptions[14], false, R.drawable.student_power_ic, SILVER_COINS_TYPE, EFFECT_USAGE,100));
+        Power[] powersArray = new Power[POWERS_LIST.size()];
+        powersArray = POWERS_LIST.toArray(powersArray);
+        return powersArray;
+    }
 
 
     public static int[] getCategoryColors(Context context) {

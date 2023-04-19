@@ -52,8 +52,10 @@ public class GameFragment extends Fragment {
         // Инициализация ViewModel
         gameViewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
         StartGameDialog dialog = new StartGameDialog();
+        dialog.setCancelable(false);
         dialog.show(getActivity().getSupportFragmentManager(), "Start game dialog");
 
+        binding.clickableArea.setVisibility(View.GONE);
         // Проверка на то, что игрок нажал на кнопку начала приключения
         gameViewModel.getStartGame().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
@@ -70,6 +72,7 @@ public class GameFragment extends Fragment {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
+                    binding.clickableArea.setVisibility(View.VISIBLE);
                     enemyPreviewDialog.dismiss();
                     gameViewModel.setPlayer();
                     binding.healthPlayerBar.setMax(gameViewModel.getPlayer().getHealth());

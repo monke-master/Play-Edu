@@ -3,8 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <FrameLayout
+    android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/general_fight_background"
     tools:context=".view.fragment.GameFragment">
 
         <LinearLayout
@@ -14,6 +16,7 @@
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/health_bars"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1.1">
@@ -106,6 +109,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/general_info"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"

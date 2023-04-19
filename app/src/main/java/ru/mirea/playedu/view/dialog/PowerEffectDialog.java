@@ -1,5 +1,7 @@
 package ru.mirea.playedu.view.dialog;
 
+import static ru.mirea.playedu.Constants.EFFECT_INFO;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -10,20 +12,22 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import ru.mirea.playedu.Constants;
 import ru.mirea.playedu.R;
 import ru.mirea.playedu.databinding.DialogPowerBinding;
-
+import ru.mirea.playedu.databinding.DialogPowerEffectBinding;
 import ru.mirea.playedu.model.Power;
 import ru.mirea.playedu.model.User;
+import ru.mirea.playedu.viewmodel.GameViewModel;
 import ru.mirea.playedu.viewmodel.ProfileViewModel;
 import ru.mirea.playedu.viewmodel.ProfileViewModelFabric;
 
 
 // Диалог с информацией о силе
-public class PowerDialog extends DialogFragment {
+public class PowerEffectDialog extends DialogFragment {
 
     public interface OnPowerBoughtListener {
 
@@ -32,11 +36,12 @@ public class PowerDialog extends DialogFragment {
     }
 
     private Power power;
+    private final int TYPE_EFFECT;
     private OnPowerBoughtListener boughtListener;
 
-    public PowerDialog(Power power, OnPowerBoughtListener powerBoughtListener) {
+    public PowerEffectDialog(Power power, int type) {
         this.power = power;
-        this.boughtListener = powerBoughtListener;
+        TYPE_EFFECT = type;
     }
 
     @Nullable
@@ -44,7 +49,7 @@ public class PowerDialog extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(
-                R.layout.dialog_power,
+                R.layout.dialog_power_effect,
                 null,
                 false);
 
@@ -58,39 +63,16 @@ public class PowerDialog extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        DialogPowerBinding binding = DialogPowerBinding.inflate(getLayoutInflater());
+        DialogPowerEffectBinding binding = DialogPowerEffectBinding.inflate(getLayoutInflater());
         binding.setPower(power);
 
-        ProfileViewModel viewModel = ViewModelProviders.of(this,
-                new ProfileViewModelFabric()).get(ProfileViewModel.class);
-        User user = viewModel.getUser().getValue();
+        GameViewModel viewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
 
         // Установка иконки для силы
         binding.achvmntImg.setImageResource(power.getIcon());
-        // Меняет кнопку, если сила уже куплена
-        if (power.isBought()) {
-            binding.buyBtn.setEnabled(false);
-            binding.buyBtn.setBackgroundColor(getResources().getColor(R.color.gray));
-            binding.buyBtn.setText(R.string.bought);
+        if (TYPE_EFFECT == EFFECT_INFO) {
+            binding.useBtn.setVisibility(View.GONE);
         }
-
-        // Меняет вид цены и монеты в зависимости от типа силы
-        if (power.getPriceType() == Constants.SILVER_COINS_TYPE) {
-            binding.priceTxt.setTextColor(getResources().getColor(R.color.silver));
-            binding.coinIc.setImageDrawable(getResources().getDrawable(R.drawable.pic_silver_coin));
-            if (user.getSilverCoins() < power.getPrice()) {
-                binding.buyBtn.setEnabled(false);
-                binding.buyBtn.setBackgroundColor(getResources().getColor(R.color.gray));
-            }
-        } else if (user.getGoldenCoins() < power.getPrice()) {
-            binding.buyBtn.setEnabled(false);
-            binding.buyBtn.setBackgroundColor(getResources().getColor(R.color.gray));
-        }
-
-        binding.buyBtn.setOnClickListener(view -> {
-            boughtListener.OnPowerBought(power);
-            dismiss();
-        });
 
         builder.setView(binding.getRoot());
         return builder.create();

@@ -11,15 +11,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 import ru.mirea.playedu.R;
+import ru.mirea.playedu.model.Power;
+import ru.mirea.playedu.view.adapter.PowerAdapter;
+import ru.mirea.playedu.view.fragment.GameFragment;
+import ru.mirea.playedu.viewmodel.GameViewModel;
+import ru.mirea.playedu.viewmodel.QuestsViewModel;
 
 public class PickPowerDialog extends DialogFragment {
 
     private View view;
+    private RecyclerView pickablePowers;
+    private GameViewModel gameViewModel;
+    private int selectedPosition;
 
-    public PickPowerDialog() {
-
+    public PickPowerDialog(int position) {
+        selectedPosition = position;
     }
 
     @Nullable
@@ -42,7 +55,26 @@ public class PickPowerDialog extends DialogFragment {
 
         view = requireActivity().getLayoutInflater().
                 inflate(R.layout.dialog_pick_power, null, false);
+
+        pickablePowers = view.findViewById(R.id.pick_power_list);
+
+        // Инициализация ViewModel
+        gameViewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
+
+        bindRecyclerView(gameViewModel.getPickablePowers());
         builder.setView(view);
         return builder.create();
+    }
+
+    private void bindRecyclerView(ArrayList<Power> rotationPowers) {
+        // Табличный RecyclerView для списка купленных сил
+        pickablePowers.setLayoutManager(new GridLayoutManager(requireContext(), 4));
+        pickablePowers.setNestedScrollingEnabled(false);
+        pickablePowers.setAdapter(new PowerAdapter(rotationPowers, new PowerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Power power, int position) {
+                gameViewModel.updateSelectedPowersList(power, selectedPosition);
+            }
+        }));
     }
 }

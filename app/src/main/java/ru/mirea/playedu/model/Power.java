@@ -9,20 +9,22 @@ public class Power {
     private String title;
     private String description;
     private boolean bought;
-    private String icon;
+    private int iconId;
     private int priceType;
+    private int effectType;
     private int price;
 
 
     public Power(int powerId, int userPowerId, String title, String description, boolean bought,
-                 String icon, int priceType, int price) {
+                 int icon, int priceType, int effectType, int price) {
         this.powerId = powerId;
         this.userPowerId = userPowerId;
         this.title = title;
         this.description = description;
         this.bought = bought;
-        this.icon = icon;
+        this.iconId = icon;
         this.priceType = priceType;
+        this.effectType = effectType;
         this.price = price;
     }
 
@@ -66,12 +68,12 @@ public class Power {
         this.bought = bought;
     }
 
-    public String getIcon() {
-        return icon;
+    public int getIcon() {
+        return iconId;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setIcon(int icon) {
+        this.iconId = icon;
     }
 
     public int getPriceType() {
@@ -80,6 +82,14 @@ public class Power {
 
     public void setPriceType(int priceType) {
         this.priceType = priceType;
+    }
+
+    public int getEffectType() {
+        return effectType;
+    }
+
+    public void setEffectType(int effectType) {
+        this.effectType = effectType;
     }
 
     public int getPrice() {
@@ -104,7 +114,7 @@ public class Power {
         if (price != power.price) return false;
         if (!title.equals(power.title)) return false;
         if (!description.equals(power.description)) return false;
-        return icon.equals(power.icon);
+        return iconId == power.iconId;
     }
 
     @Override
@@ -114,7 +124,7 @@ public class Power {
         result = 31 * result + title.hashCode();
         result = 31 * result + description.hashCode();
         result = 31 * result + (bought ? 1 : 0);
-        result = 31 * result + icon.hashCode();
+        result = 31 * result + iconId;
         result = 31 * result + priceType;
         result = 31 * result + price;
         return result;

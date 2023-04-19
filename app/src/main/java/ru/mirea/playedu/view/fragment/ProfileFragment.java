@@ -56,7 +56,7 @@ public class ProfileFragment extends Fragment {
         powersList.setNestedScrollingEnabled(false);
         powersList.setAdapter(new PowerAdapter(powers, new PowerAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(Power power) {
+            public void onItemClick(Power power, int position) {
                 PowerDialog dialog = new PowerDialog(power, new PowerDialog.OnPowerBoughtListener() {
                     // Отслеживание покупки силы
                     @Override

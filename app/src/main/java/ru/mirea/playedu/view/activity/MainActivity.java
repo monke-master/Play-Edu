@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Мокаем силы (осуждаю)
         PowerCacheStorage cacheStorage1 = PowerCacheStorage.getInstance();
-        for (Power power: Constants.POWERS_LIST) {
+        for (Power power: Constants.getPowersList(this)) {
             cacheStorage1.addPower(power);
         }
 
