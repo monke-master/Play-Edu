@@ -2,6 +2,9 @@ package ru.mirea.playedu.model;
 
 import java.net.URL;
 
+import ru.mirea.playedu.Constants.PowerStatus;
+import ru.mirea.playedu.Constants.Powers;
+
 public class Power {
 
     private int powerId;
@@ -12,11 +15,13 @@ public class Power {
     private int iconId;
     private int priceType;
     private int effectType;
+    private Powers powerType;
+    private PowerStatus powerStatus;
     private int price;
 
 
     public Power(int powerId, int userPowerId, String title, String description, boolean bought,
-                 int icon, int priceType, int effectType, int price) {
+                 int icon, int priceType, int effectType, Powers powerType, int price) {
         this.powerId = powerId;
         this.userPowerId = userPowerId;
         this.title = title;
@@ -25,6 +30,7 @@ public class Power {
         this.iconId = icon;
         this.priceType = priceType;
         this.effectType = effectType;
+        this.powerType = powerType;
         this.price = price;
     }
 
@@ -90,6 +96,22 @@ public class Power {
 
     public void setEffectType(int effectType) {
         this.effectType = effectType;
+    }
+
+    public Powers getPowerType() {
+        return powerType;
+    }
+
+    public void setPowerType(Powers powerType) {
+        this.powerType = powerType;
+    }
+
+    public PowerStatus getPowerStatus() {
+        return powerStatus;
+    }
+
+    public void setPowerStatus(PowerStatus powerStatus) {
+        this.powerStatus = powerStatus;
     }
 
     public int getPrice() {

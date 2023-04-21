@@ -61,7 +61,7 @@ public class PickPowerDialog extends DialogFragment {
         // Инициализация ViewModel
         gameViewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
 
-        bindRecyclerView(gameViewModel.getPickablePowers());
+        bindRecyclerView(gameViewModel.getBoughtPowers().getValue());
         builder.setView(view);
         return builder.create();
     }
@@ -73,7 +73,7 @@ public class PickPowerDialog extends DialogFragment {
         pickablePowers.setAdapter(new PowerAdapter(rotationPowers, new PowerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Power power, int position) {
-                gameViewModel.updateSelectedPowersList(power, selectedPosition);
+                if (!gameViewModel.getSelectedPowersList().getValue().contains(power)) gameViewModel.updateSelectedPowersList(power, selectedPosition);
             }
         }));
     }

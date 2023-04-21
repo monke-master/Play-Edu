@@ -1,5 +1,7 @@
 package ru.mirea.playedu.view.fragment;
 
+import static ru.mirea.playedu.Constants.getRandomNumber;
+import static ru.mirea.playedu.Constants.icePowerKoef;
 import static ru.mirea.playedu.Constants.maxHealth;
 
 import android.os.Bundle;
@@ -20,14 +22,17 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import ru.mirea.playedu.Constants;
+import ru.mirea.playedu.Constants.PowerStatus;
+import ru.mirea.playedu.Constants.Powers;
 import ru.mirea.playedu.Constants.PhaseResult;
 import ru.mirea.playedu.Constants.BattleResult;
 import ru.mirea.playedu.R;
 import ru.mirea.playedu.databinding.FragmentGameBinding;
 import ru.mirea.playedu.databinding.FragmentQuestsBinding;
 import ru.mirea.playedu.model.Enemy;
+import ru.mirea.playedu.model.Power;
 import ru.mirea.playedu.model.UserTask;
+import ru.mirea.playedu.view.dialog.ActivePowerDialog;
 import ru.mirea.playedu.view.dialog.DamageDialog;
 import ru.mirea.playedu.view.dialog.EnemyPreviewDialog;
 import ru.mirea.playedu.view.dialog.FightEndDialog;
@@ -62,6 +67,9 @@ public class GameFragment extends Fragment {
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
                     dialog.dismiss();
+                    gameViewModel.setPlayer();
+                    binding.healthPlayerBar.setMax(gameViewModel.getPlayer().getHealth());
+                    gameViewModel.reloadAllPowersStatus(true);
                     startGame();
                 }
             }
@@ -74,12 +82,13 @@ public class GameFragment extends Fragment {
                 if (aBoolean) {
                     binding.clickableArea.setVisibility(View.VISIBLE);
                     enemyPreviewDialog.dismiss();
-                    gameViewModel.setPlayer();
-                    binding.healthPlayerBar.setMax(gameViewModel.getPlayer().getHealth());
+                    if (gameViewModel.getCurrentEnemyId() == 0) gameViewModel.addPassivePowersEffects();
+                    gameViewModel.reloadAllPowersStatus(false);
                     binding.healthEnemyBar.setMax(gameViewModel.getEnemy(gameViewModel.getCurrentEnemyId()).getHealth());
                     gameViewModel.setIsAttack(true);
                 }
                 else {
+                    Log.e("CurrentEnemy", Integer.toString(gameViewModel.getCurrentEnemyId()));
                     if (gameViewModel.isAllEnemyKilled()) {
                         gameViewModel.restartGame();
                     }
@@ -91,14 +100,17 @@ public class GameFragment extends Fragment {
             }
         });
 
+        // Проверка на фазу боя
         gameViewModel.getIsAttack().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
                 binding.gameLayout.removeAllViewsInLayout();
                 if (gameViewModel.isPlayerKilled()) {
-                    gameViewModel.setBattleResult(BattleResult.DEFEAT);
-                    fightEndDialog = new FightEndDialog();
-                    fightEndDialog.show(getActivity().getSupportFragmentManager(), "Fight end dialog");
+                    if (!gameViewModel.useActivePower(Powers.LIFE_POWER)) {
+                        gameViewModel.setBattleResult(BattleResult.DEFEAT);
+                        fightEndDialog = new FightEndDialog();
+                        fightEndDialog.show(getActivity().getSupportFragmentManager(), "Fight end dialog");
+                    }
                     return;
                 }
                 if (gameViewModel.isEnemyKilled()) {
@@ -114,7 +126,60 @@ public class GameFragment extends Fragment {
                     attackPhase();
                 }
                 else {
-                    defensePhase();
+                    if (!(gameViewModel.getCurrentPhaseResult() == PhaseResult.DEAL_DAMAGE) || !gameViewModel.useActivePower(Powers.ICE_POWER)) {
+                        defensePhase();
+                    }
+                }
+            }
+        });
+
+        // Обработка действий связанных с активными способностями
+        gameViewModel.getCurrentActivePower().observe(getViewLifecycleOwner(), new Observer<Power>() {
+            @Override
+            public void onChanged(Power power) {
+                ActivePowerDialog activePowerDialog;
+                switch (power.getPowerType()) {
+                    case FIRE_POWER:
+                        activePowerDialog = new ActivePowerDialog(power);
+                        activePowerDialog.show(getActivity().getSupportFragmentManager(), "Active power dialog");
+                        break;
+                    case ICE_POWER:
+                        if (getRandomNumber(0, 100) >= 100 * icePowerKoef) {
+                            activePowerDialog = new ActivePowerDialog(power);
+                            activePowerDialog.show(getActivity().getSupportFragmentManager(), "Active power dialog");
+                        }
+                        else {
+                            defensePhase();
+                        }
+                        break;
+                    case TIME_POWER:
+                        gameViewModel.decrementPlayerMistakeCount();
+                        activePowerDialog = new ActivePowerDialog(power);
+                        activePowerDialog.show(getActivity().getSupportFragmentManager(), "Active power dialog");
+                        break;
+                    case HEALTH_POWER:
+                        binding.healthPlayerBar.setProgress(gameViewModel.getPlayer().getHealth());
+                        activePowerDialog = new ActivePowerDialog(power);
+                        activePowerDialog.show(getActivity().getSupportFragmentManager(), "Active power dialog");
+                        break;
+                    case GRIFFIN_POWER:
+                        enemyPreviewDialog.dismiss();
+                        activePowerDialog = new ActivePowerDialog(power);
+                        activePowerDialog.show(getActivity().getSupportFragmentManager(), "Active power dialog");
+                        break;
+                    case LIFE_POWER:
+                        if (power.getPowerStatus() == PowerStatus.AVAILABLE) {
+                            gameViewModel.revivePlayer();
+                            binding.healthPlayerBar.setProgress(gameViewModel.getPlayer().getHealth());
+                            activePowerDialog = new ActivePowerDialog(power);
+                            activePowerDialog.show(getActivity().getSupportFragmentManager(), "Active power dialog");
+                        }
+                        else {
+                            gameViewModel.setBattleResult(BattleResult.DEFEAT);
+                            fightEndDialog = new FightEndDialog();
+                            fightEndDialog.show(getActivity().getSupportFragmentManager(), "Fight end dialog");
+                        }
+                        break;
                 }
             }
         });
@@ -146,9 +211,20 @@ public class GameFragment extends Fragment {
 
             public void onFinish() {
                 gameView.endGame();
-                gameViewModel.setPhaseResult(PhaseResult.MISHIT);
-                damageDialog = new DamageDialog();
-                damageDialog.show(getActivity().getSupportFragmentManager(), "Phase result dialog");
+                if (gameViewModel.useActivePower(Powers.POISON_POWER)) {
+                    gameViewModel.setPhaseResult(PhaseResult.POISON_POWER);
+                }
+                {
+                    gameViewModel.setPhaseResult(PhaseResult.MISHIT);
+                }
+                if (gameViewModel.getPlayerMistakeCount() == 0) {
+                    damageDialog = new DamageDialog();
+                    damageDialog.show(getActivity().getSupportFragmentManager(), "Phase result dialog");
+                }
+                else if (!gameViewModel.useActivePower(Powers.TIME_POWER)) {
+                    damageDialog = new DamageDialog();
+                    damageDialog.show(getActivity().getSupportFragmentManager(), "Phase result dialog");
+                }
             }
 
         }.start();
@@ -162,12 +238,24 @@ public class GameFragment extends Fragment {
                     gameViewModel.makeHitEnemy();
                 }
                 else {
-                    gameViewModel.setPhaseResult(PhaseResult.MISHIT);
+                    if (gameViewModel.useActivePower(Powers.POISON_POWER)) {
+                        gameViewModel.setPhaseResult(PhaseResult.POISON_POWER);
+                    }
+                    else {
+                        gameViewModel.setPhaseResult(PhaseResult.MISHIT);
+                    }
                 }
                 countDownTimer.cancel();
                 gameView.endGame();
-                damageDialog = new DamageDialog();
-                damageDialog.show(getActivity().getSupportFragmentManager(), "Phase result dialog");
+                if (gameViewModel.getCurrentPhaseResult() == PhaseResult.DEAL_DAMAGE || gameViewModel.getPlayerMistakeCount() == 0) {
+                    gameViewModel.useActivePower(Powers.STUDENT_POWER);
+                    damageDialog = new DamageDialog();
+                    damageDialog.show(getActivity().getSupportFragmentManager(), "Phase result dialog");
+                }
+                else if (!gameViewModel.useActivePower(Powers.TIME_POWER)) {
+                    damageDialog = new DamageDialog();
+                    damageDialog.show(getActivity().getSupportFragmentManager(), "Phase result dialog");
+                }
             }
         });
     }
@@ -188,16 +276,27 @@ public class GameFragment extends Fragment {
             }
 
             public void onFinish() {
+                gameView.endGame();
                 if (gameView.isEnemyColide()) {
                     gameViewModel.setPhaseResult(PhaseResult.AVOID_DAMAGE);
                 }
                 else {
                     gameViewModel.setPhaseResult(PhaseResult.GET_DAMAGE);
-                    gameViewModel.makeHitPlayer();
                 }
-                gameView.endGame();
-                damageDialog = new DamageDialog();
-                damageDialog.show(getActivity().getSupportFragmentManager(), "Phase result dialog");
+                if (gameViewModel.getCurrentPhaseResult() == PhaseResult.AVOID_DAMAGE) {
+                    damageDialog = new DamageDialog();
+                    damageDialog.show(getActivity().getSupportFragmentManager(), "Phase result dialog");
+                }
+                else if (gameViewModel.getPlayerMistakeCount() == 0) {
+                    gameViewModel.makeHitPlayer();
+                    damageDialog = new DamageDialog();
+                    damageDialog.show(getActivity().getSupportFragmentManager(), "Phase result dialog");
+                }
+                else if (!gameViewModel.useActivePower(Powers.TIME_POWER)) {
+                    gameViewModel.makeHitPlayer();
+                    damageDialog = new DamageDialog();
+                    damageDialog.show(getActivity().getSupportFragmentManager(), "Phase result dialog");
+                }
             }
 
         }.start();

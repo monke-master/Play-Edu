@@ -1,6 +1,7 @@
 package ru.mirea.playedu.viewmodel;
 
 import static ru.mirea.playedu.Constants.selectablePower;
+import static ru.mirea.playedu.Constants.speedPowerKoef;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
+import ru.mirea.playedu.Constants.Powers;
 import ru.mirea.playedu.Constants.BattleResult;
 import ru.mirea.playedu.Constants.PhaseResult;
 import ru.mirea.playedu.data.repository.EnemyRepository;
@@ -16,20 +18,30 @@ import ru.mirea.playedu.data.repository.PowerRepository;
 import ru.mirea.playedu.data.storage.cache.EnemyCacheStorage;
 import ru.mirea.playedu.data.storage.cache.PlayerCacheStorage;
 import ru.mirea.playedu.data.storage.cache.PowerCacheStorage;
+import ru.mirea.playedu.databinding.ActivityLaunchBinding;
 import ru.mirea.playedu.model.Enemy;
 import ru.mirea.playedu.model.Player;
 import ru.mirea.playedu.model.Power;
+import ru.mirea.playedu.usecases.ActivePowersChangeStatsUseCase;
+import ru.mirea.playedu.usecases.AddedPassivePowersEffectsUseCase;
 import ru.mirea.playedu.usecases.CreateEnemyListUseCase;
 import ru.mirea.playedu.usecases.CreatePlayerUseCase;
+import ru.mirea.playedu.usecases.DecrementPlayerMistakeCount;
+import ru.mirea.playedu.usecases.DisablePowerUseCase;
 import ru.mirea.playedu.usecases.GetBoughtPowersUseCase;
 import ru.mirea.playedu.usecases.MakeHitEnemyUseCase;
 import ru.mirea.playedu.usecases.MakeHitPlayerUseCase;
+import ru.mirea.playedu.usecases.ReloadAllPowersStatus;
+import ru.mirea.playedu.usecases.RevivePlayerUseCase;
+import ru.mirea.playedu.usecases.SetMishitPenaltyUseCase;
 
 public class GameViewModel extends ViewModel {
     // Перечисление результатов фазы
     private PhaseResult phaseResult;
     // Перечисление результатов стражения
     private BattleResult battleResult;
+    // Перечисление обрабатываемых сил
+    private Powers activePowers;
     // Объявление репозитория игрока
     private final PlayerRepository playerRepository;
     // Объявление репозитория монстров
@@ -46,6 +58,20 @@ public class GameViewModel extends ViewModel {
     MakeHitPlayerUseCase makeHitPlayerUseCase;
     // Use case получения купленных сил
     GetBoughtPowersUseCase getBoughtPowersUseCase;
+    // Use case обработки пассивных способностей;
+    AddedPassivePowersEffectsUseCase addedPassivePowersEffectsUseCase;
+    // Use case изменения параметров от обрабатываемой силы
+    ActivePowersChangeStatsUseCase activePowersChangeStatsUseCase;
+    // Use case назначения штрафа за промах в фазе атаки
+    SetMishitPenaltyUseCase setMishitPenaltyUseCase;
+    // Use case уменьшения количества ошибок игрока
+    DecrementPlayerMistakeCount decrementPlayerMistakeCount;
+    // Use case дизактивации силы
+    DisablePowerUseCase disablePowerUseCase;
+    // Use case востановления активности сил
+    ReloadAllPowersStatus reloadAllPowersStatus;
+    // Use case возрождения игрока
+    RevivePlayerUseCase revivePlayerUseCase;
     // Текущий противник
     private int currentEnemy = 0;
     // Текущая фаза
@@ -58,6 +84,8 @@ public class GameViewModel extends ViewModel {
     private final MutableLiveData<ArrayList<Power>> selectedPowers = new MutableLiveData<>();
     // Список купленных сил
     private final MutableLiveData<ArrayList<Power>> boughtPowers = new MutableLiveData<>();
+    // Использующаяся активная сила
+    private final MutableLiveData<Power> currentActivePower = new MutableLiveData<>();
 
 
     public GameViewModel() {
@@ -69,6 +97,13 @@ public class GameViewModel extends ViewModel {
         makeHitEnemyUseCase = new MakeHitEnemyUseCase(playerRepository, enemyRepository);
         makeHitPlayerUseCase = new MakeHitPlayerUseCase(playerRepository, enemyRepository);
         getBoughtPowersUseCase = new GetBoughtPowersUseCase(powerRepository);
+        addedPassivePowersEffectsUseCase = new AddedPassivePowersEffectsUseCase(playerRepository, enemyRepository);
+        activePowersChangeStatsUseCase = new ActivePowersChangeStatsUseCase(enemyRepository, playerRepository);
+        setMishitPenaltyUseCase = new SetMishitPenaltyUseCase(enemyRepository);
+        decrementPlayerMistakeCount = new DecrementPlayerMistakeCount(playerRepository);
+        disablePowerUseCase = new DisablePowerUseCase(powerRepository);
+        reloadAllPowersStatus = new ReloadAllPowersStatus(powerRepository);
+        revivePlayerUseCase = new RevivePlayerUseCase(playerRepository);
         setEmptySelectedPowersList();
         getData();
     }
@@ -154,6 +189,7 @@ public class GameViewModel extends ViewModel {
     }
 
     public void restartGame() {
+        currentEnemy = 0;
         startGame.setValue(true);
     }
 
@@ -183,11 +219,45 @@ public class GameViewModel extends ViewModel {
         return boughtPowers;
     }
 
-    public ArrayList<Power> getPickablePowers() {
-        ArrayList<Power> pickablePowers = getBoughtPowers().getValue();
-        for (int i = 0; i < selectedPowers.getValue().size(); i++) {
-            pickablePowers.remove(selectedPowers.getValue().get(i));
+    public LiveData<Power> getCurrentActivePower() {
+        return currentActivePower;
+    }
+    public void addPassivePowersEffects() {
+        addedPassivePowersEffectsUseCase.execute(currentEnemy, selectedPowers.getValue());
+    }
+
+    public boolean useActivePower(Powers power) {
+        for (Power elem : selectedPowers.getValue()) {
+            if (elem.getPowerType() == power) {
+                activePowersChangeStatsUseCase.execute(power, currentEnemy);
+                currentActivePower.setValue(elem);
+                return true;
+            }
         }
-        return pickablePowers;
+        return false;
+    }
+
+    public void setMishitPenalty() {
+        setMishitPenaltyUseCase.execute(currentEnemy);
+    }
+
+    public void decrementPlayerMistakeCount() {
+        decrementPlayerMistakeCount.execute();
+    }
+
+    public int getPlayerMistakeCount() {
+        return getPlayer().getMistakeCount();
+    }
+
+    public void disablePower(Power power) {
+        disablePowerUseCase.execute(power);
+    }
+
+    public void reloadAllPowersStatus(boolean includeOnceUsedPowers) {
+        reloadAllPowersStatus.execute(includeOnceUsedPowers);
+    }
+
+    public void revivePlayer() {
+        revivePlayerUseCase.execute();
     }
 }

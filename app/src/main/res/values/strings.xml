@@ -58,12 +58,18 @@
     <string name="start">Начать</string>
 
     <string name="damage_done">Нанесен урон:</string>
-    <string name="no_damage">Вы не смогли нанести урон</string>
+    <string name="no_damage">Вы не смогли нанести урон и открылись для противника. Фаза защиты стала сложнее на 15% процентов!</string>
+    <string name="no_damage_poison_power">Вы не смогли нанести урон, однако успели отравить противника. Негативные эффекты не начисляются!</string>
     <string name="victory">Победа!</string>
     <string name="defeat">К сожалению, вы проиграли</string>
     <string name="new_fight">Новый бой</string>
     <string name="award">Награда:</string>
     <string name="no_damage_to_player">Вам не был нанесен урон</string>
+    <string name="no_damage_ice_power">Враг столбенел! Вам не был нанесен урон</string>
+    <string name="mistake_title">В последний момент вы замедлили ход времени. Негативные эффекты фазы защиты/атаки не засчитываются!</string>
+    <string name="health_title">Вы использовали древнее исцеляющее заклинание. Ваше здоровье востановлено на 1 единицу!</string>
+    <string name="griffin_power_title">Вы использовали таинственный талисман грифона. Невероятный по силе поток магии уничтожил вашего противника. Жаль, что талисман не уцелел…</string>
+    <string name="life_power_title">Вам ещё рано на тот свет! Волшебное свечение возвращает вас к жизни</string>
     <string name="enemies_left">Монстров осталось: </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

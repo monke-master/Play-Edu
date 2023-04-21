@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import ru.mirea.playedu.Constants.PowerStatus;
 import ru.mirea.playedu.R;
 import ru.mirea.playedu.model.Enemy;
 import ru.mirea.playedu.model.Power;
@@ -86,7 +87,6 @@ public class EnemyPreviewDialog extends DialogFragment {
         enemyTitle.setText(String.format("Сражение с %s", enemy.getName()));
         healthNum.setText(Integer.toString(enemy.getHealth()));
         healthBar.setProgress(enemy.getHealth());
-        Log.e("Progress", Integer.toString(healthBar.getProgress()));
         damageNum.setText(Integer.toString(enemy.getDamage()));
         damageBar.setProgress(enemy.getDamage());
 
@@ -117,13 +117,15 @@ public class EnemyPreviewDialog extends DialogFragment {
         powersList.setAdapter(new PowerAdapter(powers, new PowerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Power power, int position) {
-                PickPowerDialog dialog = new PickPowerDialog(position);
-                dialog.show(getActivity().getSupportFragmentManager(), "Pick power dialog");
+                if (gameViewModel.getCurrentEnemyId() == 0) {
+                    PickPowerDialog dialog = new PickPowerDialog(position);
+                    dialog.show(getActivity().getSupportFragmentManager(), "Pick power dialog");
+                }
             }
         }, new PowerAdapter.OnItemLongClickListener() {
             @Override
             public void onItemLongClick(Power power) {
-                if (power.getPowerId() != -1) {
+                if (power.getPowerId() != -1 && power.getPowerStatus() == PowerStatus.AVAILABLE) {
                     PowerEffectDialog dialog = new PowerEffectDialog(power, power.getEffectType());
                     dialog.show(getActivity().getSupportFragmentManager(), "Power info dialog");
                 }

@@ -15,7 +15,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
-import ru.mirea.playedu.Constants;
+import ru.mirea.playedu.Constants.PowerStatus;
 import ru.mirea.playedu.R;
 import ru.mirea.playedu.databinding.DialogPowerBinding;
 import ru.mirea.playedu.databinding.DialogPowerEffectBinding;
@@ -66,14 +66,23 @@ public class PowerEffectDialog extends DialogFragment {
         DialogPowerEffectBinding binding = DialogPowerEffectBinding.inflate(getLayoutInflater());
         binding.setPower(power);
 
-        GameViewModel viewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
+        GameViewModel gameViewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
 
         // Установка иконки для силы
         binding.achvmntImg.setImageResource(power.getIcon());
         if (TYPE_EFFECT == EFFECT_INFO) {
             binding.useBtn.setVisibility(View.GONE);
         }
-
+        else {
+            binding.useBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    gameViewModel.disablePower(power);
+                    gameViewModel.useActivePower(power.getPowerType());
+                    getDialog().dismiss();
+                }
+            });
+        }
         builder.setView(binding.getRoot());
         return builder.create();
     }
