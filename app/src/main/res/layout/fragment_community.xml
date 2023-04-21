@@ -3,166 +3,154 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.fragment.CommunityFragment">
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <ScrollView
+    <data>
+        <variable
+            name="playEduCompletedHdr"
+            type="String" />
+        <variable
+            name="tasksCompletedHdr"
+            type="String" />
+        <variable
+            name="killsHdr"
+            type="String" />
+        <variable
+            name="viewModel"
+            type="ru.mirea.playedu.viewmodel.CommunityViewModel" />
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_bold"
-                android:gravity="center"
-                android:text="@string/leaderboard_title"
-                android:textColor="@color/white"
-                android:textSize="24sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                tools:listitem="@layout/view_leaderboard_item"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="15dp"
-                />
+            android:layout_height="match_parent"
+            android:scrollbars="none">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="20dp">
-
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
-                    android:src="@drawable/ic_add" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:layout_gravity="center"
-                    android:textFontWeight="600"
-                    android:text="@string/show_more_title"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
-            </LinearLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:orientation="vertical" >
 
-                <TextView
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/roboto_bold"
-                    android:gravity="center"
-                    android:text="@string/statistic_title"
-                    android:textColor="@color/white"
-                    android:textSize="24sp" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="138dp"
-                    android:layout_marginTop="60dp"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.15"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_height="match_parent">
 
                     <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="0dp"
-                        android:background="@drawable/shape_statistic_round" />
-
-                    <TextView
-                        android:layout_width="128dp"
-                        android:layout_height="28dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="@string/statistic_round_description"
-                        android:textAlignment="center"
+                        android:id="@+id/board_hdr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="center"
+                        android:text="@string/leaderboard_title"
                         android:textColor="@color/white"
-                        android:textFontWeight="400"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="138dp"
-                    android:layout_marginTop="60dp"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.85"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="0dp"
-                        android:background="@drawable/shape_statistic_round" />
-
-                    <TextView
-                        android:layout_width="128dp"
-                        android:layout_height="28dp"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/leaders_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
                         android:layout_marginTop="10dp"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="@string/statistic_round_description"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textFontWeight="400"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/board_hdr"
+                        tools:listitem="@layout/view_leaderboard_item" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="138dp"
-                    android:layout_marginTop="220dp"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    <ImageView
+                        android:id="@+id/show_more_btn"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_marginStart="16dp"
+
+                        android:src="@drawable/ic_add"
+                        app:layout_constraintBottom_toBottomOf="@+id/show_nore_txt"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/show_nore_txt" />
 
                     <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:id="@+id/show_nore_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="0dp"
-                        android:background="@drawable/shape_statistic_round" />
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/show_more_title"
+                        android:textColor="@color/white"
+                        android:textFontWeight="600"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@+id/show_more_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/leaders_list" />
+
+                    <androidx.constraintlayout.widget.Barrier
+                        android:id="@+id/show_more_barrier"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:barrierDirection="bottom"
+                        app:constraint_referenced_ids="show_more_btn, show_nore_txt" />
+
 
                     <TextView
-                        android:layout_width="128dp"
-                        android:layout_height="28dp"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="@string/statistic_round_description"
-                        android:textAlignment="center"
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="center"
+                        android:text="@string/statistic_title"
                         android:textColor="@color/white"
-                        android:textFontWeight="400"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/show_more_barrier"
+                        tools:layout_editor_absoluteY="353dp" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <include
+                        android:id="@+id/stats_play_edu"
+                        layout="@layout/view_stats_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/stats_tasks"
+                        app:layout_constraintTop_toBottomOf="@+id/textView3"
+                        app:value="@{viewModel.userStats.playEduTasksCompleted}"
+                        app:statsName="@{playEduCompletedHdr}" />
 
-        </LinearLayout>
-    </ScrollView>
+                    <include
+                        android:id="@+id/stats_tasks"
+                        layout="@layout/view_stats_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/stats_play_edu"
+                        app:layout_constraintTop_toBottomOf="@+id/textView3"
+                        app:value="@{viewModel.userStats.userTasksCompleted}"
+                        app:statsName="@{tasksCompletedHdr}" />
 
-</FrameLayout>
+                    <include
+                        android:id="@+id/stats_kills"
+                        layout="@layout/view_stats_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/stats_tasks"
+                        app:value="@{viewModel.userStats.enemiesKilled}"
+                        app:statsName="@{killsHdr}" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </FrameLayout>
 </layout>

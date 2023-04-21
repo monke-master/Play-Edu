@@ -42,7 +42,9 @@
     <string name="yes">Да</string>
     <string name="no">Нет</string>
     <string name="statistic_title">Статистика</string>
-    <string name="statistic_round_description">Заданий от PlayEdu выполнено за неделю</string>
+    <string name="play_edu_compl_count">Заданий от PlayEdu выполнено</string>
+    <string name="tasks_compl_count">Собственных заданий выполнено</string>
+    <string name="kills_count">Монстров убито</string>
     <string name="show_more_title">Показать больше</string>
     <string name="powers_title">Силы</string>
     <string name="achievements_title">Достижения</string>
