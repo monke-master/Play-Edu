@@ -90,6 +90,10 @@ public class Constants {
     public static final float defenseSpeedKoef = 0.1f;
     public static final float defenseSpreadKoef = 0.1f;
     public static final float timeKoef = 0.1f;
+    // Награда за босса
+    public static final int bossPrice = 200;
+    // Вероятность встретить босса в конце вылазки
+    public static final float bossAppearancePercent = 0.25f;
     // Количество противников
     public static final int enemiesCount = 3;
 

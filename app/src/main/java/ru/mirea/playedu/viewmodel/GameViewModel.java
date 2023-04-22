@@ -15,13 +15,16 @@ import ru.mirea.playedu.Constants.PhaseResult;
 import ru.mirea.playedu.data.repository.EnemyRepository;
 import ru.mirea.playedu.data.repository.PlayerRepository;
 import ru.mirea.playedu.data.repository.PowerRepository;
+import ru.mirea.playedu.data.repository.UserRepository;
 import ru.mirea.playedu.data.storage.cache.EnemyCacheStorage;
 import ru.mirea.playedu.data.storage.cache.PlayerCacheStorage;
 import ru.mirea.playedu.data.storage.cache.PowerCacheStorage;
+import ru.mirea.playedu.data.storage.cache.UserCacheStorage;
 import ru.mirea.playedu.databinding.ActivityLaunchBinding;
 import ru.mirea.playedu.model.Enemy;
 import ru.mirea.playedu.model.Player;
 import ru.mirea.playedu.model.Power;
+import ru.mirea.playedu.model.User;
 import ru.mirea.playedu.usecases.ActivePowersChangeStatsUseCase;
 import ru.mirea.playedu.usecases.AddedPassivePowersEffectsUseCase;
 import ru.mirea.playedu.usecases.CreateEnemyListUseCase;
@@ -29,10 +32,12 @@ import ru.mirea.playedu.usecases.CreatePlayerUseCase;
 import ru.mirea.playedu.usecases.DecrementPlayerMistakeCount;
 import ru.mirea.playedu.usecases.DisablePowerUseCase;
 import ru.mirea.playedu.usecases.GetBoughtPowersUseCase;
+import ru.mirea.playedu.usecases.GetUserUseCase;
 import ru.mirea.playedu.usecases.MakeHitEnemyUseCase;
 import ru.mirea.playedu.usecases.MakeHitPlayerUseCase;
 import ru.mirea.playedu.usecases.ReloadAllPowersStatus;
 import ru.mirea.playedu.usecases.RevivePlayerUseCase;
+import ru.mirea.playedu.usecases.SetAdventureRewardUseCase;
 import ru.mirea.playedu.usecases.SetMishitPenaltyUseCase;
 
 public class GameViewModel extends ViewModel {
@@ -48,6 +53,8 @@ public class GameViewModel extends ViewModel {
     private final EnemyRepository enemyRepository;
     // Объявление репозитория сил
     private final PowerRepository powerRepository;
+    // Объявление репозитория пользователя
+    private final UserRepository userRepository;
     // Use case создания списка противников
     CreateEnemyListUseCase createEnemyListUseCase;
     // Use case создания игрока
@@ -72,6 +79,10 @@ public class GameViewModel extends ViewModel {
     ReloadAllPowersStatus reloadAllPowersStatus;
     // Use case возрождения игрока
     RevivePlayerUseCase revivePlayerUseCase;
+    // Use case получения пользователя
+    GetUserUseCase getUserUseCase;
+    // Use case получения награды за вылазку
+    SetAdventureRewardUseCase setAdventureRewardUseCase;
     // Текущий противник
     private int currentEnemy = 0;
     // Текущая фаза
@@ -92,6 +103,7 @@ public class GameViewModel extends ViewModel {
         playerRepository = new PlayerRepository(PlayerCacheStorage.getInstance());
         enemyRepository = new EnemyRepository(EnemyCacheStorage.getInstance());
         powerRepository = new PowerRepository(PowerCacheStorage.getInstance());
+        userRepository = new UserRepository(UserCacheStorage.getInstance());
         createEnemyListUseCase = new CreateEnemyListUseCase(enemyRepository);
         createPlayerUseCase = new CreatePlayerUseCase(playerRepository);
         makeHitEnemyUseCase = new MakeHitEnemyUseCase(playerRepository, enemyRepository);
@@ -104,6 +116,8 @@ public class GameViewModel extends ViewModel {
         disablePowerUseCase = new DisablePowerUseCase(powerRepository);
         reloadAllPowersStatus = new ReloadAllPowersStatus(powerRepository);
         revivePlayerUseCase = new RevivePlayerUseCase(playerRepository);
+        getUserUseCase = new GetUserUseCase(userRepository);
+        setAdventureRewardUseCase = new SetAdventureRewardUseCase(userRepository, enemyRepository);
         setEmptySelectedPowersList();
         getData();
     }
@@ -259,5 +273,13 @@ public class GameViewModel extends ViewModel {
 
     public void revivePlayer() {
         revivePlayerUseCase.execute();
+    }
+
+    public User getUser() {
+        return getUserUseCase.execute();
+    }
+
+    public int setAdventureReward() {
+        return setAdventureRewardUseCase.execute();
     }
 }

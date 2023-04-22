@@ -74,6 +74,7 @@ public class PickPowerDialog extends DialogFragment {
             @Override
             public void onItemClick(Power power, int position) {
                 if (!gameViewModel.getSelectedPowersList().getValue().contains(power)) gameViewModel.updateSelectedPowersList(power, selectedPosition);
+                dismiss();
             }
         }));
     }

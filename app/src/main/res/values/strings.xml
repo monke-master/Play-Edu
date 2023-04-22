@@ -62,6 +62,8 @@
     <string name="no_damage_poison_power">Вы не смогли нанести урон, однако успели отравить противника. Негативные эффекты не начисляются!</string>
     <string name="victory">Победа!</string>
     <string name="defeat">К сожалению, вы проиграли</string>
+    <string name="attack">Атака</string>
+    <string name="defense">Защита</string>
     <string name="new_fight">Новый бой</string>
     <string name="award">Награда:</string>
     <string name="no_damage_to_player">Вам не был нанесен урон</string>

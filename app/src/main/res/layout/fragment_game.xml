@@ -66,6 +66,7 @@
                     <ProgressBar
                         android:id="@+id/health_enemy_bar"
                         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:progressTint="@color/red"
                         android:layout_width="108dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

@@ -73,10 +73,10 @@ public class EnemyPreviewDialog extends DialogFragment {
         TextView enemyTitle = (TextView) view.findViewById(R.id.hdr);
         TextView healthNum = (TextView) view.findViewById(R.id.health_txt);
         ProgressBar healthBar = (ProgressBar) view.findViewById(R.id.health_progress_bar);
-        healthBar.setMax(maxHealth + 2);
+        healthBar.setMax(maxHealth * 2);
         TextView damageNum = (TextView) view.findViewById(R.id.damage_txt);
         ProgressBar damageBar = (ProgressBar) view.findViewById(R.id.damage_progress_bar);
-        damageBar.setMax(maxDamage + 2);
+        damageBar.setMax(maxDamage * 2);
         powersList = view.findViewById(R.id.powers_list);
         Button beginBattleBtn = (Button) view.findViewById(R.id.button2);
 
