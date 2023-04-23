@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--Файл для хранения размеров -->
 <resources>
+    <dimen name="date_item_size">45dp</dimen>
     <dimen name="btn_rounding_radius">15dp</dimen>
     <dimen name="min_btn_width">200dp</dimen>
     <dimen name="round_btn_radius">40dp</dimen>
@@ -26,5 +27,6 @@
 
     <dimen name="power_shape_size">80dp</dimen>
     <dimen name="power_list_margin">15dp</dimen>
+    <dimen name="date_list_margin">15dp</dimen>
 
 </resources>

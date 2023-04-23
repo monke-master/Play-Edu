@@ -15,7 +15,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_quests"
+        tools:layout="@layout/fragment_tasks"
 
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph"/>

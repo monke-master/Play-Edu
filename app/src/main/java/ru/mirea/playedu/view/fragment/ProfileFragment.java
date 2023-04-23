@@ -61,6 +61,7 @@ public class ProfileFragment extends Fragment {
         achievementsList.setLayoutManager(new GridLayoutManager(requireContext(), 4));
         achievementsList.setNestedScrollingEnabled(false);
 
+
         // Создание адаптера
         // В аргументы передается список сил и callback для отслеживания нажатия на ачивку
         AchievementAdapter achievementAdapter = new AchievementAdapter(viewModel.getAchievementsList(), achievement -> {

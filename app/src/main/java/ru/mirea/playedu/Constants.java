@@ -205,4 +205,6 @@ public class Constants {
     public static int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
     }
+
+    public static float DIALOG_COEFFICIENT = 0.89f;
 }

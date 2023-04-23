@@ -22,13 +22,13 @@ import ru.mirea.playedu.Constants;
 import ru.mirea.playedu.DimensionManager;
 import ru.mirea.playedu.HorizontalMarginItemDecoration;
 import ru.mirea.playedu.R;
-import ru.mirea.playedu.viewmodel.QuestsViewModel;
+import ru.mirea.playedu.viewmodel.TasksViewModel;
 
 // Диалог выбора цвета для фильтра
 public class FilterColorDialog extends DialogFragment implements OnSelectColorFilterCallback{
 
     private View view;
-    private QuestsViewModel questsViewModel;
+    private TasksViewModel tasksViewModel;
 
 
     @Nullable
@@ -43,7 +43,7 @@ public class FilterColorDialog extends DialogFragment implements OnSelectColorFi
         getDialog().getWindow().setBackgroundDrawable(
                 ContextCompat.getDrawable(requireContext(), R.drawable.shape_dialog));
 
-        questsViewModel = new ViewModelProvider(requireActivity()).get(QuestsViewModel.class);
+        tasksViewModel = new ViewModelProvider(requireActivity()).get(TasksViewModel.class);
         return view;
     }
 
@@ -68,7 +68,8 @@ public class FilterColorDialog extends DialogFragment implements OnSelectColorFi
                         DimensionManager.calcHorizontalMargin(
                                 metrics.widthPixels,
                                 getResources().getDimensionPixelOffset(R.dimen.color_btn_size),
-                                colors.length
+                                colors.length,
+                                Constants.DIALOG_COEFFICIENT
                         ),
                         0,
                         0,
@@ -81,7 +82,7 @@ public class FilterColorDialog extends DialogFragment implements OnSelectColorFi
 
     @Override
     public void execute(int color) {
-        questsViewModel.setTasksListForColor(color);
+        tasksViewModel.setTasksListForColor(color);
     }
 }
 

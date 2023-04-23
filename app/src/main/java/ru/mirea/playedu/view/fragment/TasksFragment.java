@@ -9,7 +9,10 @@ import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,25 +21,57 @@ import com.skydoves.powerspinner.OnSpinnerItemSelectedListener;
 import com.skydoves.powerspinner.PowerSpinnerView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-import ru.mirea.playedu.databinding.FragmentQuestsBinding;
+import ru.mirea.playedu.DimensionManager;
+import ru.mirea.playedu.HorizontalMarginItemDecoration;
+import ru.mirea.playedu.R;
+import ru.mirea.playedu.databinding.FragmentTasksBinding;
 import ru.mirea.playedu.model.UserTask;
+import ru.mirea.playedu.view.adapter.DateAdapter;
 import ru.mirea.playedu.view.adapter.UserTaskAdapter;
 import ru.mirea.playedu.view.dialog.AddTaskDialog;
 import ru.mirea.playedu.view.dialog.FilterColorDialog;
 import ru.mirea.playedu.view.dialog.FilterListDialog;
-import ru.mirea.playedu.viewmodel.QuestsViewModel;
+import ru.mirea.playedu.viewmodel.TasksViewModel;
 
-public class QuestsFragment extends Fragment {
-    private QuestsViewModel questsViewModel;
-    private FragmentQuestsBinding binding;
+public class TasksFragment extends Fragment {
+    private TasksViewModel tasksViewModel;
+    private FragmentTasksBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentQuestsBinding.inflate(getLayoutInflater());
+        binding = FragmentTasksBinding.inflate(getLayoutInflater());
         // Инициализация ViewModel
-        questsViewModel = new ViewModelProvider(requireActivity()).get(QuestsViewModel.class);
+        tasksViewModel = new ViewModelProvider(requireActivity()).get(TasksViewModel.class);
+
+        // Recycler-View для календаря
+        RecyclerView dateList = binding.dateList;
+        DateAdapter dateAdapter = new DateAdapter(tasksViewModel.getDateList(), date -> {
+            Log.d("taaag", date.toString());
+        });
+        dateList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        dateList.setAdapter(dateAdapter);
+        // Расчет отступов между элементами
+        DisplayMetrics metrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int margin =  getResources().getDimensionPixelOffset(R.dimen.date_list_margin);
+        dateList.addItemDecoration(
+                new HorizontalMarginItemDecoration(
+                        0,
+                        DimensionManager.calcHorizontalMargin(
+                                metrics.widthPixels - margin,
+                                getResources().getDimensionPixelOffset(R.dimen.date_item_size),
+                               7,
+                                1
+                        ),
+                        0,
+                        0,
+                        7));
+        // Фокусировка на текущей дате
+        dateList.scrollToPosition(tasksViewModel.getTodayDayPosition());
+
         // Фильтр задач
         PowerSpinnerView filterSpinner = binding.filterSpinner;
         filterSpinner.setOnSpinnerItemSelectedListener(
@@ -62,7 +97,7 @@ public class QuestsFragment extends Fragment {
         getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                ArrayList<UserTask> userTasks = questsViewModel.getAllTasksList();
+                ArrayList<UserTask> userTasks = tasksViewModel.getAllTasksList();
                 setUserTaskList(userTasks);
             }
         });
@@ -73,7 +108,7 @@ public class QuestsFragment extends Fragment {
                 ArrayList<UserTask> userTasks;
                 switch (newItem) {
                     case "По умолчанию": {
-                        userTasks = questsViewModel.getAllTasksList();
+                        userTasks = tasksViewModel.getAllTasksList();
                         setUserTaskList(userTasks);
                         break;
                     }
@@ -92,7 +127,7 @@ public class QuestsFragment extends Fragment {
         });
 
         // Подписка на данные об отсортированном списке
-        questsViewModel.getFilteredList().observe(getViewLifecycleOwner(), new Observer<ArrayList<UserTask>>() {
+        tasksViewModel.getFilteredList().observe(getViewLifecycleOwner(), new Observer<ArrayList<UserTask>>() {
             @Override
             public void onChanged(@Nullable ArrayList<UserTask> value) {
                 setUserTaskList(value);

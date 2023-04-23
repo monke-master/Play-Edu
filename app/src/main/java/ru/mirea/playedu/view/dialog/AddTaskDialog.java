@@ -139,14 +139,15 @@ public class AddTaskDialog extends DialogFragment implements OnSelectColorFilter
         // Рассчет отступов между цветами
         DisplayMetrics metrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int margin =  getResources().getDimensionPixelOffset(R.dimen.default_margin);
+        int margin = getResources().getDimensionPixelOffset(R.dimen.default_margin);
         recyclerView.addItemDecoration(
                 new HorizontalMarginItemDecoration(
                         0,
                         DimensionManager.calcHorizontalMargin(
                                 metrics.widthPixels - margin,
                                 getResources().getDimensionPixelOffset(R.dimen.color_btn_size),
-                                colors.length
+                                colors.length,
+                                Constants.DIALOG_COEFFICIENT
                         ),
                         0,
                         0,

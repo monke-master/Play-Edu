@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,9 +19,7 @@ import java.util.ArrayList;
 import ru.mirea.playedu.R;
 import ru.mirea.playedu.model.Power;
 import ru.mirea.playedu.view.adapter.PowerAdapter;
-import ru.mirea.playedu.view.fragment.GameFragment;
 import ru.mirea.playedu.viewmodel.GameViewModel;
-import ru.mirea.playedu.viewmodel.QuestsViewModel;
 
 public class PickPowerDialog extends DialogFragment {
 

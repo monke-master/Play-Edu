@@ -2,22 +2,16 @@ package ru.mirea.playedu.view.fragment;
 
 import static ru.mirea.playedu.Constants.getRandomNumber;
 import static ru.mirea.playedu.Constants.icePowerKoef;
-import static ru.mirea.playedu.Constants.maxHealth;
 
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,11 +25,8 @@ import ru.mirea.playedu.Constants.PhaseResult;
 import ru.mirea.playedu.Constants.BattleResult;
 import ru.mirea.playedu.R;
 import ru.mirea.playedu.databinding.FragmentGameBinding;
-import ru.mirea.playedu.databinding.FragmentQuestsBinding;
 import ru.mirea.playedu.model.Enemy;
-import ru.mirea.playedu.model.Player;
 import ru.mirea.playedu.model.Power;
-import ru.mirea.playedu.model.UserTask;
 import ru.mirea.playedu.view.dialog.ActivePowerDialog;
 import ru.mirea.playedu.view.dialog.DamageDialog;
 import ru.mirea.playedu.view.dialog.EnemyPreviewDialog;
@@ -43,7 +34,6 @@ import ru.mirea.playedu.view.dialog.FightEndDialog;
 import ru.mirea.playedu.view.dialog.StartGameDialog;
 import ru.mirea.playedu.view.gameviews.GameView;
 import ru.mirea.playedu.viewmodel.GameViewModel;
-import ru.mirea.playedu.viewmodel.QuestsViewModel;
 
 
 public class GameFragment extends Fragment {

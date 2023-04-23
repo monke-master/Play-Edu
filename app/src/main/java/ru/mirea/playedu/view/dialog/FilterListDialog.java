@@ -20,14 +20,14 @@ import androidx.lifecycle.ViewModelProvider;
 import java.util.ArrayList;
 
 import ru.mirea.playedu.R;
-import ru.mirea.playedu.viewmodel.QuestsViewModel;
+import ru.mirea.playedu.viewmodel.TasksViewModel;
 
 
 // Диалог для выбора списка задач
 public class FilterListDialog extends DialogFragment {
 
     private View view;
-    private QuestsViewModel questsViewModel;
+    private TasksViewModel tasksViewModel;
 
     @Nullable
     @Override
@@ -52,8 +52,8 @@ public class FilterListDialog extends DialogFragment {
                 inflate(R.layout.dialog_filter_list, null, false);
         ListView listsView = view.findViewById(R.id.lists_view);
 
-        questsViewModel = new ViewModelProvider(requireActivity()).get(QuestsViewModel.class);
-        ArrayList<String> categories = questsViewModel.getCategories();
+        tasksViewModel = new ViewModelProvider(requireActivity()).get(TasksViewModel.class);
+        ArrayList<String> categories = tasksViewModel.getCategories();
 
         ArrayAdapter<String> arrayAdapter =
                 new ArrayAdapter(requireContext(), R.layout.view_list_item, categories);
@@ -64,7 +64,7 @@ public class FilterListDialog extends DialogFragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView categoryView = (TextView)view;
-                questsViewModel.setTasksListForCategory(categoryView.getText().toString());
+                tasksViewModel.setTasksListForCategory(categoryView.getText().toString());
             }
         });
 
