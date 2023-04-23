@@ -6,12 +6,15 @@ import static ru.mirea.playedu.Constants.maxHealth;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -61,16 +64,25 @@ public class GameFragment extends Fragment {
         dialog.setCancelable(false);
         dialog.show(getActivity().getSupportFragmentManager(), "Start game dialog");
         binding.clickableArea.setVisibility(View.GONE);
+        gameViewModel.setIsFragmentEnter(true);
         // Проверка на то, что игрок нажал на кнопку начала приключения
         gameViewModel.getStartGame().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                if (aBoolean) {
-                    dialog.dismiss();
-                    gameViewModel.setPlayer();
-                    binding.healthPlayerBar.setMax(gameViewModel.getPlayer().getHealth());
-                    gameViewModel.reloadAllPowersStatus(true);
-                    startGame();
+                if (!gameViewModel.getIsFragmentEnter()) {
+                    if (aBoolean) {
+                        dialog.dismiss();
+                        gameViewModel.setPlayer();
+                        binding.healthPlayerBar.setMax(gameViewModel.getPlayer().getHealth());
+                        gameViewModel.reloadAllPowersStatus(true);
+                        startGame();
+                    }
+                    else {
+                        dialog.dismiss();
+                        NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
+                        NavController navController = navHostFragment.getNavController();
+                        navController.popBackStack();
+                    }
                 }
             }
         });

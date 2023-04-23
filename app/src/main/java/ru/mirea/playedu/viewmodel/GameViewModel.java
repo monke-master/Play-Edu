@@ -85,6 +85,8 @@ public class GameViewModel extends ViewModel {
     SetAdventureRewardUseCase setAdventureRewardUseCase;
     // Текущий противник
     private int currentEnemy = 0;
+    // Заход на экран?
+    private boolean isFragmentEnter = true;
     // Текущая фаза
     private final MutableLiveData<Boolean> isAttack = new MutableLiveData<>();
     // Триггер начала сражения
@@ -281,5 +283,13 @@ public class GameViewModel extends ViewModel {
 
     public int setAdventureReward() {
         return setAdventureRewardUseCase.execute();
+    }
+
+    public boolean getIsFragmentEnter() {
+        return isFragmentEnter;
+    }
+
+    public void setIsFragmentEnter(boolean state) {
+        isFragmentEnter = state;
     }
 }

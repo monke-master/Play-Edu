@@ -3,6 +3,9 @@ package ru.mirea.playedu.view.activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -31,25 +34,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
 
-        // Отслеживание переключения вкладок
-        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.quests_btn:
-                    replaceFragment(new QuestsFragment());
-                    break;
-                case R.id.adventure_btn:
-                    replaceFragment(new GameFragment());
-                    break;
-                case R.id.profile_btn:
-                    replaceFragment(new ProfileFragment());
-                    break;
-                case R.id.community_btn:
-                    replaceFragment(new CommunityFragment());
-                    break;
-            }
-            return true;
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
+        NavController navController = navHostFragment.getNavController();
+        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
 
-        });
 
         // TODO убрать это нахуй
         // Перевiрка регистрации
@@ -74,11 +62,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         setContentView(binding.getRoot());
-    }
-
-
-    // Переключение фрагмента
-    private void replaceFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
     }
 }

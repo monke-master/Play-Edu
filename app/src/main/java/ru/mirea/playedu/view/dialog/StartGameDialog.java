@@ -2,13 +2,17 @@ package ru.mirea.playedu.view.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
@@ -48,10 +52,12 @@ public class StartGameDialog extends DialogFragment {
         Button disagreeBtn = (Button) view.findViewById(R.id.no_btn);
         // Инициализация ViewModel
         gameViewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
+        gameViewModel.setIsFragmentEnter(false);
 
         agreeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 gameViewModel.setStartGame(true);
             }
         });
