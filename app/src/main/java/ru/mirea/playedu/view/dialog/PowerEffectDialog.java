@@ -22,8 +22,6 @@ import ru.mirea.playedu.databinding.DialogPowerEffectBinding;
 import ru.mirea.playedu.model.Power;
 import ru.mirea.playedu.model.User;
 import ru.mirea.playedu.viewmodel.GameViewModel;
-import ru.mirea.playedu.viewmodel.ProfileViewModel;
-import ru.mirea.playedu.viewmodel.ProfileViewModelFabric;
 
 
 // Диалог с информацией о силе

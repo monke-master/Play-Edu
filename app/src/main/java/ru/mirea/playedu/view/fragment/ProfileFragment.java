@@ -50,7 +50,7 @@ public class ProfileFragment extends Fragment {
 
         // Создание адаптера
         // В аргументы передается список сил и callback для отслеживания нажатия на силу
-        PowerAdapter powerAdapter = new PowerAdapter(viewModel.getPowersList(), power -> {
+        PowerAdapter powerAdapter = new PowerAdapter(viewModel.getPowersList(), (power, position) -> {
             PowerDialog dialog = new PowerDialog(power);
             dialog.show(getActivity().getSupportFragmentManager(), "Power dialog");
         });
