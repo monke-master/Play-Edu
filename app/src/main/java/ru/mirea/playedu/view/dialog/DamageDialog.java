@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import ru.mirea.playedu.Constants.Powers;
 import ru.mirea.playedu.R;
 import ru.mirea.playedu.databinding.DialogDamageBinding;
 import ru.mirea.playedu.viewmodel.GameViewModel;
@@ -50,8 +51,6 @@ public class DamageDialog extends DialogFragment {
         // Инициализация ViewModel
         gameViewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
 
-        // Получение view с помощью binding
-        // TODO заменить эту херню на View-Model!
         switch (gameViewModel.getCurrentPhaseResult()) {
             case DEAL_DAMAGE:
                 binding.damageTxt.setText(Integer.toString(gameViewModel.getPlayer().getDamage()));
@@ -61,16 +60,27 @@ public class DamageDialog extends DialogFragment {
                 binding.enemyImg.setImageResource(gameViewModel.getEnemy(gameViewModel.getCurrentEnemyId()).getImageId());
                 binding.damageGroup.setVisibility(View.GONE);
                 binding.hdr.setText(R.string.no_damage);
+                gameViewModel.setMishitPenalty();
                 break;
             case AVOID_DAMAGE:
                 binding.enemyImg.setImageResource(gameViewModel.getEnemy(gameViewModel.getCurrentEnemyId()).getImageId());
                 binding.damageGroup.setVisibility(View.GONE);
                 binding.hdr.setText(R.string.no_damage_to_player);
+                gameViewModel.useActivePower(Powers.FIRE_POWER);
                 break;
             case GET_DAMAGE:
                 binding.damageTxt.setText(Integer.toString(gameViewModel.getEnemy(gameViewModel.getCurrentEnemyId()).getDamage()));
                 binding.enemyImg.setImageResource(gameViewModel.getEnemy(gameViewModel.getCurrentEnemyId()).getImageId());
+                gameViewModel.useActivePower(Powers.FIRE_POWER);
+                break;
+            case POISON_POWER:
+                binding.enemyImg.setImageResource(R.drawable.poison_power_ic);
+                binding.damageGroup.setVisibility(View.GONE);
+                binding.hdr.setText(R.string.no_damage_poison_power);
+                break;
         }
+
+
 
         binding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override

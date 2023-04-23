@@ -58,6 +58,8 @@ public class PowerDialog extends DialogFragment {
         ProfileViewModel viewModel = new ViewModelProvider(requireActivity()).get(ProfileViewModel.class);
         User user = viewModel.getUser().getValue();
 
+        // Установка иконки для силы
+        binding.achvmntImg.setImageResource(power.getIcon());
         // Меняет кнопку, если сила уже куплена
         if (power.isBought()) {
             binding.buyBtn.setEnabled(false);

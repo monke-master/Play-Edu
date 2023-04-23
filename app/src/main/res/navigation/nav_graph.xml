@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/quests_btn">
+
+    <fragment
+        android:id="@+id/quests_btn"
+        android:name="ru.mirea.playedu.view.fragment.QuestsFragment"
+        android:label="QuestsFragment" >
+        <action
+            android:id="@+id/action_questsFragment_to_gameFragment"
+            app:destination="@id/adventure_btn" />
+        <action
+            android:id="@+id/action_questsFragment_to_communityFragment"
+            app:destination="@id/community_btn" />
+        <action
+            android:id="@+id/action_questsFragment_to_profileFragment"
+            app:destination="@id/profile_btn" />
+    </fragment>
+    <fragment
+        android:id="@+id/adventure_btn"
+        android:name="ru.mirea.playedu.view.fragment.GameFragment"
+        android:label="GameFragment" >
+        <action
+            android:id="@+id/action_gameFragment_to_questsFragment"
+            app:destination="@id/quests_btn" />
+        <action
+            android:id="@+id/action_gameFragment_to_communityFragment"
+            app:destination="@id/community_btn" />
+        <action
+            android:id="@+id/action_gameFragment_to_profileFragment"
+            app:destination="@id/profile_btn" />
+    </fragment>
+    <fragment
+        android:id="@+id/community_btn"
+        android:name="ru.mirea.playedu.view.fragment.CommunityFragment"
+        android:label="fragment_community"
+        tools:layout="@layout/fragment_community" >
+        <action
+            android:id="@+id/action_communityFragment_to_gameFragment"
+            app:destination="@id/adventure_btn" />
+        <action
+            android:id="@+id/action_communityFragment_to_questsFragment"
+            app:destination="@id/quests_btn" />
+        <action
+            android:id="@+id/action_communityFragment_to_profileFragment"
+            app:destination="@id/profile_btn" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile_btn"
+        android:name="ru.mirea.playedu.view.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_questsFragment"
+            app:destination="@id/quests_btn" />
+        <action
+            android:id="@+id/action_profileFragment_to_gameFragment"
+            app:destination="@id/adventure_btn" />
+        <action
+            android:id="@+id/action_profileFragment_to_communityFragment"
+            app:destination="@id/community_btn" />
+    </fragment>
+</navigation>

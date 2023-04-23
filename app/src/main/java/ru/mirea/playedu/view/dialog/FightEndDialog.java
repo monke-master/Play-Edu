@@ -49,9 +49,11 @@ public class FightEndDialog extends DialogFragment {
         // Инициализация ViewModel
         gameViewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
 
+        binding.enemyImg.setImageResource(gameViewModel.getEnemy(gameViewModel.getCurrentEnemyId()).getImageId());
         switch (gameViewModel.getCurrentBattleResult()) {
             case DEFEAT:
-                binding.awardGroup.setVisibility(View.GONE);
+                binding.winBattleGroup.setVisibility(View.GONE);
+                binding.awardHdr.setText("");
                 binding.resultHdr.setText(R.string.defeat);
                 binding.button3.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -73,7 +75,7 @@ public class FightEndDialog extends DialogFragment {
                 });
                 break;
             case WIN_ADVENTURE:
-                binding.awardCountTxt.setText(Integer.toString(gameViewModel.getEnemy(gameViewModel.getCurrentEnemyId()).getPrice()));
+                binding.awardCountTxt.setText(Integer.toString(gameViewModel.setAdventureReward()));
                 binding.button3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
