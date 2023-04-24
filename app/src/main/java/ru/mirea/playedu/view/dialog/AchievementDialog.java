@@ -48,6 +48,7 @@ public class AchievementDialog extends DialogFragment {
         // Получение binding диалога
         DialogAchievementBinding binding = DialogAchievementBinding.inflate(getLayoutInflater());
         binding.setAchievement(achievement);
+        binding.achvmntImg.setImageResource(achievement.getIcon());
 
         builder.setView(binding.getRoot());
         return builder.create();

@@ -67,6 +67,7 @@ public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.
         public void bind(Achievement achievement, OnItemClickListener listener) {
 
             binding.setAchievement(achievement);
+            binding.powerImg.setImageResource(achievement.getIcon());
             itemView.setOnClickListener(view -> listener.onItemClick(achievement));
         }
 

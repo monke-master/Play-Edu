@@ -3,6 +3,7 @@ package ru.mirea.playedu;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 
@@ -115,7 +116,7 @@ public class Constants {
     // Количество добавочного здоровья от силы крови
     public static final int bloodPowerKoef = 2;
     // Процентное увеличение силы противников от силы мудрости
-    public static final float wisdomPowerEnemyKoef = 0.3f;
+    public static final float wisdomPowerEnemyKoef = 0.15f;
     // Процентное увеличение силы игрока от силы мудрости
     public static final int wisdomPowerPlayerKoef = 1;
     // Процентный шанс заморозить противника от силы льда
@@ -141,15 +142,7 @@ public class Constants {
     // Сила заглушка
     public static Power selectablePower = new Power(-1, 0, "", "", false, R.drawable.ic_pick_power, SILVER_COINS_TYPE, EFFECT_INFO, Powers.NONE,0);
 
-    // Список достижений (убрать нахер се неподтребство на сервер)
-    public static Achievement[] ACHIEVEMENTS_LIST = new Achievement[]{
-            new Achievement(1, 1, "Орден Пропастина", "За заслуги перед Пропастинечеством", true, "No"),
-            new Achievement(1, 1, "Звезда Беркова", "За взятие Киевского интеграла", true, "No"),
-            new Achievement(1, 1, "Поцелуй Большого Булеана", "Лучше не знать откуда это у вас...", true, "No"),
-            new Achievement(1, 1, "Триггер Смирнова", "Собрать трехступенчатый PR-триггер", false, "No")
-    };
-
-    // Получение списка сил
+    // Получение массива сил
     public static Power[] getPowersList(Context context) {
         String[] powersTitles = context.getResources().getStringArray(R.array.powersTitles);
         String[] powersDescriptions = context.getResources().getStringArray(R.array.powersDescription);
@@ -174,6 +167,34 @@ public class Constants {
         return powersArray;
     }
 
+    // Получение массива достижений
+    public static Achievement[] getAchievementsList(Context context) {
+        String[] achievementsTitles = context.getResources().getStringArray(R.array.achievementsTitles);
+        String[] achievementsDescriptions = context.getResources().getStringArray(R.array.achievementsDescription);
+        ArrayList<Achievement> ACHIEVEMENTS_LIST = new ArrayList<>();
+        ACHIEVEMENTS_LIST.add(new Achievement(0, 0, achievementsTitles[0], achievementsDescriptions[0], false, R.drawable.adventurer_achiev_ic));
+        ACHIEVEMENTS_LIST.add(new Achievement(1, 0, achievementsTitles[1], achievementsDescriptions[1], false, R.drawable.genius_achiev_ic));
+        ACHIEVEMENTS_LIST.add(new Achievement(2, 0, achievementsTitles[2], achievementsDescriptions[2], false, R.drawable.collector_achiev_ic));
+        ACHIEVEMENTS_LIST.add(new Achievement(3, 0, achievementsTitles[3], achievementsDescriptions[3], false, R.drawable.hero_achiev_ic));
+        ACHIEVEMENTS_LIST.add(new Achievement(4, 0, achievementsTitles[4], achievementsDescriptions[4], false, R.drawable.legend_achiev_ic));
+        ACHIEVEMENTS_LIST.add(new Achievement(5, 0, achievementsTitles[5], achievementsDescriptions[5], false, R.drawable.nosy_achiev_ic));
+        ACHIEVEMENTS_LIST.add(new Achievement(6, 0, achievementsTitles[6], achievementsDescriptions[6], false, R.drawable.fashionista_achiev_ic));
+        ACHIEVEMENTS_LIST.add(new Achievement(7, 0, achievementsTitles[7], achievementsDescriptions[7], false, R.drawable.undead_killer1_achiev_ic));
+        ACHIEVEMENTS_LIST.add(new Achievement(8, 0, achievementsTitles[8], achievementsDescriptions[8], false, R.drawable.undead_killer2_achiev_ic));
+        ACHIEVEMENTS_LIST.add(new Achievement(9, 0, achievementsTitles[9], achievementsDescriptions[9], false, R.drawable.undead_killer3_achiev_ic));
+        ACHIEVEMENTS_LIST.add(new Achievement(10, 0, achievementsTitles[10], achievementsDescriptions[10], false, R.drawable.kings_assassin_achiev_ic));
+        ACHIEVEMENTS_LIST.add(new Achievement(11, 0, achievementsTitles[11], achievementsDescriptions[11], false, R.drawable.academician1_achiev_ic));
+        ACHIEVEMENTS_LIST.add(new Achievement(12, 0, achievementsTitles[12], achievementsDescriptions[12], false, R.drawable.academician2_achiev_ic));
+        ACHIEVEMENTS_LIST.add(new Achievement(13, 0, achievementsTitles[13], achievementsDescriptions[13], false, R.drawable.academician3_achiev_ic));
+        ACHIEVEMENTS_LIST.add(new Achievement(14, 0, achievementsTitles[14], achievementsDescriptions[14], false, R.drawable.admiral_karpov_achiev_ic));
+        ACHIEVEMENTS_LIST.add(new Achievement(15, 0, achievementsTitles[15], achievementsDescriptions[15], false, R.drawable.heroic_endurance1_achiev_ic));
+        ACHIEVEMENTS_LIST.add(new Achievement(16, 0, achievementsTitles[16], achievementsDescriptions[16], false, R.drawable.heroic_endurance2_achiev_ic));
+        ACHIEVEMENTS_LIST.add(new Achievement(17, 0, achievementsTitles[17], achievementsDescriptions[17], false, R.drawable.heroic_endurance3_achiev_ic));
+        ACHIEVEMENTS_LIST.add(new Achievement(18, 0, achievementsTitles[18], achievementsDescriptions[18], false, R.drawable.red_star_berkov_achiev_ic));
+        Achievement[] achievementsArray = new Achievement[0];
+        achievementsArray = ACHIEVEMENTS_LIST.toArray(achievementsArray);
+        return achievementsArray;
+    }
 
     public static int[] getCategoryColors(Context context) {
          int[] colors = {

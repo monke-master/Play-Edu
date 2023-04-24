@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Мокаем ачивки (осуждаю)
         AchievementCacheStorage cacheStorage = AchievementCacheStorage.getInstance();
-        for (Achievement achievement: Constants.ACHIEVEMENTS_LIST) {
+        for (Achievement achievement: Constants.getAchievementsList(this)) {
             cacheStorage.addAchievement(achievement);
         }
 
