@@ -7,17 +7,17 @@ public class UserTask {
     private int taskId;
     private String label;
     private Category category;
-    private boolean status;
+    private boolean completed;
     private int coinsReward;
     private Date deadlineDate;
     private Date creationDate;
     private int color;
 
-    public UserTask(String label, Category category, boolean status, int coinsReward,
+    public UserTask(String label, Category category, boolean completed, int coinsReward,
                     Date deadlineDate, Date creationDate, int color) {
         this.label = label;
         this.category = category;
-        this.status = status;
+        this.completed = completed;
         this.coinsReward = coinsReward;
         this.deadlineDate = deadlineDate;
         this.creationDate = creationDate;
@@ -27,7 +27,7 @@ public class UserTask {
     public UserTask() {
         label = "";
         category = new Category("");
-        status = true;
+        completed = true;
         coinsReward = 0;
         deadlineDate = new Date();
         creationDate = new Date();
@@ -58,12 +58,12 @@ public class UserTask {
         this.category = category;
     }
 
-    public boolean isStatus() {
-        return status;
+    public boolean isCompleted() {
+        return completed;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     public int getCoinsReward() {
@@ -106,7 +106,7 @@ public class UserTask {
         UserTask task = (UserTask) o;
 
         if (taskId != task.taskId) return false;
-        if (status != task.status) return false;
+        if (completed != task.completed) return false;
         if (coinsReward != task.coinsReward) return false;
         if (color != task.color) return false;
         if (!label.equals(task.label)) return false;
@@ -120,7 +120,7 @@ public class UserTask {
         int result = taskId;
         result = 31 * result + label.hashCode();
         result = 31 * result + category.hashCode();
-        result = 31 * result + (status ? 1 : 0);
+        result = 31 * result + (completed ? 1 : 0);
         result = 31 * result + coinsReward;
         result = 31 * result + deadlineDate.hashCode();
         result = 31 * result + creationDate.hashCode();

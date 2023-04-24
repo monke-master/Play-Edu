@@ -9,11 +9,15 @@ import java.util.Calendar;
 import java.util.Date;
 
 import ru.mirea.playedu.data.repository.CategoryRepository;
+import ru.mirea.playedu.data.repository.UserStatsRepository;
 import ru.mirea.playedu.data.repository.UserTaskRepository;
 import ru.mirea.playedu.data.storage.cache.CategoryCacheStorage;
+import ru.mirea.playedu.data.storage.cache.UserStatsCacheStorage;
 import ru.mirea.playedu.data.storage.cache.UserTaskCacheStorage;
+import ru.mirea.playedu.model.Response;
 import ru.mirea.playedu.model.UserTask;
 import ru.mirea.playedu.model.UserTaskFilter;
+import ru.mirea.playedu.usecases.CompleteUserTaskUseCase;
 import ru.mirea.playedu.usecases.GetCategoryTitlesListUseCase;
 import ru.mirea.playedu.usecases.GetTasksWithCategoryUseCase;
 import ru.mirea.playedu.usecases.GetTasksWithColorUseCase;
@@ -28,6 +32,7 @@ public class TasksViewModel extends ViewModel {
     private GetTasksWithColorUseCase getTasksWithColorUseCase;
     private GetTasksWithCreationDateUseCase getTasksWithCreationDateUseCase;
     private GetUserTasksListUseCase getUserTasksListUseCase;
+    private CompleteUserTaskUseCase completeUserTaskUseCase;
     // Список пользовательских задач
     private final MutableLiveData<ArrayList<UserTask>> userTasksList = new MutableLiveData<>();;
     // Список категорий
@@ -37,17 +42,20 @@ public class TasksViewModel extends ViewModel {
     // Индекс текущей даты в массиве дат
     private int todayDatePosition;
     private UserTaskFilter userTaskFilter;
+    private MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
 
     public TasksViewModel() {
         UserTaskRepository userTaskRepository = new UserTaskRepository(UserTaskCacheStorage.getInstance());
         CategoryRepository categoryRepository = new CategoryRepository(CategoryCacheStorage.getInstance());
+        UserStatsRepository statsRepository = new UserStatsRepository(UserStatsCacheStorage.getInstance());
 
         getCategoryTitlesListUseCase = new GetCategoryTitlesListUseCase(categoryRepository);
         getTasksWithCategoryUseCase = new GetTasksWithCategoryUseCase(userTaskRepository);
         getTasksWithColorUseCase = new GetTasksWithColorUseCase(userTaskRepository);
         getTasksWithCreationDateUseCase = new GetTasksWithCreationDateUseCase(userTaskRepository);
         getUserTasksListUseCase = new GetUserTasksListUseCase(userTaskRepository);
+        completeUserTaskUseCase = new CompleteUserTaskUseCase(userTaskRepository, statsRepository);
 
         dateList = new ArrayList<>();
         userTaskFilter = new UserTaskFilter();
@@ -99,15 +107,6 @@ public class TasksViewModel extends ViewModel {
         }
     }
 
-    public LiveData<ArrayList<UserTask>> getUserTasksList() {
-        return userTasksList;
-    }
-
-    public MutableLiveData<ArrayList<String>> getCategoryTitlesList() {
-        return categoryTitlesList;
-    }
-
-    // Заполнение массива дат в диапазоне (-год от сегодняшней даты; +год от сегодняшней)
     private void fillDateList() {
         Date today = Calendar.getInstance().getTime();
         // Получение даты, равной текущей минус год
@@ -120,12 +119,34 @@ public class TasksViewModel extends ViewModel {
         for (Calendar date = yearAgo;
              date.getTime().getTime() <= yearLater.getTime().getTime();
              date.add(Calendar.DAY_OF_MONTH, 1)) {
-                Calendar temp = (Calendar) date.clone();
-                dateList.add(temp);
-                if (temp.getTime().getTime() == today.getTime())
-                    todayDatePosition = dateList.size() - 1;
+            Calendar temp = (Calendar) date.clone();
+            dateList.add(temp);
+            if (temp.getTime().getTime() == today.getTime())
+                todayDatePosition = dateList.size() - 1;
         }
     }
+
+    public int completeUserTask(UserTask task) {
+        Response response = completeUserTaskUseCase.execute(task);
+        if (response.getCode() != 200) {
+            errorMessage.setValue(response.getBody());
+        } else {
+            filterUserTasks();
+        }
+        return response.getCode();
+
+    }
+
+    public LiveData<ArrayList<UserTask>> getUserTasksList() {
+        return userTasksList;
+    }
+
+    public MutableLiveData<ArrayList<String>> getCategoryTitlesList() {
+        return categoryTitlesList;
+    }
+
+    // Заполнение массива дат в диапазоне (-год от сегодняшней даты; +год от сегодняшней)
+
 
     public ArrayList<Calendar> getDateList() {
         return dateList;

@@ -7,17 +7,17 @@ public class PlayEduTask {
     private int taskId;
     private String label;
     private PlayEduEvent event;
-    private boolean status;
+    private boolean completed;
     private int coinsReward;
     private Date deadlineDate;
     private Date creationDate;
 
-    public PlayEduTask(int taskId, String label, PlayEduEvent event, boolean status,
+    public PlayEduTask(int taskId, String label, PlayEduEvent event, boolean completed,
                        int coinsReward, Date deadlineDate, Date creationDate) {
         this.taskId = taskId;
         this.label = label;
         this.event = event;
-        this.status = status;
+        this.completed = completed;
         this.coinsReward = coinsReward;
         this.deadlineDate = deadlineDate;
         this.creationDate = creationDate;
@@ -47,12 +47,12 @@ public class PlayEduTask {
         this.event = event;
     }
 
-    public boolean isStatus() {
-        return status;
+    public boolean isCompleted() {
+        return completed;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     public int getCoinsReward() {
@@ -87,7 +87,7 @@ public class PlayEduTask {
         PlayEduTask task = (PlayEduTask) o;
 
         if (taskId != task.taskId) return false;
-        if (status != task.status) return false;
+        if (completed != task.completed) return false;
         if (coinsReward != task.coinsReward) return false;
         if (!label.equals(task.label)) return false;
         if (!event.equals(task.event)) return false;
@@ -100,7 +100,7 @@ public class PlayEduTask {
         int result = taskId;
         result = 31 * result + label.hashCode();
         result = 31 * result + event.hashCode();
-        result = 31 * result + (status ? 1 : 0);
+        result = 31 * result + (completed ? 1 : 0);
         result = 31 * result + coinsReward;
         result = 31 * result + deadlineDate.hashCode();
         result = 31 * result + creationDate.hashCode();

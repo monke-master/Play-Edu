@@ -11,17 +11,26 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import ru.mirea.playedu.R;
+import ru.mirea.playedu.databinding.DialogCompleteTaskBinding;
+import ru.mirea.playedu.model.UserTask;
+import ru.mirea.playedu.viewmodel.TasksViewModel;
 
 public class CompleteTaskDialog extends DialogFragment {
 
-    private View view;
+    private UserTask userTask;
+
+    public CompleteTaskDialog(UserTask task) {
+        this.userTask = task;
+    }
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = requireActivity().getLayoutInflater().inflate(
+        View view = requireActivity().getLayoutInflater().inflate(
                 R.layout.dialog_complete_task,
                 null,
                 false);
@@ -37,8 +46,17 @@ public class CompleteTaskDialog extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_complete_task, null, false);
-        builder.setView(view);
+        DialogCompleteTaskBinding binding = DialogCompleteTaskBinding.inflate(getLayoutInflater());
+        TasksViewModel viewModel = new ViewModelProvider(requireActivity()).get(TasksViewModel.class);
+
+        binding.yesBtn.setOnClickListener(view -> {
+            viewModel.completeUserTask(userTask);
+            dismiss();
+        });
+
+        binding.noBtn.setOnClickListener(view -> dismiss());
+
+        builder.setView(binding.getRoot());
         return builder.create();
     }
 

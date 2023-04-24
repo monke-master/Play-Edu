@@ -166,7 +166,7 @@ public class AddTaskDialog extends DialogFragment implements OnSelectColorFilter
                 UserTask userTask = new UserTask(title, category, true, price, deadlineDate, creationDate, taskColor);
                 viewModel.addTask(userTask);
                 getParentFragmentManager().setFragmentResult("requestKey", Bundle.EMPTY);
-                alert.cancel();
+                dismiss();
             }
         });
 

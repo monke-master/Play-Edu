@@ -31,6 +31,7 @@ import ru.mirea.playedu.model.UserTask;
 import ru.mirea.playedu.view.adapter.DateAdapter;
 import ru.mirea.playedu.view.adapter.UserTaskAdapter;
 import ru.mirea.playedu.view.dialog.AddTaskDialog;
+import ru.mirea.playedu.view.dialog.CompleteTaskDialog;
 import ru.mirea.playedu.view.dialog.FilterColorDialog;
 import ru.mirea.playedu.view.dialog.FilterCategoryDialog;
 import ru.mirea.playedu.viewmodel.TasksViewModel;
@@ -100,6 +101,7 @@ public class TasksFragment extends Fragment {
         getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
+                tasksViewModel.filterUserTasksByDate(tasksViewModel.getUserTaskFilter().getFilteredDate());
                 ArrayList<UserTask> userTasks = tasksViewModel.getUserTasksList().getValue();
                 setUserTaskList(userTasks);
             }
@@ -145,7 +147,18 @@ public class TasksFragment extends Fragment {
 
     // Задание списка элементов для списка пользовательских заданий
     private void setUserTaskList(ArrayList<UserTask> userTasks) {
-        UserTaskAdapter adapter = new UserTaskAdapter(userTasks);
+        UserTaskAdapter adapter = new UserTaskAdapter(userTasks, new UserTaskAdapter.TaskItemListener() {
+            @Override
+            public void onComplete(UserTask userTask) {
+                CompleteTaskDialog dialog = new CompleteTaskDialog(userTask);
+                dialog.show(getParentFragmentManager(), "Complete task dialog");
+            }
+
+            @Override
+            public void onDelete(UserTask userTask) {
+
+            }
+        });
         binding.userTasksRecyclerView.setAdapter(adapter);
         binding.userTasksRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
