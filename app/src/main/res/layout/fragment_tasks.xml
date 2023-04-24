@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="ru.mirea.playedu.viewmodel.TasksViewModel" />
+    </data>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -46,7 +53,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
-                    android:text="69"
+                    android:text="@{Integer.toString(viewModel.user.goldenCoins)}"
                     android:textColor="@color/golden" />
 
                 <ImageView
@@ -64,7 +71,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
-                    android:text="1488"
+                    android:text="@{Integer.toString(viewModel.user.silverCoins)}"
                     android:textColor="@color/silver" />
             </LinearLayout>
 

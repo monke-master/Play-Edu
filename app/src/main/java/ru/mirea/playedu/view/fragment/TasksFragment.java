@@ -46,6 +46,7 @@ public class TasksFragment extends Fragment {
         binding = FragmentTasksBinding.inflate(getLayoutInflater());
         // Инициализация ViewModel
         tasksViewModel = new ViewModelProvider(requireActivity()).get(TasksViewModel.class);
+        binding.setViewModel(tasksViewModel);
 
         // Recycler-View для календаря
         RecyclerView dateList = binding.dateList;

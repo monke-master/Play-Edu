@@ -9,12 +9,15 @@ import java.util.Calendar;
 import java.util.Date;
 
 import ru.mirea.playedu.data.repository.CategoryRepository;
+import ru.mirea.playedu.data.repository.UserRepository;
 import ru.mirea.playedu.data.repository.UserStatsRepository;
 import ru.mirea.playedu.data.repository.UserTaskRepository;
 import ru.mirea.playedu.data.storage.cache.CategoryCacheStorage;
+import ru.mirea.playedu.data.storage.cache.UserCacheStorage;
 import ru.mirea.playedu.data.storage.cache.UserStatsCacheStorage;
 import ru.mirea.playedu.data.storage.cache.UserTaskCacheStorage;
 import ru.mirea.playedu.model.Response;
+import ru.mirea.playedu.model.User;
 import ru.mirea.playedu.model.UserTask;
 import ru.mirea.playedu.model.UserTaskFilter;
 import ru.mirea.playedu.usecases.CompleteUserTaskUseCase;
@@ -23,6 +26,7 @@ import ru.mirea.playedu.usecases.GetTasksWithCategoryUseCase;
 import ru.mirea.playedu.usecases.GetTasksWithColorUseCase;
 import ru.mirea.playedu.usecases.GetTasksWithCreationDateUseCase;
 import ru.mirea.playedu.usecases.GetUserTasksListUseCase;
+import ru.mirea.playedu.usecases.GetUserUseCase;
 
 public class TasksViewModel extends ViewModel {
 
@@ -33,6 +37,7 @@ public class TasksViewModel extends ViewModel {
     private GetTasksWithCreationDateUseCase getTasksWithCreationDateUseCase;
     private GetUserTasksListUseCase getUserTasksListUseCase;
     private CompleteUserTaskUseCase completeUserTaskUseCase;
+    private GetUserUseCase getUserUseCase;
     // Список пользовательских задач
     private final MutableLiveData<ArrayList<UserTask>> userTasksList = new MutableLiveData<>();;
     // Список категорий
@@ -43,19 +48,22 @@ public class TasksViewModel extends ViewModel {
     private int todayDatePosition;
     private UserTaskFilter userTaskFilter;
     private MutableLiveData<String> errorMessage = new MutableLiveData<>();
+    private MutableLiveData<User> user = new MutableLiveData<>();
 
 
     public TasksViewModel() {
         UserTaskRepository userTaskRepository = new UserTaskRepository(UserTaskCacheStorage.getInstance());
         CategoryRepository categoryRepository = new CategoryRepository(CategoryCacheStorage.getInstance());
         UserStatsRepository statsRepository = new UserStatsRepository(UserStatsCacheStorage.getInstance());
+        UserRepository userRepository = new UserRepository(UserCacheStorage.getInstance());
 
         getCategoryTitlesListUseCase = new GetCategoryTitlesListUseCase(categoryRepository);
         getTasksWithCategoryUseCase = new GetTasksWithCategoryUseCase(userTaskRepository);
         getTasksWithColorUseCase = new GetTasksWithColorUseCase(userTaskRepository);
         getTasksWithCreationDateUseCase = new GetTasksWithCreationDateUseCase(userTaskRepository);
         getUserTasksListUseCase = new GetUserTasksListUseCase(userTaskRepository);
-        completeUserTaskUseCase = new CompleteUserTaskUseCase(userTaskRepository, statsRepository);
+        completeUserTaskUseCase = new CompleteUserTaskUseCase(userTaskRepository, statsRepository, userRepository);
+        getUserUseCase = new GetUserUseCase(userRepository);
 
         dateList = new ArrayList<>();
         userTaskFilter = new UserTaskFilter();
@@ -66,6 +74,7 @@ public class TasksViewModel extends ViewModel {
     }
 
     private void getData() {
+        user.setValue(getUserUseCase.execute());
         fillDateList();
         userTaskFilter.setFilteredDate(dateList.get(todayDatePosition));
         filterUserTasks();
@@ -132,6 +141,7 @@ public class TasksViewModel extends ViewModel {
             errorMessage.setValue(response.getBody());
         } else {
             filterUserTasks();
+            user.setValue(getUserUseCase.execute());
         }
         return response.getCode();
 
@@ -158,5 +168,9 @@ public class TasksViewModel extends ViewModel {
 
     public UserTaskFilter getUserTaskFilter() {
         return userTaskFilter;
+    }
+
+    public MutableLiveData<User> getUser() {
+        return user;
     }
 }
