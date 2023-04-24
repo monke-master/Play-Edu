@@ -22,12 +22,13 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.ViewHolder> {
 
     private ArrayList<Calendar> dateList;
     private OnItemClickListener onItemClickListener;
-    private ViewHolder pickedDate;
+    private ViewHolder pickedDateVH;
+    private Calendar pickedDate;
 
-    public DateAdapter(ArrayList<Calendar> dateList, OnItemClickListener onItemClickListener) {
-        this.dateList = dateList;
+    public DateAdapter(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
-        pickedDate = null;
+        dateList = new ArrayList<>();
+        pickedDateVH = null;
     }
 
     public void addItem(Calendar date) {
@@ -35,11 +36,15 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.ViewHolder> {
         notifyItemChanged(dateList.size() - 1);
     }
 
+    public void setDateList(ArrayList<Calendar> dateList) {
+        this.dateList.addAll(dateList);
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ViewDateBinding binding = ViewDateBinding.inflate(LayoutInflater.from(parent.getContext()));
-        //ViewColorBinding binding = ViewColorBinding.inflate(LayoutInflater.from(parent.getContext()));
         return new ViewHolder(binding);
     }
 
@@ -53,6 +58,15 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.ViewHolder> {
         return dateList.size();
     }
 
+    public Calendar getPickedDate() {
+        return pickedDateVH.getDate();
+    }
+
+    public void setPickedDate(Calendar date) {
+        pickedDate = date;
+    }
+
+    // View-Holder для элемента даты
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ViewDateBinding binding;
@@ -68,16 +82,18 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.ViewHolder> {
             binding.setDate(date);
             this.date = date;
             setBackgroundColor(getDefaultColor(date));
+            if (pickedDate == date)
+                pickedDateVH = this;
             // Обработка нажатия
             itemView.setOnClickListener(view -> {
                 // Если нажатие произошло на виджет другой даты, то
                 // Возвращение предыдущей выбранной дате ее исходного цвета
-                if (pickedDate != null && pickedDate != this) {
-                    pickedDate.setBackgroundColor(getDefaultColor(pickedDate.getDate()));
+                if (pickedDateVH != null && pickedDateVH != this) {
+                    pickedDateVH.setBackgroundColor(getDefaultColor(pickedDateVH.getDate()));
                 }
                 // Установка новой выбранной даты
                 setBackgroundColor(itemView.getResources().getColor(R.color.purple_100));
-                pickedDate = this;
+                pickedDateVH = this;
                 listener.onItemClick(date);
             });
 
@@ -88,6 +104,8 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.ViewHolder> {
         }
 
         private int getDefaultColor(Calendar date) {
+            if (DateHelper.equalDate(date, pickedDate))
+                itemView.getResources().getColor(R.color.purple_100);
             if (DateHelper.isToday(date))
                 return itemView.getResources().getColor(R.color.purple_200);
             return itemView.getResources().getColor(R.color.purple_400);
@@ -95,6 +113,10 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.ViewHolder> {
 
         public Calendar getDate() {
             return date;
+        }
+
+        public void setDate(Calendar date) {
+            this.date = date;
         }
     }
 

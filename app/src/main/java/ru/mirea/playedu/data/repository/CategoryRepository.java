@@ -33,14 +33,6 @@ public class CategoryRepository {
     }
 
     // Заменяет категорию с заданным id на новую
-    public ArrayList<String> getCategoriesTitles() {
-        ArrayList<String> categoriesTitles = new ArrayList<String>();
-        for (Category category : getCategories()) {
-            if (!categoriesTitles.contains(category.getTitle())) categoriesTitles.add(category.getTitle());
-        }
-        return categoriesTitles;
-    }
-    
     public Response updateCategory(int categoryId, Category newCategory) {
         if (cacheStorage.updateCategory(categoryId, newCategory))
             return new Response(200, "Success");

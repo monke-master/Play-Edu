@@ -82,7 +82,7 @@ public class FilterColorDialog extends DialogFragment implements OnSelectColorFi
 
     @Override
     public void execute(int color) {
-        tasksViewModel.setTasksListForColor(color);
+        tasksViewModel.filterUserTasksByColor(color);
     }
 }
 

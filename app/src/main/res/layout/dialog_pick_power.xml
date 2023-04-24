@@ -17,4 +17,5 @@
         app:spanCount="4"
         tools:itemCount="16"
         tools:listitem="@layout/view_power_item" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

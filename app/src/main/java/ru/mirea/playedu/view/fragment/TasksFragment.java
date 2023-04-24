@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +20,9 @@ import com.skydoves.powerspinner.OnSpinnerItemSelectedListener;
 import com.skydoves.powerspinner.PowerSpinnerView;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 
+import ru.mirea.playedu.DateHelper;
 import ru.mirea.playedu.DimensionManager;
 import ru.mirea.playedu.HorizontalMarginItemDecoration;
 import ru.mirea.playedu.R;
@@ -32,7 +32,7 @@ import ru.mirea.playedu.view.adapter.DateAdapter;
 import ru.mirea.playedu.view.adapter.UserTaskAdapter;
 import ru.mirea.playedu.view.dialog.AddTaskDialog;
 import ru.mirea.playedu.view.dialog.FilterColorDialog;
-import ru.mirea.playedu.view.dialog.FilterListDialog;
+import ru.mirea.playedu.view.dialog.FilterCategoryDialog;
 import ru.mirea.playedu.viewmodel.TasksViewModel;
 
 public class TasksFragment extends Fragment {
@@ -48,11 +48,14 @@ public class TasksFragment extends Fragment {
 
         // Recycler-View для календаря
         RecyclerView dateList = binding.dateList;
-        DateAdapter dateAdapter = new DateAdapter(tasksViewModel.getDateList(), date -> {
-            Log.d("taaag", date.toString());
+        DateAdapter dateAdapter = new DateAdapter(date -> {
+            tasksViewModel.filterUserTasksByDate(date);
         });
+        dateAdapter.setPickedDate(DateHelper.getTodayDate());
+        dateAdapter.setDateList(tasksViewModel.getDateList());
         dateList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         dateList.setAdapter(dateAdapter);
+
         // Расчет отступов между элементами
         DisplayMetrics metrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -78,7 +81,7 @@ public class TasksFragment extends Fragment {
                 (OnSpinnerItemSelectedListener<CharSequence>) (oldIndex, oldItem, newIndex, newItem) -> {
                     switch (newIndex) {
                         case 0:
-                            FilterListDialog listDialog = new FilterListDialog();
+                            FilterCategoryDialog listDialog = new FilterCategoryDialog();
                             listDialog.show(getActivity().getSupportFragmentManager(), "Filter lists dialog");
                             break;
                         case 1:
@@ -97,7 +100,7 @@ public class TasksFragment extends Fragment {
         getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                ArrayList<UserTask> userTasks = tasksViewModel.getAllTasksList();
+                ArrayList<UserTask> userTasks = tasksViewModel.getUserTasksList().getValue();
                 setUserTaskList(userTasks);
             }
         });
@@ -105,15 +108,15 @@ public class TasksFragment extends Fragment {
         // Обработка нажатия на элемент фильтра
         binding.filterSpinner.setOnSpinnerItemSelectedListener(new OnSpinnerItemSelectedListener<String>() {
             @Override public void onItemSelected(int oldIndex, @Nullable String oldItem, int newIndex, String newItem) {
-                ArrayList<UserTask> userTasks;
                 switch (newItem) {
                     case "По умолчанию": {
-                        userTasks = tasksViewModel.getAllTasksList();
-                        setUserTaskList(userTasks);
+                        tasksViewModel.getUserTaskFilter().setFilteredColor(null);
+                        tasksViewModel.getUserTaskFilter().setFilteredCategory(null);
+                        tasksViewModel.filterUserTasksByDate(dateAdapter.getPickedDate());
                         break;
                     }
                     case "По списку": {
-                        FilterListDialog dialog = new FilterListDialog();
+                        FilterCategoryDialog dialog = new FilterCategoryDialog();
                         dialog.show(getActivity().getSupportFragmentManager(), "Filter list dialog");
                         break;
                     }
@@ -127,7 +130,7 @@ public class TasksFragment extends Fragment {
         });
 
         // Подписка на данные об отсортированном списке
-        tasksViewModel.getFilteredList().observe(getViewLifecycleOwner(), new Observer<ArrayList<UserTask>>() {
+        tasksViewModel.getUserTasksList().observe(getViewLifecycleOwner(), new Observer<ArrayList<UserTask>>() {
             @Override
             public void onChanged(@Nullable ArrayList<UserTask> value) {
                 setUserTaskList(value);

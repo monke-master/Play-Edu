@@ -24,7 +24,7 @@ import ru.mirea.playedu.viewmodel.TasksViewModel;
 
 
 // Диалог для выбора списка задач
-public class FilterListDialog extends DialogFragment {
+public class FilterCategoryDialog extends DialogFragment {
 
     private View view;
     private TasksViewModel tasksViewModel;
@@ -33,7 +33,7 @@ public class FilterListDialog extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = requireActivity().getLayoutInflater().inflate(
-                R.layout.dialog_filter_list,
+                R.layout.dialog_filter_category,
                 null,
                 false);
 
@@ -49,11 +49,11 @@ public class FilterListDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         view = requireActivity().getLayoutInflater().
-                inflate(R.layout.dialog_filter_list, null, false);
+                inflate(R.layout.dialog_filter_category, null, false);
         ListView listsView = view.findViewById(R.id.lists_view);
 
         tasksViewModel = new ViewModelProvider(requireActivity()).get(TasksViewModel.class);
-        ArrayList<String> categories = tasksViewModel.getCategories();
+        ArrayList<String> categories = tasksViewModel.getCategoryTitlesList().getValue();
 
         ArrayAdapter<String> arrayAdapter =
                 new ArrayAdapter(requireContext(), R.layout.view_list_item, categories);
@@ -64,7 +64,7 @@ public class FilterListDialog extends DialogFragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView categoryView = (TextView)view;
-                tasksViewModel.setTasksListForCategory(categoryView.getText().toString());
+                tasksViewModel.filterUserTasksByCategory(categoryView.getText().toString());
             }
         });
 
