@@ -29,6 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
                 android:layout_marginTop="10dp"
                 android:text="@{power.description}"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -41,6 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
                 android:layout_marginTop="70dp"
                 android:text="@{power.title}"
                 android:textSize="@dimen/header1_txt_size"
@@ -56,15 +58,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="150dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="150dp"
                 android:backgroundTint="@color/purple_600"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:text="@string/use_power"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/descrpt_txt" />
+                app:layout_constraintTop_toBottomOf="@id/descrpt_txt" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

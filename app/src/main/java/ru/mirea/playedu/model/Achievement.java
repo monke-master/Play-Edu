@@ -9,10 +9,10 @@ public class Achievement {
     private String title;
     private String description;
     private boolean unlocked;
-    private String icon;
+    private int icon;
 
     public Achievement(int achievementId, int userAchievementId, String title,
-                       String description, boolean unlocked, String icon) {
+                       String description, boolean unlocked, int icon) {
         this.achievementId = achievementId;
         this.userAchievementId = userAchievementId;
         this.title = title;
@@ -61,11 +61,11 @@ public class Achievement {
         this.unlocked = unlocked;
     }
 
-    public String getIcon() {
+    public int getIcon() {
         return icon;
     }
 
-    public void setIcon(String icon) {
+    public void setIcon(int icon) {
         this.icon = icon;
     }
 
@@ -81,7 +81,7 @@ public class Achievement {
         if (unlocked != that.unlocked) return false;
         if (!title.equals(that.title)) return false;
         if (!description.equals(that.description)) return false;
-        return icon.equals(that.icon);
+        return icon == that.icon;
     }
 
     @Override
@@ -91,7 +91,7 @@ public class Achievement {
         result = 31 * result + title.hashCode();
         result = 31 * result + description.hashCode();
         result = 31 * result + (unlocked ? 1 : 0);
-        result = 31 * result + icon.hashCode();
+        result = 31 * result + icon;
         return result;
     }
 
