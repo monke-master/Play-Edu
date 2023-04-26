@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:backgroundTint="@color/purple_400"
+        android:id="@+id/question_pos_btn"
+        android:layout_width="@dimen/color_btn_size"
+        android:layout_height="@dimen/color_btn_size"
+        android:background="@drawable/shape_round_btn"
+        android:orientation="vertical">
+
+    </LinearLayout>
+</layout>

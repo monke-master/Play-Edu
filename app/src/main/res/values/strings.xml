@@ -82,4 +82,9 @@
     <string name="max_pswrd_length">Пароль должен содержать не более 32 символов!</string>
     <string name="password_match_error">Пароли не совпадают!</string>
     <string name="bought">Куплено</string>
+
+    <string name="mock_string">Lorem ipsum dolor sit amet consectetur.
+        Adipiscing laoreet in ullamcorper et nunc. Et tincidunt nunc nisl volutpat libero at justo
+        dictumst faucibus. Nisl aliquam enim gravida tempus velit accumsan. Massa velit viverra nulla
+        habitant gravida. Nunc dignissim adipiscing dui amet sed at.</string>
 </resources>
