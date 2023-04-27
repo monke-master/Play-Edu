@@ -49,6 +49,9 @@ public class AddTaskDialog extends DialogFragment implements OnSelectColorFilter
     private Category category;
 
 
+    public AddTaskDialog(Date creationDate) {
+        this.creationDate = creationDate;
+    }
 
     @Nullable
     @Override
@@ -161,11 +164,10 @@ public class AddTaskDialog extends DialogFragment implements OnSelectColorFilter
                 title = titleEditTxt.getText().toString();
                 price = Integer.parseInt(priceEditTxt.getText().toString());
                 deadlineDate = calendar.getTime();
-                creationDate = Calendar.getInstance().getTime();
                 category = viewModel.createCategory(listEditTxt.getText().toString());
-                UserTask userTask = new UserTask(title, category, true, price, deadlineDate, creationDate, taskColor);
+                UserTask userTask = new UserTask(title, category, false, price, deadlineDate, creationDate, taskColor);
                 viewModel.addTask(userTask);
-                getParentFragmentManager().setFragmentResult("requestKey", Bundle.EMPTY);
+                requireActivity().getSupportFragmentManager().setFragmentResult("requestKey", Bundle.EMPTY);
                 dismiss();
             }
         });
