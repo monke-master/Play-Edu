@@ -5,20 +5,18 @@
     >
 
     <LinearLayout
-        android:paddingHorizontal="40dp"
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            style="@style/DefaultText"
+            android:textAlignment="center"
             android:id="@+id/message_txt"
+            style="@style/DefaultText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
-            android:text="@string/no_damage"
-            />
+            android:layout_marginVertical="30dp"
+            android:layout_marginHorizontal="20dp"
+            android:text="@string/no_damage" />
 
     </LinearLayout>
 

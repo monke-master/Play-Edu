@@ -11,8 +11,7 @@
     </data>
 
 
-    <LinearLayout
-
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -22,22 +21,29 @@
             android:layout_width="@dimen/power_shape_size"
             android:layout_height="@dimen/power_shape_size"
             android:layout_gravity="center_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/shape_power" />
 
         <TextView
-            android:textSize="@dimen/power_txt_size"
-            android:textAlignment="center"
-            android:breakStrategy="simple"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center_horizontal"
-            style="@style/DefaultText"
-            android:id="@+id/name_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{power.title}"
-            app:layout_constraintTop_toBottomOf="@+id/power_img" />
 
-    </LinearLayout>
+            android:id="@+id/name_txt"
+            style="@style/DefaultText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="3dp"
+            android:breakStrategy="balanced"
+            android:text="@{power.title}"
+            android:textAlignment="center"
+            android:textSize="@dimen/power_txt_size"
+            app:layout_constraintStart_toStartOf="@id/power_img"
+            app:layout_constraintEnd_toEndOf="@+id/power_img"
+            app:layout_constraintTop_toBottomOf="@+id/power_img"
+            tools:text="Сила Красно Белого Булеана" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
 

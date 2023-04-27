@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -12,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
@@ -21,25 +22,38 @@
             app:layout_constraintTop_toTopOf="@+id/achvmnt_img">
 
             <TextView
-                android:id="@+id/name_txt"
+                android:id="@+id/title_txt"
                 style="@style/Header"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="90dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="60dp"
                 android:text="@{achievement.title}"
-                android:textSize="@dimen/header1_txt_size" />
+                android:textAlignment="center"
+                android:textSize="@dimen/header1_txt_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Поцелуй Большого Булеана" />
 
             <TextView
-                android:layout_marginTop="20dp"
-                android:layout_gravity="center_horizontal"
                 android:id="@+id/descrpt_txt"
                 style="@style/DefaultText"
-                android:layout_marginBottom="30dp"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{achievement.description}" />
-        </LinearLayout>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="16dp"
+                android:text="@{achievement.description}"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_txt"
+                tools:text="@string/mock_string" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/achvmnt_img"

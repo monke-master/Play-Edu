@@ -9,16 +9,64 @@
         android:layout_height="match_parent"
         android:paddingHorizontal="40dp">
 
-        <ImageView
-            android:id="@+id/background"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/enemy_img"
-            app:srcCompat="@drawable/shape_dialog" />
+            android:background="@drawable/shape_dialog"
+            app:layout_constraintTop_toTopOf="@+id/enemy_img"
+            tools:layout_editor_absoluteX="40dp">
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/damage_group"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:constraint_referenced_ids="damage_txt, damage_progress_bar,damage_progress_bar" />
+
+            <ProgressBar
+                android:id="@+id/damage_progress_bar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:progressBackgroundTint="@color/red"
+                android:progressDrawable="@drawable/shape_progress_bar"
+                app:layout_constraintBottom_toBottomOf="@+id/damage_txt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/damage_txt" />
+
+            <TextView
+                tools:text="@string/mock_string"
+                android:id="@+id/hdr"
+                style="@style/DefaultText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="60dp"
+                android:text="@string/damage_done"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toTopOf="@id/damage_progress_bar"
+                android:layout_marginBottom="10dp"
+                app:layout_goneMarginBottom="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="16dp"
+                android:id="@+id/damage_txt"
+                style="@style/DefaultText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                tools:text="100500"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="@+id/damage_progress_bar"
+                app:layout_constraintTop_toBottomOf="@+id/hdr" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
 
@@ -29,52 +77,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/pic_enemy" />
-
-        <TextView
-            app:layout_goneMarginBottom="200dp"
-            style="@style/DefaultText"
-            android:id="@+id/hdr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/damage_done"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/enemy_img" />
-
-        <ProgressBar
-            android:id="@+id/damage_progress_bar"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:progressBackgroundTint="@color/red"
-            android:progressDrawable="@drawable/shape_progress_bar"
-            app:layout_constraintBottom_toBottomOf="@+id/background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/hdr" />
-
-        <TextView
-            android:id="@+id/damage_txt"
-            style="@style/DefaultText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="100500"
-            app:layout_constraintBottom_toBottomOf="@id/damage_progress_bar"
-            app:layout_constraintStart_toStartOf="@+id/damage_progress_bar"
-            app:layout_constraintTop_toTopOf="@id/damage_progress_bar" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/damage_group"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:constraint_referenced_ids="damage_txt, damage_progress_bar"
-            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
