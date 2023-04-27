@@ -18,6 +18,7 @@
 
         <ImageView
             android:id="@+id/power_img"
+            android:foregroundGravity="center"
             android:layout_width="@dimen/power_shape_size"
             android:layout_height="@dimen/power_shape_size"
             android:layout_gravity="center_horizontal"

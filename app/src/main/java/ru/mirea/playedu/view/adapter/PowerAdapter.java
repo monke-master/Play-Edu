@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import ru.mirea.playedu.R;
 import ru.mirea.playedu.databinding.ViewPowerItemBinding;
 import ru.mirea.playedu.model.Power;
 
@@ -40,6 +41,7 @@ public class PowerAdapter extends RecyclerView.Adapter<PowerAdapter.ViewHolder> 
     }
 
     public void setPowersList(ArrayList<Power> powers) {
+        this.powers.clear();
         this.powers = powers;
         notifyDataSetChanged();
     }
@@ -74,6 +76,10 @@ public class PowerAdapter extends RecyclerView.Adapter<PowerAdapter.ViewHolder> 
         public void bind(Power power, OnItemClickListener listener, OnItemLongClickListener longClickListener, int position) {
             binding.setPower(power);
             binding.powerImg.setImageResource(power.getIcon());
+            if (!power.isBought())
+                binding.powerImg.setForeground(itemView.getResources().getDrawable(R.drawable.shape_power_overlay));
+            else
+                binding.powerImg.setForeground(null);
             itemView.setOnClickListener(view -> {
                 listener.onItemClick(power, position);
             });
