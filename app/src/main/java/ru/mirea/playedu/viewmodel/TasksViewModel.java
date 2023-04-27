@@ -46,6 +46,7 @@ public class TasksViewModel extends ViewModel {
     private ArrayList<Calendar> dateList;
     // Индекс текущей даты в массиве дат
     private int todayDatePosition;
+    private int currentDatePosition;
     private UserTaskFilter userTaskFilter;
     private MutableLiveData<String> errorMessage = new MutableLiveData<>();
     private MutableLiveData<User> user = new MutableLiveData<>();
@@ -98,6 +99,7 @@ public class TasksViewModel extends ViewModel {
 
     // Фильтрует список пользовательских задач по заданной дате создания
     public void filterUserTasksByDate(Calendar date) {
+        currentDatePosition = dateList.indexOf(date);
         userTaskFilter.setFilteredDate(date);
         filterUserTasks();
     }
@@ -133,6 +135,7 @@ public class TasksViewModel extends ViewModel {
             if (temp.getTime().getTime() == today.getTime())
                 todayDatePosition = dateList.size() - 1;
         }
+        currentDatePosition = todayDatePosition;
     }
 
     public int completeUserTask(UserTask task) {
@@ -172,5 +175,9 @@ public class TasksViewModel extends ViewModel {
 
     public MutableLiveData<User> getUser() {
         return user;
+    }
+
+    public int getCurrentDatePosition() {
+        return currentDatePosition;
     }
 }

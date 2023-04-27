@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,12 +95,12 @@ public class TasksFragment extends Fragment {
                 });
 
         binding.addTaskBtn.setOnClickListener(view -> {
-            AddTaskDialog dialog = new AddTaskDialog();
+            AddTaskDialog dialog = new AddTaskDialog(tasksViewModel.getDateList().get(tasksViewModel.getCurrentDatePosition()).getTime());
             dialog.show(getActivity().getSupportFragmentManager(), "Add task dialog");
         });
 
         // Обработка события на нажатую кнопку "Добавить" из диалога
-        getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
+        requireActivity().getSupportFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
                 tasksViewModel.filterUserTasksByDate(tasksViewModel.getUserTaskFilter().getFilteredDate());
